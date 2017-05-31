@@ -8,8 +8,8 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: petstore.swagger.io
-basePath: /v2
+host: 10.11.1.29:8090
+basePath: /choice-ERP
 tags:
   - name: BigTickets
     description: 空运大票
