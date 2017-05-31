@@ -29,20 +29,17 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: FLIGHT_DATE_STARE
+        - name: FLIGHT_DATE_START
           in: query
           description: 预定日期（开始）
-          required: false
-          type: date
+          type: string
         - name: FLIGHT_DATE_END
           in: query
           description: 预定日期（结束）
-          required: false
-          type: date
+          type: string
         - name: AIRLINE_COMPANY
           description: 航空代理公司
           in: query
-          required: false
           type: string
       responses:
         '200':
@@ -53,143 +50,10 @@ paths:
               $ref: '#/definitions/BigTickets'
         '400':
           description: Invalid status value
-  /clearance/combineBigTickets:
-    post:
-      tags:
-        - BigTickets
-      summary: 获取选定的信息
-      description: 'Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.'
-      operationId: combineBigTickets
-      produces:
-        - application/xml
-        - application/json
-      parameters:
-        - name: tags
-          in: query
-          description: Tags to filter by
-          required: true
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-      responses:
-        '200':
-          description: successful operation
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Pet'
-        '400':
-          description: Invalid tag value
+            type: object
+            $ref: '#/definitions/ERROR'
 definitions:
-  Order:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      petId:
-        type: integer
-        format: int64
-      quantity:
-        type: integer
-        format: int32
-      shipDate:
-        type: string
-        format: date-time
-      status:
-        type: string
-        description: Order Status
-        enum:
-          - placed
-          - approved
-          - delivered
-      complete:
-        type: boolean
-        default: false
-    xml:
-      name: Order
-  Category:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-    xml:
-      name: Category
-  User:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      username:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-      email:
-        type: string
-      password:
-        type: string
-      phone:
-        type: string
-      userStatus:
-        type: integer
-        format: int32
-        description: User Status
-    xml:
-      name: User
-  Tag:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-    xml:
-      name: Tag
-  Pet:
-    type: object
-    required:
-      - name
-      - photoUrls
-    properties:
-      id:
-        type: integer
-        format: int64
-      category:
-        $ref: '#/definitions/Category'
-      name:
-        type: string
-        example: doggie
-      photoUrls:
-        type: array
-        xml:
-          name: photoUrl
-          wrapped: true
-        items:
-          type: string
-      tags:
-        type: array
-        xml:
-          name: tag
-          wrapped: true
-        items:
-          $ref: '#/definitions/Tag'
-      status:
-        type: string
-        description: pet status in the store
-        enum:
-          - available
-          - pending
-          - sold
-    xml:
-      name: Pet
   ApiResponse:
     type: object
     properties:
@@ -203,6 +67,8 @@ definitions:
   BigTickets: 
      type: object
      properties:
+       ID:
+        type: integer
        FLIGHT_DATE:
         type: string
        C_INFO:
@@ -229,9 +95,20 @@ definitions:
         type: string
        TAG:
         type: string
-    
-
-
+  ERROR:
+    type: object
+    properties:
+      isSuccess:
+        type: boolean
+        example: false
+      msg: 
+        type: string
+  SUCCESS:
+    type: object
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
