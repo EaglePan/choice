@@ -136,12 +136,58 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/submit:
     get:
+      tags: 
+        - Clearance
+      summary: 提交请关单
+      description: 提交请关单
+      operationId: submit
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要提交的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/doClearance:
     get:
-  /clearance/printDeliveryOrder:
-    get:
-  /clearance/print:
-    get:
+      tags: 
+        - Clearance
+      summary: 清关操作
+      description: 清关操作
+      operationId: doClearance
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要提交的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+ # /clearance/printDeliveryOrder:
+ # /clearance/print:
 definitions:
   ApiResponse:
     type: object
