@@ -47,8 +47,9 @@ paths:
         '200':
           description: 请求成功
           schema:
-            type: object
-            $ref: '#/definitions/SearchList'
+            type: array
+            items: 
+              $ref: '#/definitions/SearchList'
         '400':
           description: 请求失败
           schema:
