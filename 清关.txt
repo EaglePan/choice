@@ -17,40 +17,6 @@ tags:
 schemes:
   - http
 paths:
-  /clearance/findBigTickets:
-    get:
-      tags:
-        - Clearance
-      summary: 获取空运大票信息
-      description: 获取空运大票信息
-      operationId: findBigTickets
-      produces:
-        - application/json
-      parameters:
-        - name: FLIGHT_DATE_START
-          in: query
-          description: 预定日期（开始）
-          type: string
-        - name: FLIGHT_DATE_END
-          in: query
-          description: 预定日期（结束）
-          type: string
-        - name: AIRLINE_COMPANY
-          description: 航空代理公司
-          in: query
-          type: string
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BigTickets'
-        '400':
-          description: Invalid status value
-          schema:
-            type: object
-            $ref: '#/definitions/ERROR'
   /clearance/getList: 
     get:
       tags:
@@ -79,22 +45,95 @@ paths:
           type: string
       responses:
         '200':
-          description: successful operation
+          description: 请求成功
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/BigTickets'
+            type: object
+            $ref: '#/definitions/SearchList'
         '400':
-          description: Invalid status value
+          description: 请求失败
           schema:
             type: object
             $ref: '#/definitions/ERROR'
   /clearance/add:
-    get: 
+    post: 
+      tags: 
+        - Clearance
+      summary: 添加新的请关单
+      description: 添加新的请关单
+      operationId: add
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 新增时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/addObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/update:
-    get:
+    post: 
+      tags: 
+        - Clearance
+      summary: 编辑请关单
+      description: 编辑请关单
+      operationId: update
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 编辑时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/updateObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/delete:
-    get:
+    delete:
+      tags: 
+        - Clearance
+      summary: 删除请关单
+      description: 删除请关单
+      operationId: delete
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要删除的字段ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/submit:
     get:
   /clearance/doClearance:
@@ -161,22 +200,75 @@ definitions:
         example: true
   SearchList: 
     type: object
-    properties:
-      RECEIPT_ID:
+    properties: 
+      ID: 
+         type: string
+         description: ID
+      RECEIPT_ID: 
          type: string
          description: 单据号
-      STATUS:
+      STATUS: 
         type: string
         description: 状态
-      DESTINATION:
+      DESTINATION: 
          type: string
          description: 目的地
-      PROXY:
+      PROXY: 
          type: string
          description: 清关代理
-      REQDATE:
+      REQDATE: 
          type: string
          description: 清关日期
+  addObj:
+    type: object
+    properties:
+      DESTINATION:
+        type: string
+        description: 目的地ID
+      PROXY: 
+        type: string
+        description: 清关代理公司ID
+      REQDATE:
+        type: string
+        description: 清关日期
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS:
+        type: array
+        items:
+         $ref: '#/definitions/relObj'
+  updateObj:
+    type: object
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      DESTINATION:
+        type: string
+        description: 目的地ID
+      PROXY: 
+        type: string
+        description: 清关代理公司ID
+      REQDATE:
+        type: string
+        description: 清关日期
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS:
+        type: array
+        items:
+         $ref: '#/definitions/relObj'
+  relObj:
+    type: object
+    properties:
+      BIGTICKET_ID:
+        type: string
+        description: 空运大票ID
+      SIZE_IDS:
+        type: string
+        description: 空运大票对应委托单尺寸清单ID(x,x,x,x,x)
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
