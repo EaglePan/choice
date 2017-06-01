@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: '货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；'
-  version: 1.0.0
+  version: 1.0.0 
   title: 清关
   termsOfService: 'http://swagger.io/terms/'
   contact:
