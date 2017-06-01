@@ -1,0 +1,182 @@
+swagger: '2.0'
+info:
+  description: '货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；'
+  version: 1.0.0
+  title: 清关
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: it_yichao@choicexp.com.cn
+host: 10.11.1.29:8090
+basePath: /choice-ERP
+tags:
+  - name: Clearance
+    description: 清关相关接口
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+schemes:
+  - http
+paths:
+  /clearance/findBigTickets:
+    get:
+      tags:
+        - Clearance
+      summary: 获取空运大票信息
+      description: 获取空运大票信息
+      operationId: findBigTickets
+      produces:
+        - application/json
+      parameters:
+        - name: FLIGHT_DATE_START
+          in: query
+          description: 预定日期（开始）
+          type: string
+        - name: FLIGHT_DATE_END
+          in: query
+          description: 预定日期（结束）
+          type: string
+        - name: AIRLINE_COMPANY
+          description: 航空代理公司
+          in: query
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: Invalid status value
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /clearance/getList: 
+    get:
+      tags:
+        - Clearance
+      summary: 获取清关信息列表
+      description: 获取清关信息列表
+      operationId: getList
+      produces:
+        - application/json
+      parameters:
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: PROXY
+          in: query
+          description: 清关代理
+          type: string
+        - name: REQDATE_START
+          description: 清关日期(开始)
+          in: query
+          type: string
+        - name: REQDATE_END
+          description: 清关日期(结束)
+          in: query
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: Invalid status value
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /clearance/add:
+    get: 
+  /clearance/update:
+    get:
+  /clearance/delete:
+    get:
+  /clearance/submit:
+    get:
+  /clearance/doClearance:
+    get:
+  /clearance/printDeliveryOrder:
+    get:
+  /clearance/print:
+    get:
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+  BigTickets: 
+     type: object
+     properties:
+       ID:
+        type: integer
+       FLIGHT_DATE:
+        type: string
+       C_INFO:
+         type: string
+       TICKET_ID: 
+         type: string
+       LADING_NO: 
+        type: string
+       E_PLACE:
+        type: string
+       FLIGHT:  
+        type: string
+       ROUTE:
+        type: string
+       TAKE_OFF_DATE:
+        type: string
+       LAND_DATE:
+        type: string
+       COUNT:
+        type: string
+       WEIGHT:
+        type: string
+       BOARD_NUMBER:
+        type: string
+       TAG:
+        type: string
+  ERROR:
+    type: object
+    properties:
+      isSuccess:
+        type: boolean
+        example: false
+      msg: 
+        type: string
+  SUCCESS:
+    type: object
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+  SearchList: 
+    type: object
+    properties:
+      RECEIPT_ID:
+         type: string
+         description: 单据号
+      STATUS:
+        type: string
+        description: 状态
+      DESTINATION:
+         type: string
+         description: 目的地
+      PROXY:
+         type: string
+         description: 清关代理
+      REQDATE:
+         type: string
+         description: 清关日期
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
