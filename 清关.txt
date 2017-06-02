@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  description: '»õÎïÔÚµ½´ïÄ¿µÄµØÖ®Ç°»òÖ®ºó£¬ĞèÒª°²ÅÅÇå¹Ø¹«Ë¾£¨Ä¿Ç°È«²¿ÊÇ´úÀí¹«Ë¾£©°´½ø¸Û»õÎïµÄÌáµ¥ºÅ·ÖÅú´Î½øĞĞÇå¹Ø²Ù×÷£»'
+  description: 'è´§ç‰©åœ¨åˆ°è¾¾ç›®çš„åœ°ä¹‹å‰æˆ–ä¹‹åï¼Œéœ€è¦å®‰æ’æ¸…å…³å…¬å¸ï¼ˆç›®å‰å…¨éƒ¨æ˜¯ä»£ç†å…¬å¸ï¼‰æŒ‰è¿›æ¸¯è´§ç‰©çš„æå•å·åˆ†æ‰¹æ¬¡è¿›è¡Œæ¸…å…³æ“ä½œï¼›'
   version: 1.0.0 
-  title: Çå¹Ø
+  title: æ¸…å…³
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: it_yichao@choicexp.com.cn
@@ -10,7 +10,7 @@ host: 10.11.1.29:8090
 basePath: /choice-ERP
 tags:
   - name: Clearance
-    description: Çå¹ØÏà¹Ø½Ó¿Ú
+    description: æ¸…å…³ç›¸å…³æ¥å£
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
@@ -21,37 +21,37 @@ paths:
     get:
       tags:
         - Clearance
-      summary: »ñÈ¡Çå¹ØĞÅÏ¢ÁĞ±í
-      description: »ñÈ¡Çå¹ØĞÅÏ¢ÁĞ±í
+      summary: è·å–æ¸…å…³ä¿¡æ¯åˆ—è¡¨
+      description: è·å–æ¸…å…³ä¿¡æ¯åˆ—è¡¨
       operationId: getList
       produces:
         - application/json
       parameters:
         - name: DESTINATION
           in: query
-          description: Ä¿µÄµØ
+          description: ç›®çš„åœ°
           type: string
         - name: PROXY
           in: query
-          description: Çå¹Ø´úÀí
+          description: æ¸…å…³ä»£ç†
           type: string
         - name: REQDATE_START
-          description: Çå¹ØÈÕÆÚ(¿ªÊ¼)
+          description: æ¸…å…³æ—¥æœŸ(å¼€å§‹)
           in: query
           type: string
         - name: REQDATE_END
-          description: Çå¹ØÈÕÆÚ(½áÊø)
+          description: æ¸…å…³æ—¥æœŸ(ç»“æŸ)
           in: query
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items: 
               $ref: '#/definitions/SearchList'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -59,26 +59,26 @@ paths:
     post: 
       tags: 
         - Clearance
-      summary: Ìí¼ÓĞÂµÄÇë¹Øµ¥
-      description: Ìí¼ÓĞÂµÄÇë¹Øµ¥
+      summary: æ·»åŠ æ–°çš„è¯·å…³å•
+      description: æ·»åŠ æ–°çš„è¯·å…³å•
       operationId: add
       produces:
         - application/json
       parameters:
         - in: body
           name: body
-          description: ĞÂÔöÊ±Ê¹ÓÃµÄ²ÎÊı
+          description: æ–°å¢æ—¶ä½¿ç”¨çš„å‚æ•°
           required: true
           schema:
             $ref: '#/definitions/addObj'
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -86,26 +86,26 @@ paths:
     post: 
       tags: 
         - Clearance
-      summary: ±à¼­Çë¹Øµ¥
-      description: ±à¼­Çë¹Øµ¥
+      summary: ç¼–è¾‘è¯·å…³å•
+      description: ç¼–è¾‘è¯·å…³å•
       operationId: update
       produces:
         - application/json
       parameters:
         - in: body
           name: body
-          description: ±à¼­Ê±Ê¹ÓÃµÄ²ÎÊı
+          description: ç¼–è¾‘æ—¶ä½¿ç”¨çš„å‚æ•°
           required: true
           schema:
             $ref: '#/definitions/updateObj'
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -113,25 +113,25 @@ paths:
     delete:
       tags: 
         - Clearance
-      summary: É¾³ıÇë¹Øµ¥
-      description: É¾³ıÇë¹Øµ¥
+      summary: åˆ é™¤è¯·å…³å•
+      description: åˆ é™¤è¯·å…³å•
       operationId: delete
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ĞèÒªÉ¾³ıµÄ×Ö¶ÎID
+          description: éœ€è¦åˆ é™¤çš„å­—æ®µID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -139,25 +139,25 @@ paths:
     get:
       tags: 
         - Clearance
-      summary: Ìá½»Çë¹Øµ¥
-      description: Ìá½»Çë¹Øµ¥
+      summary: æäº¤è¯·å…³å•
+      description: æäº¤è¯·å…³å•
       operationId: submit
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ĞèÒªÌá½»µÄÊı¾İID
+          description: éœ€è¦æäº¤çš„æ•°æ®ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -165,25 +165,25 @@ paths:
     get:
       tags: 
         - Clearance
-      summary: Çå¹Ø²Ù×÷
-      description: Çå¹Ø²Ù×÷
+      summary: æ¸…å…³æ“ä½œ
+      description: æ¸…å…³æ“ä½œ
       operationId: doClearance
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ĞèÒªÌá½»µÄÊı¾İID
+          description: éœ€è¦æäº¤çš„æ•°æ®ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -253,34 +253,34 @@ definitions:
          description: ID
       RECEIPT_ID: 
          type: string
-         description: µ¥¾İºÅ
+         description: å•æ®å·
       STATUS: 
         type: string
-        description: ×´Ì¬
+        description: çŠ¶æ€
       DESTINATION: 
          type: string
-         description: Ä¿µÄµØ
+         description: ç›®çš„åœ°
       PROXY: 
          type: string
-         description: Çå¹Ø´úÀí
+         description: æ¸…å…³ä»£ç†
       REQDATE: 
          type: string
-         description: Çå¹ØÈÕÆÚ
+         description: æ¸…å…³æ—¥æœŸ
   addObj:
     type: object
     properties:
       DESTINATION:
         type: string
-        description: Ä¿µÄµØID
+        description: ç›®çš„åœ°ID
       PROXY: 
         type: string
-        description: Çå¹Ø´úÀí¹«Ë¾ID
+        description: æ¸…å…³ä»£ç†å…¬å¸ID
       REQDATE:
         type: string
-        description: Çå¹ØÈÕÆÚ
+        description: æ¸…å…³æ—¥æœŸ
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       DETAILS:
         type: array
         items:
@@ -290,19 +290,19 @@ definitions:
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       DESTINATION:
         type: string
-        description: Ä¿µÄµØID
+        description: ç›®çš„åœ°ID
       PROXY: 
         type: string
-        description: Çå¹Ø´úÀí¹«Ë¾ID
+        description: æ¸…å…³ä»£ç†å…¬å¸ID
       REQDATE:
         type: string
-        description: Çå¹ØÈÕÆÚ
+        description: æ¸…å…³æ—¥æœŸ
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       DETAILS:
         type: array
         items:
@@ -312,10 +312,10 @@ definitions:
     properties:
       BIGTICKET_ID:
         type: string
-        description: ¿ÕÔË´óÆ±ID
+        description: ç©ºè¿å¤§ç¥¨ID
       SIZE_IDS:
         type: string
-        description: ¿ÕÔË´óÆ±¶ÔÓ¦Î¯ÍĞµ¥³ß´çÇåµ¥ID(x,x,x,x,x)
+        description: ç©ºè¿å¤§ç¥¨å¯¹åº”å§”æ‰˜å•å°ºå¯¸æ¸…å•ID(x,x,x,x,x)
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
