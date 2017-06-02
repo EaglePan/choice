@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  description: '货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；'
+  description: '<span style="font-size:15px;font-weight:bold">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style="font-size:15px;font-weight:bold">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style="font-size:15px;font-weight:bold">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；'
   version: 1.0.0 
-  title: 清关
+  title: 清关/分货交接
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: it_yichao@choicexp.com.cn
@@ -11,9 +11,10 @@ basePath: /choice-ERP
 tags:
   - name: Clearance
     description: 清关相关接口
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
+  - name: Transfer
+    description: 分货交接接口
+  - name: CargoDelivery 
+    description: 货物派送接口
 schemes:
   - http
 paths:
@@ -265,6 +266,84 @@ paths:
             $ref: '#/definitions/ERROR'
  # /clearance/printDeliveryOrder:
  # /clearance/print:
+ ########################################
+  /transfer/getList:
+    get:
+      tags:
+        - Transfer
+      summary: 获取分货交接信息列表
+      description: 获取分货交接信息列表
+      operationId: getTList
+      produces:
+        - application/json
+      parameters:
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: PROXY
+          in: query
+          description: 清关代理
+          type: string
+        - name: REQDATE_START
+          description: 清关日期(开始)
+          in: query
+          type: string
+        - name: REQDATE_END
+          description: 清关日期(结束)
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/SearchList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+ ########################################
+  /cargoDelivery/getList:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取货物派送信息列表
+      description: 获取货物派送信息列表
+      operationId: getCList
+      produces:
+        - application/json
+      parameters:
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: PROXY
+          in: query
+          description: 清关代理
+          type: string
+        - name: REQDATE_START
+          description: 清关日期(开始)
+          in: query
+          type: string
+        - name: REQDATE_END
+          description: 清关日期(结束)
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/SearchList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
 definitions:
   ApiResponse:
     type: object
