@@ -55,6 +55,82 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  /clearance/getClearance:
+    get:
+      tags:
+        - Clearance
+      summary: 获取清关信息
+      description: 获取清关信息
+      operationId: getClearance
+      produces:
+        - application/json
+      parameters:
+        - name: ID
+          in: query
+          description: ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SearchList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /clearance/getBigTticket:
+    get: 
+      tags:
+        - Clearance
+      summary: 获取清关关联的空运大票信息
+      description: 获取清关关联的空运大票信息
+      operationId: getBigTticket
+      produces:
+        - application/json
+      parameters:
+        - name: P_ID
+          in: query
+          description: 清关记录ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /clearance/getAirEntrust:
+    get:
+      tags:
+        - Clearance
+      summary: 获取清关关联的空运委托单信息
+      description: 获取清关关联的空运委托信息
+      operationId: getAirEntrust
+      produces:
+        - application/json
+      parameters:
+        - name: BigTicket_ID
+          in: query
+          description: 空运大票号ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/Airentrusts'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/add:
     post: 
       tags: 
@@ -316,6 +392,42 @@ definitions:
       SIZE_IDS:
         type: string
         description: 空运大票对应委托单尺寸清单ID(x,x,x,x,x)
+  Airentrusts:
+    type: object
+    properties:
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      RECEIVER_INFO:
+        type: string
+        description: 收货人信息
+      CARGO_INFO:
+        type: string
+        description: 货物信息
+      TAGS:
+        type: string
+        description: 货物标签
+      COUNT:
+        type: string
+        description: 件数
+      WEIGHT:
+        type: string
+        description: 重量
+      BARCODE:
+        type: string
+        description: 打印
+      PAYMENT_TYPE:
+        type: string
+        description: 付费方式
+      CURRENCY: 
+        type: string
+        description: 币种
+      DEAL_SUM:
+        type: string
+        description: 金额
+      REMARK:
+        type: string
+        description: 备注
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
