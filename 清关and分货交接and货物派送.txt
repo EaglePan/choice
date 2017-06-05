@@ -311,12 +311,16 @@ paths:
           in: query
           description: 清关代理
           type: string
-        - name: REQDATE_START
-          description: 清关日期(开始)
+        - name: UNLOAD_POINT
+          description: 卸货点
           in: query
           type: string
-        - name: REQDATE_END
-          description: 清关日期(结束)
+        - name: WAREHOUSE
+          description: 仓库
+          in: query
+          type: string
+        - name: DELIVER_MAN
+          description: 派送人员(员工账号)
           in: query
           type: string
       responses:
@@ -325,7 +329,7 @@ paths:
           schema:
             type: array
             items: 
-              $ref: '#/definitions/SearchList'
+              $ref: '#/definitions/TransferSearchList'
         '400':
           description: 请求失败
           schema:
@@ -528,6 +532,58 @@ definitions:
       REMARK:
         type: string
         description: 备注
+  TransferSearchList:
+    type: object
+    description: 分货交接查询对象
+    properties:
+      ID: 
+       type: string
+       description: ID
+      RECEIPT_ID:
+       type: string
+       description: 单据号
+      STATUS:
+       type: string
+       description: 状态
+      EPLACE:
+       type: string
+       description: 目的地
+      WAREHOUSE:
+       type: string
+       description: 仓库
+      CLEARANCE_PROXY:
+       type: string
+       description: 清关代理
+      UNLOAD_POINT:
+       type: string
+       description: 卸货点
+      DELIVER_MAN:
+       type: string
+       description: 派送人员
+      DRIVER_INFO:
+       type: string
+       description: 司机信息
+      TOTAL_COUNT:
+       type: string
+       description: 总件数
+      TOTAL_REC_COUNT:
+       type: string
+       description: 实收件数
+      TOTAL_WEIGHT:
+       type: string
+       description: 总重量
+      CURRENCY:
+       type: string
+       description: 币种
+      EXCHARGE_RATE:
+       type: string
+       description: 汇率
+      T_COST:
+       type: string
+       description: 运费
+      REMARK:
+       type: string
+       description: 备注
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
