@@ -81,7 +81,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /clearance/getBigTticket:
+  /clearance/getBigTicket:
     get: 
       tags:
         - Clearance
@@ -127,6 +127,32 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/Airentrusts'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /clearance/getSingleBigTicket: 
+    get:
+      tags:
+        - Clearance
+      summary: 获取单个空运大票号信息
+      description: 空运大票号从空运大票表中查找状态为“已起飞“或”到达目的地“，且目的地与单头的目的地相同的记录中提取;同时从空运大票表中将除卸货点、清关、备注之外的列内容提取并赋值
+      opertionId: getSingleBigTicket
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: BIG_TICKET_ID
+          description: 空运大票ID
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/BigTickets'
         '400':
           description: 请求失败
           schema:
