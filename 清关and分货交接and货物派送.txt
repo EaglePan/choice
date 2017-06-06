@@ -9,15 +9,56 @@ info:
 host: 10.11.1.29:8090
 basePath: /choice-ERP
 tags:
+  - name: BigTickets
+    description: 空运大票
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: Clearance
     description: 清关相关接口
   - name: Transfer
     description: 分货交接接口
   - name: CargoDelivery 
     description: 货物派送接口
+    
 schemes:
   - http
 paths:
+  /clearance/findBigTickets:
+    get:
+      tags:
+        - BigTickets
+      summary: 调入信息
+      description: 调入信息
+      operationId: findBigTickets
+      produces:
+        - application/json
+      parameters:
+        - name: FLIGHT_DATE_START
+          in: query
+          description: 预定日期（开始）
+          type: string
+        - name: FLIGHT_DATE_END
+          in: query
+          description: 预定日期（结束）
+          type: string
+        - name: AIRLINE_COMPANY
+          description: 航空代理公司
+          in: query
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: Invalid status value
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+ ########################################
   /clearance/getList: 
     get:
       tags:
@@ -138,7 +179,6 @@ paths:
         - Clearance
       summary: 获取单个空运大票号信息
       description: 空运大票号从空运大票表中查找状态为“已起飞“或”到达目的地“，且目的地与单头的目的地相同的记录中提取;同时从空运大票表中将除卸货点、清关、备注之外的列内容提取并赋值
-      opertionId: getSingleBigTicket
       produces:
         - application/json
       parameters:
@@ -335,6 +375,17 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  /transfer/findClearance:
+  /transfer/getBigTicket:
+  /transfer/add:
+  /transfer/update:
+  /transfer/delete:
+  /transfer/submit:
+  /transfer/terminate:
+  /transfer/inputTransferInfo:
+  /transfer/inputCost:
+  /transfer/confirmTransfer:
+  /transfer/sendInfo:
  ########################################
   /cargoDelivery/getList:
     get:
@@ -391,32 +442,46 @@ definitions:
      properties:
        ID:
         type: integer
+        description: 空运大票ID
        FLIGHT_DATE:
         type: string
+        description: 预订航班日期(指令)
        C_INFO:
-         type: string
+        type: string
+        description: 发货人信息
        TICKET_ID: 
-         type: string
+        type: string
+        description: 空运大票好
        LADING_NO: 
         type: string
+        description: 提单号(指令)
        E_PLACE:
         type: string
+        description: 目的地(指令)
        FLIGHT:  
         type: string
+        description: 航班号(指令)
        ROUTE:
         type: string
+        description: 航线(指令)
        TAKE_OFF_DATE:
         type: string
-       LAND_DATE:
+        description: 起飞日期
+       ARRIVAL_TIME:
         type: string
+        description: 着陆日期
        COUNT:
         type: string
+        description: 件数
        WEIGHT:
         type: string
+        description: 重量
        BOARD_NUMBER:
         type: string
+        description: 板号
        TAG:
         type: string
+        description: 标签（空运委托单）
   ERROR:
     type: object
     description: 异常返回结构
