@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: '<span style="font-size:15px;font-weight:bold">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style="font-size:15px;font-weight:bold">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style="font-size:15px;font-weight:bold">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；'
   version: 1.0.0 
-  title: 清关/分货交接
+  title: 清关/分货交接/获取派送
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: it_yichao@choicexp.com.cn
@@ -11,9 +11,6 @@ basePath: /choice-ERP
 tags:
   - name: BigTickets
     description: 空运大票
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
   - name: Clearance
     description: 清关相关接口
   - name: Transfer
@@ -58,7 +55,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
- ########################################
+ #CLEARANCE#######################################
   /clearance/getList: 
     get:
       tags:
@@ -332,7 +329,7 @@ paths:
             $ref: '#/definitions/ERROR'
  # /clearance/printDeliveryOrder:
  # /clearance/print:
- ########################################
+ #TRANSFER#######################################
   /transfer/getList:
     get:
       tags:
@@ -453,29 +450,259 @@ paths:
           schema:
             type: array
             items: 
-              $ref: '#/definitions/BigTickets'
+              $ref: '#/definitions/TransferDetailList'
         '400':
           description: 请求失败
           schema:
             type: object
             $ref: '#/definitions/ERROR'  
-  #/transfer/add:
-  #/transfer/update:
-  #/transfer/delete:
-  #/transfer/submit:
-  #/transfer/terminate:
-  #/transfer/inputTransferInfo:
-  #/transfer/inputCost:
-  #/transfer/confirmTransfer:
-  #/transfer/sendInfo:
- ########################################
+  /transfer/add:
+    post: 
+      tags: 
+        - Transfer
+      summary: 添加新的分货交接单
+      description: 添加新的分货交接单
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 新增时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/TransferAddObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/update:
+    post: 
+      tags: 
+        - Transfer
+      summary: 编辑分货交接单
+      description: 编辑分货交接单
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 编辑时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/TransferUpdateObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/delete:
+    delete:
+      tags: 
+        - Transfer
+      summary: 删除请关单
+      description: 删除请关单
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要删除的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/submit:
+    get:
+      tags: 
+        - Transfer
+      summary: 提交分货交接单
+      description: 提交分货交接单
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要提交的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/terminate:
+    get:
+      tags: 
+        - Transfer
+      summary: 终止分货交接单
+      description: 终止分货交接单
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要提交的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/inputTransferInfo:
+    post: 
+      tags: 
+        - Transfer
+      summary: 交接信息录入
+      description: 交接信息录入
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: 编辑时使用的参数
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/TransferUpdateBodyObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/inputCost:
+    get:
+      tags:
+        - Transfer
+      summary: 费用录入
+      description: 费用录入
+      produces:
+        - application/json
+      parameters:
+        - name: ID
+          description: 记录ID
+          in: query
+          type: string
+        - name: CURRENCY
+          description: 币种
+          in: query
+          type: string
+        - name: T_COST
+          description: 运费
+          in: query
+          type: string  
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/confirm:
+    post:
+      tags:
+        - Transfer
+      summary: 交货确认
+      description: 交货确认
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 编辑时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/TransferUpdateObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/sendInfo:
+    post:
+      tags:
+        - Transfer
+      summary: 发送信息
+      description: 发送信息
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "体数据"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TransferUpdateBodyObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+ #CARGO_DELIVERY#######################################
   /cargoDelivery/getList:
     get:
       tags:
         - CargoDelivery
       summary: 获取货物派送信息列表
       description: 获取货物派送信息列表
-      operationId: getCList
       produces:
         - application/json
       parameters:
@@ -483,16 +710,16 @@ paths:
           in: query
           description: 目的地
           type: string
-        - name: PROXY
-          in: query
-          description: 清关代理
-          type: string
-        - name: REQDATE_START
-          description: 清关日期(开始)
+        - name: UNLOAD_POINT
+          description: 卸货点
           in: query
           type: string
-        - name: REQDATE_END
-          description: 清关日期(结束)
+        - name: WAREHOUSE
+          description: 仓库
+          in: query
+          type: string
+        - name: DELIVER_MAN
+          description: 派送人员(员工账号)
           in: query
           type: string
       responses:
@@ -501,13 +728,25 @@ paths:
           schema:
             type: array
             items: 
-              $ref: '#/definitions/BigTickets'
+              $ref: '#/definitions/CD_SearchList'
         '400':
           description: 请求失败
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  #/cargoDelivery/getCargoDlv:
+  #/cargoDelivery/getCargoDetails:
+  #/cargoDelivery/findBigTickets:
+  #/cargoDelivery/findAirEntrust:
+  #/cargoDelivery/add:
+  #/cargoDelivery/update:
+  #/cargoDelivery/delete:
+  #/cargoDelivery/submit:
+  #/cargoDelivery/inputSignInfo:
+  #/cargoDelivery/confirm:
+  #/cargoDelivery/fileUpload:
 definitions:
+#ALL########################################
   ApiResponse:
     type: object
     properties:
@@ -580,6 +819,7 @@ definitions:
       isSuccess:
         type: boolean
         example: true
+#CLEARANCE##################################
   SearchList: 
     type: object
     description: 查询返回
@@ -604,7 +844,7 @@ definitions:
          description: 清关日期
   addObj:
     type: object
-    description: 新增时前端提供的数据结构
+    description: 清关新增时前端提供的数据结构
     properties:
       DESTINATION:
         type: string
@@ -618,12 +858,30 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      BIGTICKET_ID:
+      DETAILS_INFO:
+        type: array
+        description: 体数据
+        items:
+          $ref: '#/definitions/bodyAddObj'
+  bodyAddObj:
+    type: object
+    description: 清关新增时前端提供的数据结构(体)
+    properties:
+      BIG_TICKET_ID:
         type: string
-        description: 空运大票ID(x,x,x,x,x)
+        description: 空运大票ID
+      IS_CLEARANCE: 
+        type: string
+        description: 清关
+      DISCHARGING_POINT:
+        type: string
+        description: 卸货点
+      DISTRIBUTOR:
+        type: string
+        description: 派送人员
   updateObj:
     type: object
-    description: 编辑时前端提供的数据结构
+    description: 清关编辑时前端提供的数据结构
     properties:
       ID:
         type: string
@@ -640,9 +898,33 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      BIGTICKET_ID:
+      DETAILS_INFO:
+        type: array
+        description: 体数据（只传有修改的）
+        items:
+          $ref: '#/definitions/bodyUpdateObj'
+      DELETE_INFO:
         type: string
-        description: 空运大票ID(x,x,x,x,x)
+        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+  bodyUpdateObj:
+    type: object
+    description: 清关编辑时前端提供的数据结构(体)
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      BIG_TICKET_ID:
+        type: string
+        description: 空运大票ID
+      IS_CLEARANCE: 
+        type: string
+        description: 清关
+      DISCHARGING_POINT:
+        type: string
+        description: 卸货点
+      DISTRIBUTOR:
+        type: string
+        description: 派送人员
   Airentrusts:
     type: object
     properties:
@@ -679,6 +961,7 @@ definitions:
       REMARK:
         type: string
         description: 备注
+#TRANSFER###################################
   TransferSearchList:
     type: object
     description: 分货交接查询对象
@@ -777,6 +1060,179 @@ definitions:
       NOTICE:
         type: string
         description: 通知
+  TransferAddObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接)
+    properties:
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:  
+        type: string
+        description: 卸货点
+      CLEARANCE_PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string  
+        description: 司机名及电话
+      STOCK_TYPE:  
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:  
+        type: string
+        description: 仓储公司
+      WAREHOUSE:  
+        description: 仓库
+        type: string
+      DELIVER_MAN:  
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO: 
+        type: array
+        items:
+          $ref: '#/definitions/TransferAddBodyObj'
+  TransferAddBodyObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接体)
+    properties:
+      BIG_TICKET_ID:
+        type: string
+        description: 空运大票ID
+      REC_COUNT:  
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string  
+        description: 异常类型
+      ERR_REASON:  
+        type: string
+        description: 异常原因
+      NOTICE:  
+        type: string
+        description: 通知
+  TransferUpdateObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接)
+    properties:
+      ID:
+        type: string
+        description: ID
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:  
+        type: string
+        description: 卸货点
+      CLEARANCE_PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string  
+        description: 司机名及电话
+      STOCK_TYPE:  
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:  
+        type: string
+        description: 仓储公司
+      WAREHOUSE:  
+        description: 仓库
+        type: string
+      DELIVER_MAN:  
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO:
+        type: array
+        items:
+          $ref: '#/definitions/TransferUpdateBodyObj'
+      DELETE_INFO:
+        type: string
+        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+  TransferUpdateBodyObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接体)
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      BIG_TICKET_ID:
+        type: string
+        description: 空运大票ID
+      REC_COUNT:  
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string  
+        description: 异常类型
+      ERR_REASON:  
+        type: string
+        description: 异常原因
+      NOTICE:  
+        type: string
+        description: 通知
+#CARGO_DELIVERY#############################
+  CD_SearchList:
+    type: object
+    description: 货物派送查询
+    properties:
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS: 
+        type: string
+        description: 当前状态
+      EPLACE: 
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+      PIC_ID:
+        type: string
+        description: 图片
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
