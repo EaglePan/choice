@@ -376,16 +376,98 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /transfer/findClearance:
-  /transfer/getBigTicket:
-  /transfer/add:
-  /transfer/update:
-  /transfer/delete:
-  /transfer/submit:
-  /transfer/terminate:
-  /transfer/inputTransferInfo:
-  /transfer/inputCost:
-  /transfer/confirmTransfer:
-  /transfer/sendInfo:
+    get:
+      tags:
+        - Transfer
+      summary: 获取清关信息列表
+      description: 从清关单中，按状态＝“已提交”或“已清关”，再按目的地+清关代理+单体的卸货点与本单单头的对应值进行比较，同时清关单体中清关标识＝0进行过滤，从清关单明细中提取空运大票号，从空运大票资料表中将相关的空运委托单记录写入本明细表中（实收件数＝件数）；
+      operationId: findClearance
+      produces:
+        - application/json
+      parameters:
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: PROXY
+          in: query
+          description: 清关代理
+          type: string
+        - name: UNLOAD_POINT
+          description: 卸货点
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR' 
+  /transfer/getTransfer:
+    get: 
+      tags:
+        - Transfer
+      summary: 获取分货交接头信息
+      description: 获取分货交接头信息
+      produces:
+        - application/json
+      parameters:
+        - name: ID
+          in: query
+          description: 分货交接头ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'    
+  /transfer/getDetails:
+    get: 
+      tags:
+        - Transfer
+      summary: 获取分货交接体信息
+      description: 获取分货交接体信息
+      produces: 
+        - application/json
+      parameters:
+        - name: P_ID
+          in: query
+          description: 分货交接头ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/BigTickets'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'  
+  #/transfer/add:
+  #/transfer/update:
+  #/transfer/delete:
+  #/transfer/submit:
+  #/transfer/terminate:
+  #/transfer/inputTransferInfo:
+  #/transfer/inputCost:
+  #/transfer/confirmTransfer:
+  #/transfer/sendInfo:
  ########################################
   /cargoDelivery/getList:
     get:
@@ -419,7 +501,7 @@ paths:
           schema:
             type: array
             items: 
-              $ref: '#/definitions/SearchList'
+              $ref: '#/definitions/BigTickets'
         '400':
           description: 请求失败
           schema:
@@ -649,6 +731,52 @@ definitions:
       REMARK:
        type: string
        description: 备注
+  TransferDetailList:
+    type: object
+    description: 分货交接获取清关信息
+    properties:
+      ID:
+        type: string
+        description: 分货交接体数据ID
+      LADING_NO: 
+        type: string
+        description: 提单号(指令)
+      TICKET_ID: 
+        type: string
+        description: 空运大票号
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      R_INFO:
+        type: string
+        description: 收货人信息（未知）
+      CARGO_INFO:
+        type: string
+        description: 货物信息（未知）
+      TAG:
+        type: string
+        description: 标签（空运委托单）
+      COUNT:
+        type: string
+        description: 件数
+      WEIGHT:
+        type: string
+        description: 重量
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string
+        description: 异常类别
+      ERR_REASON:
+        type: string
+        description: 异常原因
+      NOTICE:
+        type: string
+        description: 通知
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
