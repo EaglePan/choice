@@ -423,9 +423,7 @@ paths:
         '200':
           description: 请求成功
           schema:
-            type: array
-            items: 
-              $ref: '#/definitions/BigTickets'
+            $ref: '#/definitions/TransferList'
         '400':
           description: 请求失败
           schema:
@@ -696,7 +694,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
- #CARGO_DELIVERY#######################################
+#CargoDelivery##############################
   /cargoDelivery/getList:
     get:
       tags:
@@ -734,15 +732,214 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  #/cargoDelivery/getCargoDlv:
-  #/cargoDelivery/getCargoDetails:
-  #/cargoDelivery/findBigTickets:
-  #/cargoDelivery/findAirEntrust:
-  #/cargoDelivery/add:
-  #/cargoDelivery/update:
-  #/cargoDelivery/delete:
-  #/cargoDelivery/submit:
-  #/cargoDelivery/inputSignInfo:
+  /cargoDelivery/getCargoDlv:
+    get: 
+      tags:
+        - CargoDelivery
+      summary: 获取分货交接头信息
+      description: 获取分货交接头信息
+      produces:
+        - application/json
+      parameters:
+        - name: ID
+          in: query
+          description: 货物派送头ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/CD'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/getCargoDetails:
+    get: 
+      tags:
+        - CargoDelivery
+      summary: 获取分货交接体信息
+      description: 获取分货交接体信息
+      produces:
+        - application/json
+      parameters:
+        - name: P_ID
+          in: query
+          description: 货物派送头ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CD_DetailsList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/findAirEntrust:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取多个空运委托单信息
+      description: 获取清关关联的空运委托信息
+      produces:
+        - application/json
+      parameters:
+        - name: WAREHOUSE
+          in: query
+          description: 当前仓库
+          type: string
+        - name: WAREHOUSE
+          in: query
+          description: 当前仓库
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/CD_Airentrust'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/findAirEntrusts:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取一个空运委托单信息
+      description: 获取一个空运委托信息
+      produces:
+        - application/json
+      parameters:
+        - name: WAREHOUSE
+          in: query
+          description: 当前仓库
+          type: string
+        - name: AIR_HBL
+          in: query
+          description: 空运HBL号
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/CD_Airentrust'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/add:
+    post: 
+      tags: 
+        - CargoDelivery
+      summary: 添加新的货物派送单
+      description: 添加新的货物派送单
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 新增时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/CD_AddObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/update:
+    post: 
+      tags: 
+        - CargoDelivery
+      summary: 添加新的货物派送单
+      description: 添加新的货物派送单
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 新增时使用的参数
+          required: true
+          schema:
+            $ref: '#/definitions/CD_UpdateObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/delete:
+    delete:
+      tags: 
+        - CargoDelivery
+      summary: 删除货物派送单
+      description: 删除货物派送单
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要删除的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/submit:
+    get:
+      tags: 
+        - CargoDelivery
+      summary: 提交货物派送单
+      description: 提交货物派送单
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 需要提交的数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/inputSignInfo:
   #/cargoDelivery/confirm:
   #/cargoDelivery/fileUpload:
 definitions:
@@ -1014,9 +1211,55 @@ definitions:
       REMARK:
        type: string
        description: 备注
+  TransferList:
+    type: object
+    description: 获取分货交接头信息
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:  
+        type: string
+        description: 卸货点
+      CLEARANCE_PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string  
+        description: 司机名及电话
+      STOCK_TYPE:  
+        type: string
+        description: 仓储类型:1-代理；2-分公司
+      SUPPLIER:  
+        type: string
+        description: 仓储公司
+      WAREHOUSE:  
+        description: 仓库
+        type: string
+      DELIVER_MAN:  
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      STATUS:
+        type: string
+        description: 状态 
+      RECEIPT_ID:
+        type: string
+        description: 单据号 
   TransferDetailList:
     type: object
-    description: 分货交接获取清关信息
+    description: 获取分货交接体信息
     properties:
       ID:
         type: string
@@ -1195,7 +1438,7 @@ definitions:
       NOTICE:  
         type: string
         description: 通知
-#CARGO_DELIVERY#############################
+#CargoDelivery#############################
   CD_SearchList:
     type: object
     description: 货物派送查询
@@ -1230,9 +1473,252 @@ definitions:
       REMARK:
         type: string
         description: 备注
+  CD:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID:
+        type: string
+        description: 数据ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS: 
+        type: string
+        description: 当前状态
+      EPLACE: 
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+  CD_DetailsList:
+    type: object
+    description: 货物派送体数据
+    properties:
+      ID:
+        type: string
+        description: 数据ID
+      BIG_TICKET:
+        type: string
+        description: 空运大票号
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      RECEIVER_INFO:
+        type: string
+        description: 收货人信息
+      TAG:
+        type: string
+        description: 标签
+      PAY_TYPE:
+        type: string
+        description: 付费类型
+      CURRENCY:
+        type: string
+        description: 币种
+      EXCHARGE_RATE:
+        type: string
+        description: 汇率
+      COUNT:
+        type: string
+        description: 到货件数
+      WEIGHT:
+        type: string
+        description: 到货重量
+      RECEIVABLE_COUNT:
+        type: string
+        description: 应收金额
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
       PIC_ID:
         type: string
-        description: 图片
+        description: 图片ID
+  CD_Airentrust:
+    type: object
+    description: 货物派送获取空运委托单以及大票信息
+    properties:
+      AIR_ENTRUST_ID:
+        type: string
+        description: 委托单ID
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      BIG_TICKET:
+        type: string
+        description: 空运大票号
+      RECEIVER_INFO:
+        type: string
+        description: 收货人信息
+      TAGS:
+        type: string
+        description: 货物标签
+      PAY_TYPE:
+        type: string
+        description: 付费方式  
+      CURRENCY:
+        type: string
+        description: 币种
+      EXCHARGE_RATE:
+        type: string
+        description: 汇率
+      COUNT:
+        type: string
+        description: 到货件数
+      WEIGHT:
+        type: string
+        description: 到货重量
+      RECEIVABLE_COUNT:
+        type: string
+        description: 应收金额
+  CD_AddObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      EPLACE: 
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO: 
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_AddDetailsObj'
+  CD_AddDetailsObj:
+    type: object
+    description: 货物派送体数据
+    properties:
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+      PIC_ID:
+        type: string
+        description: 图片ID(xx,xx,xx,xx)
+  CD_UpdateObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID: 
+        type: string
+        description: 纪录ID
+      EPLACE: 
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO: 
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_UpdateDetailsObj'
+      DELETE_INFO:
+        type: string
+        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+  CD_UpdateDetailsObj:
+    type: object
+    description: 货物派送体数据
+    properties:
+      ID:
+        type: string
+        description: 体纪录ID
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+      PIC_ID:
+        type: string
+        description: 图片ID(xx,xx,xx,xx)
+
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
