@@ -55,7 +55,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
- #CLEARANCE#######################################
+#CLEARANCE#######################################
   /clearance/getList: 
     get:
       tags:
@@ -327,9 +327,9 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
- # /clearance/printDeliveryOrder:
- # /clearance/print:
- #TRANSFER#######################################
+  # /clearance/printDeliveryOrder:
+  # /clearance/print:
+#TRANSFER#######################################
   /transfer/getList:
     get:
       tags:
@@ -591,7 +591,7 @@ paths:
         - application/json
       parameters:
         - in: "body"
-          name: "body"
+          name: "DETAILS_INFO"
           description: 编辑时使用的参数
           required: true
           schema:
@@ -651,7 +651,7 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: body
+          name: DETAILS_INFO
           description: 编辑时使用的参数
           required: true
           schema:
@@ -677,7 +677,7 @@ paths:
         - application/json
       parameters:
         - in: "body"
-          name: "body"
+          name: "DETAILS_INFO"
           description: "体数据"
           schema:
             type: array
@@ -789,9 +789,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: WAREHOUSE
+        - name: AIR_HBL
           in: query
-          description: 当前仓库
+          description: 空运HBL号
           type: string
         - name: WAREHOUSE
           in: query
@@ -820,10 +820,6 @@ paths:
         - name: WAREHOUSE
           in: query
           description: 当前仓库
-          type: string
-        - name: AIR_HBL
-          in: query
-          description: 空运HBL号
           type: string
       responses:
         '200':
@@ -940,7 +936,60 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/inputSignInfo:
-  #/cargoDelivery/confirm:
+    post: 
+      tags: 
+        - CargoDelivery
+      summary: 签收信息录入
+      description: 签收信息录入
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "DETAILS_INFO"
+          description: 编辑时使用的参数
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/CD_SIGN'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/confirm:
+    post:
+      tags:
+        - CargoDelivery
+      summary: 签收确认
+      description: 签收确认
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "DETAILS_INFO"
+          description: "体数据"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CD_UpdateDetailsObj'
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   #/cargoDelivery/fileUpload:
 definitions:
 #ALL########################################
@@ -1517,6 +1566,9 @@ definitions:
       ID:
         type: string
         description: 数据ID
+      P_ID:
+        type: string
+        description: 头ID
       BIG_TICKET:
         type: string
         description: 空运大票号
@@ -1700,6 +1752,9 @@ definitions:
       ID:
         type: string
         description: 体纪录ID
+      P_ID:
+        type: string
+        description: 头ID
       AIR_ENTRUST_ID:
         type: string
         description: 空运委托单ID
@@ -1718,7 +1773,31 @@ definitions:
       PIC_ID:
         type: string
         description: 图片ID(xx,xx,xx,xx)
-
+  CD_SIGN:
+    type: object
+    description: 货物派送体数据（签收信息录入）
+    properties:
+      ID:
+        type: string
+        description: 体纪录ID
+      P_ID:
+        type: string
+        description: 头ID
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
