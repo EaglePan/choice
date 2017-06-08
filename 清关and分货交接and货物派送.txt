@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: '<span style="font-size:15px;font-weight:bold">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style="font-size:15px;font-weight:bold">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style="font-size:15px;font-weight:bold">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；'
-  version: 1.0.0 
+  version: 1.0.1 
   title: 清关/分货交接/获取派送
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -17,7 +17,6 @@ tags:
     description: 分货交接接口
   - name: CargoDelivery 
     description: 货物派送接口
-    
 schemes:
   - http
 paths:
@@ -53,6 +52,7 @@ paths:
         '400':
           description: Invalid status value
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
 #CLEARANCE#######################################
   /clearance/getList: 
@@ -91,6 +91,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/getClearance:
     get:
@@ -110,10 +111,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SearchList'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/getBigTicket:
     get: 
@@ -139,6 +142,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/getAirEntrust:
     get:
@@ -158,10 +162,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/Airentrusts'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/getSingleBigTicket: 
     get:
@@ -181,10 +187,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/BigTickets'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/add:
     post: 
@@ -206,10 +214,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/update:
     post: 
@@ -231,10 +241,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/delete:
     delete:
@@ -255,10 +267,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/submit:
     get:
@@ -279,10 +293,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /clearance/doClearance:
     get:
@@ -303,10 +319,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   # /clearance/printDeliveryOrder:
   # /clearance/print:
@@ -351,6 +369,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/findClearance:
     get:
@@ -384,6 +403,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR' 
   /transfer/getTransfer:
     get: 
@@ -406,6 +426,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'    
   /transfer/getDetails:
     get: 
@@ -430,6 +451,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'  
   /transfer/add:
     post: 
@@ -450,10 +472,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/update:
     post: 
@@ -474,10 +498,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/delete:
     delete:
@@ -497,10 +523,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/submit:
     get:
@@ -520,10 +548,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/terminate:
     get:
@@ -543,10 +573,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/inputTransferInfo:
     post: 
@@ -569,10 +601,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/inputCost:
     get:
@@ -599,10 +633,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/confirm:
     post:
@@ -623,10 +659,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /transfer/sendInfo:
     post:
@@ -648,10 +686,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
 #CargoDelivery##############################
   /cargoDelivery/getList:
@@ -689,6 +729,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/getCargoDlv:
     get: 
@@ -711,6 +752,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/getCargoDetails:
     get: 
@@ -735,6 +777,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/findAirEntrust:
     get:
@@ -757,10 +800,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/CD_Airentrust'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/findAirEntrusts:
     get:
@@ -785,6 +830,7 @@ paths:
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/add:
     post: 
@@ -805,10 +851,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/update:
     post: 
@@ -829,10 +877,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/delete:
     delete:
@@ -852,10 +902,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/submit:
     get:
@@ -875,10 +927,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/inputSignInfo:
     post: 
@@ -901,10 +955,12 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/confirm:
     post:
@@ -926,12 +982,62 @@ paths:
         '200':
           description: 请求成功
           schema:
+            type: object
             $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
+            type: object
             $ref: '#/definitions/ERROR'
-  #/cargoDelivery/fileUpload:
+  /cargoDelivery/fileUpload:
+    post:
+      tags:
+        - CargoDelivery
+      summary: 文件上传(参照之前的功能)
+      description: 文件上传(参照之前的功能)
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 体记录ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: string
+            description: 文件表中的记录ID
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /cargoDelivery/getFile:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取文件
+      description: 获取文件
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: PIC_IDS
+          description: 图片ID集（xx,xx,xx,xx）
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FILE_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
 definitions:
 #ALL########################################
   BigTickets: 
@@ -1729,6 +1835,14 @@ definitions:
       REJECT_REASON:
         type: string
         description: 拒收原因
+  FILE_INFO:
+    type: object
+    description: 文件查看，获取url
+    properties:
+      ID:
+        type: string
+      URL:
+        type: string
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

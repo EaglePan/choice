@@ -1474,24 +1474,83 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
+    },
+    "/cargoDelivery/fileUpload": {
+      "post": {
+        "tags": [
+          "CargoDelivery"
+        ],
+        "summary": "文件上传(参照之前的功能)",
+        "description": "文件上传(参照之前的功能)",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ID",
+            "description": "体记录ID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功",
+            "schema": {
+              "type": "string",
+              "description": "文件表中的记录ID"
+            }
+          },
+          "400": {
+            "description": "请求失败",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ERROR"
+            }
+          }
         }
       }
     },
+    "/cargoDelivery/getFile": {
+      "get": {
+        "tags": [
+          "CargoDelivery"
+        ],
+        "summary": "获取文件",
+        "description": "获取文件",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "PIC_IDS",
+            "description": "图片ID集（xx,xx,xx,xx）",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FILE_INFO"
+              }
+            }
+          },
+          "400": {
+            "description": "请求失败",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ERROR"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
     "BigTickets": {
       "type": "object",
       "description": "空运大票数据结构",
@@ -2565,6 +2624,18 @@
         "REJECT_REASON": {
           "type": "string",
           "description": "拒收原因"
+        }
+      }
+    },
+    "FILE_INFO": {
+      "type": "object",
+      "description": "文件查看，获取url",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "URL": {
+          "type": "string"
         }
       }
     }
