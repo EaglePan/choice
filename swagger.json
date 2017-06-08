@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "<span style=\"font-size:15px;font-weight:bold\">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style=\"font-size:15px;font-weight:bold\">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style=\"font-size:15px;font-weight:bold\">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "清关/分货交接/获取派送",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
