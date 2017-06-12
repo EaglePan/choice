@@ -178,14 +178,14 @@
         }
       }
     },
-    "/clearance/getBigTicket": {
+    "/clearance/getClearanceDetails": {
       "get": {
         "tags": [
           "Clearance"
         ],
         "summary": "获取清关关联的空运大票信息",
         "description": "获取清关关联的空运大票信息",
-        "operationId": "getBigTticket",
+        "operationId": "getClearanceDetails",
         "produces": [
           "application/json"
         ],
@@ -1663,6 +1663,10 @@
         "REQDATE": {
           "type": "string",
           "description": "清关日期"
+        },
+        "REMARK": {
+          "type": "string",
+          "description": "备注"
         }
       }
     },

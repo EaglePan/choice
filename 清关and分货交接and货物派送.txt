@@ -118,13 +118,13 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /clearance/getBigTicket:
+  /clearance/getClearanceDetails:
     get: 
       tags:
         - Clearance
       summary: 获取清关关联的空运大票信息
       description: 获取清关关联的空运大票信息
-      operationId: getBigTticket
+      operationId: getClearanceDetails
       produces:
         - application/json
       parameters:
@@ -1125,6 +1125,9 @@ definitions:
       REQDATE: 
          type: string
          description: 清关日期
+      REMARK: 
+         type: string
+         description: 备注
   addObj:
     type: object
     description: 清关新增时前端提供的数据结构
