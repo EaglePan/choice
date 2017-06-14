@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: '<span style="font-size:15px;font-weight:bold">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style="font-size:15px;font-weight:bold">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style="font-size:15px;font-weight:bold">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；'
-  version: 1.0.1 
+  version: 1.0.3 
   title: 清关/分货交接/货物派送
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -138,7 +138,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/BigTickets'
+              $ref: '#/definitions/BigTickets2'
         '400':
           description: 请求失败
           schema:
@@ -154,9 +154,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: BigTicket_ID
+        - name: AirEntrust_ID
           in: query
-          description: 空运大票号ID
+          description: 空运委托单ID（xx,xx,xx）
           type: string
       responses:
         '200':
@@ -315,6 +315,16 @@ paths:
           description: 需要提交的数据ID
           type: string
           required: true
+        - in: query
+          name: BIG_TICKET_ID
+          description: 空运大票号ID
+          type: string
+          required: true
+        - in: query
+          name: AIR_ENTRUST_IDS
+          description: 空运委托单ID(XX,XX,XX)
+          type: string
+          required: true  
       responses:
         '200':
           description: 请求成功
@@ -371,7 +381,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /transfer/findClearance:
+  /transfer/findAirEntrusts:
     get:
       tags:
         - Transfer
@@ -428,6 +438,44 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'    
+ 
+  /transfer/findAirEntrust:
+    get: 
+      tags:
+        - Transfer
+      summary: 通过hbl号，获取空运委托单ID
+      description: 通过hbl号，获取空运委托单ID
+      produces: 
+        - application/json
+      parameters:
+        - name: AIR_HBL
+          in: query
+          description: 空运委托单HBL号
+          type: string
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: PROXY
+          in: query
+          description: 清关代理
+          type: string
+        - name: UNLOAD_POINT
+          description: 卸货点
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/TransferDetailList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /transfer/getDetails:
     get: 
       tags:
@@ -1047,6 +1095,9 @@ definitions:
        ID:
         type: integer
         description: 空运大票ID
+       AIR_ENTRUST_IDS:
+        type: string
+        description: 空运委托单ID(XX,XX,XX)
        FLIGHT_DATE:
         type: string
         description: 预订航班日期(指令)
@@ -1086,6 +1137,64 @@ definitions:
        TAG:
         type: string
         description: 标签（空运委托单）
+  BigTickets2: 
+     type: object
+     description: 空运大票数据结构
+     properties:
+       ID:
+        type: integer
+        description: 空运大票ID
+       AIR_ENTRUST_IDS:
+        type: string
+        description: 空运委托单ID(XX,XX,XX)
+       FLIGHT_DATE:
+        type: string
+        description: 预订航班日期(指令)
+       C_INFO:
+        type: string
+        description: 发货人信息
+       TICKET_ID: 
+        type: string
+        description: 空运大票好
+       LADING_NO: 
+        type: string
+        description: 提单号(指令)
+       E_PLACE:
+        type: string
+        description: 目的地(指令)
+       FLIGHT:  
+        type: string
+        description: 航班号(指令)
+       ROUTE:
+        type: string
+        description: 航线(指令)
+       TAKE_OFF_DATE:
+        type: string
+        description: 起飞日期
+       ARRIVAL_TIME:
+        type: string
+        description: 着陆日期
+       COUNT:
+        type: string
+        description: 件数
+       WEIGHT:
+        type: string
+        description: 重量
+       BOARD_NUMBER:
+        type: string
+        description: 板号
+       TAG:
+        type: string
+        description: 标签（空运委托单）
+       IS_CLEARANCE:
+        type: string
+        description: 清关
+       UNLOAD_POINT:
+        type: string
+        description: 卸货点
+       DISTRIBUTOR:
+        type: string
+        description: 派送人员
   ERROR:
     type: object
     description: 异常返回结构
@@ -1159,7 +1268,7 @@ definitions:
       IS_CLEARANCE: 
         type: string
         description: 清关
-      DISCHARGING_POINT:
+      UNLOAD_POINT:
         type: string
         description: 卸货点
       DISTRIBUTOR:
@@ -1205,7 +1314,7 @@ definitions:
       IS_CLEARANCE: 
         type: string
         description: 清关
-      DISCHARGING_POINT:
+      UNLOAD_POINT:
         type: string
         description: 卸货点
       DISTRIBUTOR:
@@ -1437,9 +1546,9 @@ definitions:
     type: object
     description: 新增时前端提供的数据结构(分货交接体)
     properties:
-      BIG_TICKET_ID:
+      AIR_ENTRUST_ID:
         type: string
-        description: 空运大票ID
+        description: 空运委托单ID
       REC_COUNT:  
         type: string
         description: 实收件数
@@ -1509,7 +1618,7 @@ definitions:
       ID:
         type: string
         description: 记录ID
-      BIG_TICKET_ID:
+      AIR_ENTRUST_ID:
         type: string
         description: 空运大票ID
       REC_COUNT:  
