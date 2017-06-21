@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "<span style=\"font-size:15px;font-weight:bold\">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style=\"font-size:15px;font-weight:bold\">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style=\"font-size:15px;font-weight:bold\">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "title": "清关/分货交接/货物派送",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -267,8 +267,8 @@
         "parameters": [
           {
             "in": "query",
-            "name": "BIG_TICKET_ID",
-            "description": "空运大票ID",
+            "name": "BIG_TICKET_CODE",
+            "description": "空运大票号",
             "type": "string",
             "required": true
           }
@@ -504,8 +504,8 @@
         "tags": [
           "Clearance"
         ],
-        "summary": "提交请关单",
-        "description": "提交请关单",
+        "summary": "打印请关单",
+        "description": "打印请关单",
         "produces": [
           "application/json"
         ],
@@ -1150,10 +1150,10 @@
           {
             "in": "body",
             "name": "DETAILS_INFO",
-            "description": "编辑时使用的参数",
+            "description": "交货确认的参数",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferUpdateObj"
+              "$ref": "#/definitions/TransferComfirmObj"
             }
           }
         ],
@@ -1740,7 +1740,7 @@
       "type": "object",
       "description": "空运大票数据结构",
       "properties": {
-        "ID": {
+        "BIG_TICKET_ID": {
           "type": "integer",
           "description": "空运大票ID"
         },
@@ -1760,7 +1760,7 @@
           "type": "string",
           "description": "空运大票好"
         },
-        "LADING_NO": {
+        "LANDING_NO": {
           "type": "string",
           "description": "提单号(指令)"
         },
@@ -1826,7 +1826,7 @@
           "type": "string",
           "description": "空运大票好"
         },
-        "LADING_NO": {
+        "LANDING_NO": {
           "type": "string",
           "description": "提单号(指令)"
         },
@@ -2124,7 +2124,7 @@
           "type": "string",
           "description": "仓库"
         },
-        "CLEARANCE_PROXY": {
+        "PROXY": {
           "type": "string",
           "description": "清关代理"
         },
@@ -2186,7 +2186,7 @@
           "type": "string",
           "description": "卸货点"
         },
-        "CLEARANCE_PROXY": {
+        "PROXY": {
           "type": "string",
           "description": "清关代理"
         },
@@ -2240,7 +2240,7 @@
           "type": "string",
           "description": "分货交接体数据ID"
         },
-        "LADING_NO": {
+        "LANDING_NO": {
           "type": "string",
           "description": "提单号(指令)"
         },
@@ -2306,7 +2306,7 @@
           "type": "string",
           "description": "卸货点"
         },
-        "CLEARANCE_PROXY": {
+        "PROXY": {
           "type": "string",
           "description": "清关代理"
         },
@@ -2396,7 +2396,7 @@
           "type": "string",
           "description": "卸货点"
         },
-        "CLEARANCE_PROXY": {
+        "PROXY": {
           "type": "string",
           "description": "清关代理"
         },
@@ -2471,6 +2471,52 @@
         "ERR_REASON": {
           "type": "string",
           "description": "异常原因"
+        },
+        "NOTICE": {
+          "type": "string",
+          "description": "通知"
+        }
+      }
+    },
+    "TransferComfirmObj": {
+      "type": "object",
+      "description": "交接确认",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "头ID"
+        },
+        "CURRENCY_NAME": {
+          "type": "string",
+          "description": "币种"
+        },
+        "T_COST": {
+          "type": "string",
+          "description": "运费"
+        },
+        "DETAILS_INFO": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransferComfirmBodyObj"
+          }
+        }
+      }
+    },
+    "TransferComfirmBodyObj": {
+      "type": "object",
+      "description": "交接确认",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "分货交接体数据ID"
+        },
+        "COUNT": {
+          "type": "string",
+          "description": "件数"
+        },
+        "REC_COUNT": {
+          "type": "string",
+          "description": "实收件数"
         },
         "NOTICE": {
           "type": "string",
@@ -2920,7 +2966,7 @@
         "CODE": {
           "type": "string"
         },
-        "Name": {
+        "NAME": {
           "type": "string"
         }
       }

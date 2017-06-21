@@ -1,12 +1,12 @@
 swagger: '2.0'
 info:
   description: '<span style="font-size:15px;font-weight:bold">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style="font-size:15px;font-weight:bold">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style="font-size:15px;font-weight:bold">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；'
-  version: 1.0.4 
+  version: 1.0.5
   title: 清关/分货交接/货物派送
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: it_yichao@choicexp.com.cn
-host: 10.11.1.29:8090
+host: '10.11.1.29:8090'
 basePath: /choice-ERP
 tags:
   - name: BigTickets
@@ -15,7 +15,7 @@ tags:
     description: 清关相关接口
   - name: Transfer
     description: 分货交接接口
-  - name: CargoDelivery 
+  - name: CargoDelivery
     description: 货物派送接口
 schemes:
   - http
@@ -54,8 +54,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-#CLEARANCE#######################################
-  /clearance/getList: 
+  /clearance/getList:
     get:
       tags:
         - Clearance
@@ -86,7 +85,7 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/SearchList'
         '400':
           description: 请求失败
@@ -119,7 +118,7 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /clearance/getClearanceDetails:
-    get: 
+    get:
       tags:
         - Clearance
       summary: 获取清关关联的空运大票信息
@@ -156,7 +155,7 @@ paths:
       parameters:
         - name: AirEntrust_ID
           in: query
-          description: 空运委托单ID（xx,xx,xx）
+          description: '空运委托单ID（xx,xx,xx）'
           type: string
       responses:
         '200':
@@ -169,7 +168,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /clearance/getSingleBigTicket: 
+  /clearance/getSingleBigTicket:
     get:
       tags:
         - Clearance
@@ -179,10 +178,10 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: BIG_TICKET_ID
-          description: 空运大票ID
+          name: BIG_TICKET_CODE
+          description: 空运大票号
           type: string
-          required: true 
+          required: true
       responses:
         '200':
           description: 请求成功
@@ -195,8 +194,8 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /clearance/add:
-    post: 
-      tags: 
+    post:
+      tags:
         - Clearance
       summary: 添加新的请关单
       description: 添加新的请关单
@@ -222,8 +221,8 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /clearance/update:
-    post: 
-      tags: 
+    post:
+      tags:
         - Clearance
       summary: 编辑请关单
       description: 编辑请关单
@@ -250,7 +249,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/delete:
     delete:
-      tags: 
+      tags:
         - Clearance
       summary: 删除请关单
       description: 删除请关单
@@ -276,7 +275,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/submit:
     get:
-      tags: 
+      tags:
         - Clearance
       summary: 提交请关单
       description: 提交请关单
@@ -302,7 +301,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/doClearance:
     get:
-      tags: 
+      tags:
         - Clearance
       summary: 清关操作
       description: 清关操作
@@ -322,9 +321,9 @@ paths:
           required: true
         - in: query
           name: AIR_ENTRUST_IDS
-          description: 空运委托单ID(XX,XX,XX)
+          description: '空运委托单ID(XX,XX,XX)'
           type: string
-          required: true  
+          required: true
       responses:
         '200':
           description: 请求成功
@@ -338,10 +337,10 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/printDeliveryOrder:
     get:
-      tags: 
+      tags:
         - Clearance
-      summary: 提交请关单
-      description: 提交请关单
+      summary: 打印请关单
+      description: 打印请关单
       produces:
         - application/json
       parameters:
@@ -361,10 +360,9 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  # /clearance/print:
   /clearance/getDeliveryMan:
     get:
-      tags: 
+      tags:
         - Clearance
       summary: 派单员弹窗
       description: 派单员弹窗
@@ -390,7 +388,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /clearance/getUnloadPlace:
     get:
-      tags: 
+      tags:
         - Clearance
       summary: 卸货点弹窗
       description: 卸货点弹窗
@@ -414,7 +412,6 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-#TRANSFER#######################################
   /transfer/getList:
     get:
       tags:
@@ -450,7 +447,7 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/TransferSearchList'
         '400':
           description: 请求失败
@@ -484,15 +481,15 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/BigTickets'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR' 
+            $ref: '#/definitions/ERROR'
   /transfer/getTransfer:
-    get: 
+    get:
       tags:
         - Transfer
       summary: 获取分货交接头信息
@@ -513,14 +510,14 @@ paths:
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'    
+            $ref: '#/definitions/ERROR'
   /transfer/findAirEntrust:
-    get: 
+    get:
       tags:
         - Transfer
       summary: 通过hbl号，获取空运委托单ID
       description: 通过hbl号，获取空运委托单ID
-      produces: 
+      produces:
         - application/json
       parameters:
         - name: AIR_HBL
@@ -544,7 +541,7 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/TransferDetailList'
         '400':
           description: 请求失败
@@ -552,12 +549,12 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /transfer/getDetails:
-    get: 
+    get:
       tags:
         - Transfer
       summary: 获取分货交接体信息
       description: 获取分货交接体信息
-      produces: 
+      produces:
         - application/json
       parameters:
         - name: P_ID
@@ -569,16 +566,16 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/TransferDetailList'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'  
+            $ref: '#/definitions/ERROR'
   /transfer/add:
-    post: 
-      tags: 
+    post:
+      tags:
         - Transfer
       summary: 添加新的分货交接单
       description: 添加新的分货交接单
@@ -603,8 +600,8 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /transfer/update:
-    post: 
-      tags: 
+    post:
+      tags:
         - Transfer
       summary: 编辑分货交接单
       description: 编辑分货交接单
@@ -630,7 +627,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /transfer/delete:
     delete:
-      tags: 
+      tags:
         - Transfer
       summary: 删除请关单
       description: 删除请关单
@@ -655,7 +652,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /transfer/submit:
     get:
-      tags: 
+      tags:
         - Transfer
       summary: 提交分货交接单
       description: 提交分货交接单
@@ -680,7 +677,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /transfer/terminate:
     get:
-      tags: 
+      tags:
         - Transfer
       summary: 终止分货交接单
       description: 终止分货交接单
@@ -704,20 +701,20 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /transfer/inputTransferInfo:
-    post: 
-      tags: 
+    post:
+      tags:
         - Transfer
       summary: 交接信息录入
       description: 交接信息录入
       produces:
         - application/json
       parameters:
-        - in: "body"
-          name: "DETAILS_INFO"
+        - in: body
+          name: DETAILS_INFO
           description: 编辑时使用的参数
           required: true
           schema:
-            type: "array"
+            type: array
             items:
               $ref: '#/definitions/TransferUpdateBodyObj'
       responses:
@@ -751,7 +748,7 @@ paths:
         - name: T_COST
           description: 运费
           in: query
-          type: string  
+          type: string
       responses:
         '200':
           description: 请求成功
@@ -774,10 +771,10 @@ paths:
       parameters:
         - in: body
           name: DETAILS_INFO
-          description: 编辑时使用的参数
+          description: 交货确认的参数
           required: true
           schema:
-            $ref: '#/definitions/TransferUpdateObj'
+            $ref: '#/definitions/TransferComfirmObj'
       responses:
         '200':
           description: 请求成功
@@ -798,9 +795,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: "body"
-          name: "DETAILS_INFO"
-          description: "体数据"
+        - in: body
+          name: DETAILS_INFO
+          description: 体数据
           schema:
             type: array
             items:
@@ -816,7 +813,6 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-#CargoDelivery##############################
   /cargoDelivery/getList:
     get:
       tags:
@@ -847,7 +843,7 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/CD_SearchList'
         '400':
           description: 请求失败
@@ -855,7 +851,7 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/getCargoDlv:
-    get: 
+    get:
       tags:
         - CargoDelivery
       summary: 获取分货交接头信息
@@ -878,7 +874,7 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/getCargoDetails:
-    get: 
+    get:
       tags:
         - CargoDelivery
       summary: 获取分货交接体信息
@@ -948,7 +944,7 @@ paths:
           description: 请求成功
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/CD_Airentrust'
         '400':
           description: 请求失败
@@ -956,8 +952,8 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/add:
-    post: 
-      tags: 
+    post:
+      tags:
         - CargoDelivery
       summary: 添加新的货物派送单
       description: 添加新的货物派送单
@@ -982,8 +978,8 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/update:
-    post: 
-      tags: 
+    post:
+      tags:
         - CargoDelivery
       summary: 添加新的货物派送单
       description: 添加新的货物派送单
@@ -1009,7 +1005,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /cargoDelivery/delete:
     delete:
-      tags: 
+      tags:
         - CargoDelivery
       summary: 删除货物派送单
       description: 删除货物派送单
@@ -1034,7 +1030,7 @@ paths:
             $ref: '#/definitions/ERROR'
   /cargoDelivery/submit:
     get:
-      tags: 
+      tags:
         - CargoDelivery
       summary: 提交货物派送单
       description: 提交货物派送单
@@ -1058,20 +1054,20 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
   /cargoDelivery/inputSignInfo:
-    post: 
-      tags: 
+    post:
+      tags:
         - CargoDelivery
       summary: 签收信息录入
       description: 签收信息录入
       produces:
         - application/json
       parameters:
-        - in: "body"
-          name: "DETAILS_INFO"
+        - in: body
+          name: DETAILS_INFO
           description: 编辑时使用的参数
           required: true
           schema:
-            type: "array"
+            type: array
             items:
               $ref: '#/definitions/CD_SIGN'
       responses:
@@ -1094,9 +1090,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: "body"
-          name: "DETAILS_INFO"
-          description: "体数据"
+        - in: body
+          name: DETAILS_INFO
+          description: 体数据
           schema:
             type: array
             items:
@@ -1147,7 +1143,7 @@ paths:
       parameters:
         - in: query
           name: PIC_IDS
-          description: 图片ID集（xx,xx,xx,xx）
+          description: '图片ID集（xx,xx,xx,xx）'
           type: string
       responses:
         '200':
@@ -1162,112 +1158,111 @@ paths:
             type: object
             $ref: '#/definitions/ERROR'
 definitions:
-#ALL########################################
-  BigTickets: 
-     type: object
-     description: 空运大票数据结构
-     properties:
-       ID:
+  BigTickets:
+    type: object
+    description: 空运大票数据结构
+    properties:
+      BIG_TICKET_ID:
         type: integer
         description: 空运大票ID
-       AIR_ENTRUST_IDS:
+      AIR_ENTRUST_IDS:
         type: string
-        description: 空运委托单ID(XX,XX,XX)
-       FLIGHT_DATE:
+        description: '空运委托单ID(XX,XX,XX)'
+      FLIGHT_DATE:
         type: string
         description: 预订航班日期(指令)
-       C_INFO:
+      C_INFO:
         type: string
         description: 发货人信息
-       TICKET_ID: 
+      TICKET_ID:
         type: string
         description: 空运大票好
-       LADING_NO: 
+      LANDING_NO:
         type: string
         description: 提单号(指令)
-       E_PLACE:
+      E_PLACE:
         type: string
         description: 目的地(指令)
-       FLIGHT:  
+      FLIGHT:
         type: string
         description: 航班号(指令)
-       ROUTE:
+      ROUTE:
         type: string
         description: 航线(指令)
-       TAKE_OFF_DATE:
+      TAKE_OFF_DATE:
         type: string
         description: 起飞日期
-       ARRIVAL_TIME:
+      ARRIVAL_TIME:
         type: string
         description: 着陆日期
-       COUNT:
+      COUNT:
         type: string
         description: 件数
-       WEIGHT:
+      WEIGHT:
         type: string
         description: 重量
-       BOARD_NUMBER:
+      BOARD_NUMBER:
         type: string
         description: 板号
-       TAG:
+      TAG:
         type: string
         description: 标签（空运委托单）
-  BigTickets2: 
-     type: object
-     description: 空运大票数据结构
-     properties:
-       ID:
+  BigTickets2:
+    type: object
+    description: 空运大票数据结构
+    properties:
+      ID:
         type: integer
         description: 空运大票ID
-       AIR_ENTRUST_IDS:
+      AIR_ENTRUST_IDS:
         type: string
-        description: 空运委托单ID(XX,XX,XX)
-       FLIGHT_DATE:
+        description: '空运委托单ID(XX,XX,XX)'
+      FLIGHT_DATE:
         type: string
         description: 预订航班日期(指令)
-       C_INFO:
+      C_INFO:
         type: string
         description: 发货人信息
-       TICKET_ID: 
+      TICKET_ID:
         type: string
         description: 空运大票好
-       LADING_NO: 
+      LANDING_NO:
         type: string
         description: 提单号(指令)
-       E_PLACE:
+      E_PLACE:
         type: string
         description: 目的地(指令)
-       FLIGHT:  
+      FLIGHT:
         type: string
         description: 航班号(指令)
-       ROUTE:
+      ROUTE:
         type: string
         description: 航线(指令)
-       TAKE_OFF_DATE:
+      TAKE_OFF_DATE:
         type: string
         description: 起飞日期
-       ARRIVAL_TIME:
+      ARRIVAL_TIME:
         type: string
         description: 着陆日期
-       COUNT:
+      COUNT:
         type: string
         description: 件数
-       WEIGHT:
+      WEIGHT:
         type: string
         description: 重量
-       BOARD_NUMBER:
+      BOARD_NUMBER:
         type: string
         description: 板号
-       TAG:
+      TAG:
         type: string
         description: 标签（空运委托单）
-       IS_CLEARANCE:
+      IS_CLEARANCE:
         type: string
         description: 清关
-       UNLOAD_POINT:
+      UNLOAD_POINT:
         type: string
         description: 卸货点
-       DISTRIBUTOR:
+      DISTRIBUTOR:
         type: string
         description: 派送人员
   ERROR:
@@ -1277,7 +1272,7 @@ definitions:
       isSuccess:
         type: boolean
         example: false
-      msg: 
+      msg:
         type: string
   SUCCESS:
     type: object
@@ -1286,32 +1281,31 @@ definitions:
       isSuccess:
         type: boolean
         example: true
-#CLEARANCE##################################
-  SearchList: 
+  SearchList:
     type: object
     description: 查询返回
-    properties: 
-      ID: 
-         type: string
-         description: ID
-      RECEIPT_ID: 
-         type: string
-         description: 单据号
-      STATUS: 
+    properties:
+      ID:
+        type: string
+        description: ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
         type: string
         description: 状态
-      DESTINATION: 
-         type: string
-         description: 目的地
-      PROXY: 
-         type: string
-         description: 清关代理
-      REQDATE: 
-         type: string
-         description: 清关日期
-      REMARK: 
-         type: string
-         description: 备注
+      DESTINATION:
+        type: string
+        description: 目的地
+      PROXY:
+        type: string
+        description: 清关代理
+      REQDATE:
+        type: string
+        description: 清关日期
+      REMARK:
+        type: string
+        description: 备注
   addObj:
     type: object
     description: 清关新增时前端提供的数据结构
@@ -1319,7 +1313,7 @@ definitions:
       DESTINATION:
         type: string
         description: 目的地ID
-      PROXY: 
+      PROXY:
         type: string
         description: 清关代理公司ID
       REQDATE:
@@ -1340,7 +1334,7 @@ definitions:
       BIG_TICKET_ID:
         type: string
         description: 空运大票ID
-      IS_CLEARANCE: 
+      IS_CLEARANCE:
         type: string
         description: 清关
       UNLOAD_POINT:
@@ -1359,7 +1353,7 @@ definitions:
       DESTINATION:
         type: string
         description: 目的地ID
-      PROXY: 
+      PROXY:
         type: string
         description: 清关代理公司ID
       REQDATE:
@@ -1375,7 +1369,7 @@ definitions:
           $ref: '#/definitions/bodyUpdateObj'
       DELETE_INFO:
         type: string
-        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
   bodyUpdateObj:
     type: object
     description: 清关编辑时前端提供的数据结构(体)
@@ -1386,7 +1380,7 @@ definitions:
       BIG_TICKET_ID:
         type: string
         description: 空运大票ID
-      IS_CLEARANCE: 
+      IS_CLEARANCE:
         type: string
         description: 清关
       UNLOAD_POINT:
@@ -1422,7 +1416,7 @@ definitions:
       PAYMENT_TYPE:
         type: string
         description: 付费方式
-      CURRENCY: 
+      CURRENCY:
         type: string
         description: 币种
       DEAL_SUM:
@@ -1431,59 +1425,58 @@ definitions:
       REMARK:
         type: string
         description: 备注
-#TRANSFER###################################
   TransferSearchList:
     type: object
     description: 分货交接查询对象
     properties:
-      ID: 
-       type: string
-       description: ID
+      ID:
+        type: string
+        description: ID
       RECEIPT_ID:
-       type: string
-       description: 单据号
+        type: string
+        description: 单据号
       STATUS:
-       type: string
-       description: 状态
+        type: string
+        description: 状态
       EPLACE:
-       type: string
-       description: 目的地
+        type: string
+        description: 目的地
       WAREHOUSE:
-       type: string
-       description: 仓库
-      CLEARANCE_PROXY:
-       type: string
-       description: 清关代理
+        type: string
+        description: 仓库
+      PROXY:
+        type: string
+        description: 清关代理
       UNLOAD_POINT:
-       type: string
-       description: 卸货点
+        type: string
+        description: 卸货点
       DELIVER_MAN:
-       type: string
-       description: 派送人员
+        type: string
+        description: 派送人员
       DRIVER_INFO:
-       type: string
-       description: 司机信息
+        type: string
+        description: 司机信息
       TOTAL_COUNT:
-       type: string
-       description: 总件数
+        type: string
+        description: 总件数
       TOTAL_REC_COUNT:
-       type: string
-       description: 实收件数
+        type: string
+        description: 实收件数
       TOTAL_WEIGHT:
-       type: string
-       description: 总重量
+        type: string
+        description: 总重量
       CURRENCY:
-       type: string
-       description: 币种
+        type: string
+        description: 币种
       EXCHARGE_RATE:
-       type: string
-       description: 汇率
+        type: string
+        description: 汇率
       T_COST:
-       type: string
-       description: 运费
+        type: string
+        description: 运费
       REMARK:
-       type: string
-       description: 备注
+        type: string
+        description: 备注
   TransferList:
     type: object
     description: 获取分货交接头信息
@@ -1494,25 +1487,25 @@ definitions:
       EPLACE:
         type: string
         description: 目的地
-      UNLOAD_POINT:  
+      UNLOAD_POINT:
         type: string
         description: 卸货点
-      CLEARANCE_PROXY:
+      PROXY:
         type: string
         description: 清关代理
       DRIVER_INFO:
-        type: string  
-        description: 司机名及电话
-      STOCK_TYPE:  
         type: string
-        description: 仓储类型:1-代理；2-分公司
-      SUPPLIER:  
+        description: 司机名及电话
+      STOCK_TYPE:
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:
         type: string
         description: 仓储公司
-      WAREHOUSE:  
+      WAREHOUSE:
         description: 仓库
         type: string
-      DELIVER_MAN:  
+      DELIVER_MAN:
         description: 派送人员
         type: string
       CURRENCY:
@@ -1526,10 +1519,10 @@ definitions:
         description: 备注
       STATUS:
         type: string
-        description: 状态 
+        description: 状态
       RECEIPT_ID:
         type: string
-        description: 单据号 
+        description: 单据号
   TransferDetailList:
     type: object
     description: 获取分货交接体信息
@@ -1537,10 +1530,10 @@ definitions:
       ID:
         type: string
         description: 分货交接体数据ID
-      LADING_NO: 
+      LANDING_NO:
         type: string
         description: 提单号(指令)
-      TICKET_ID: 
+      TICKET_ID:
         type: string
         description: 空运大票号
       AIR_HBL:
@@ -1583,25 +1576,25 @@ definitions:
       EPLACE:
         type: string
         description: 目的地
-      UNLOAD_POINT:  
+      UNLOAD_POINT:
         type: string
         description: 卸货点
-      CLEARANCE_PROXY:
+      PROXY:
         type: string
         description: 清关代理
       DRIVER_INFO:
-        type: string  
+        type: string
         description: 司机名及电话
-      STOCK_TYPE:  
+      STOCK_TYPE:
         type: string
         description: '仓储类型:1-代理；2-分公司'
-      SUPPLIER:  
+      SUPPLIER:
         type: string
         description: 仓储公司
-      WAREHOUSE:  
+      WAREHOUSE:
         description: 仓库
         type: string
-      DELIVER_MAN:  
+      DELIVER_MAN:
         description: 派送人员
         type: string
       CURRENCY:
@@ -1613,7 +1606,7 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      DETAILS_INFO: 
+      DETAILS_INFO:
         type: array
         items:
           $ref: '#/definitions/TransferAddBodyObj'
@@ -1624,19 +1617,19 @@ definitions:
       AIR_ENTRUST_ID:
         type: string
         description: 空运委托单ID
-      REC_COUNT:  
+      REC_COUNT:
         type: string
         description: 实收件数
       REMARK:
         type: string
         description: 备注
       ERR_TYPE:
-        type: string  
+        type: string
         description: 异常类型
-      ERR_REASON:  
+      ERR_REASON:
         type: string
         description: 异常原因
-      NOTICE:  
+      NOTICE:
         type: string
         description: 通知
   TransferUpdateObj:
@@ -1649,25 +1642,25 @@ definitions:
       EPLACE:
         type: string
         description: 目的地
-      UNLOAD_POINT:  
+      UNLOAD_POINT:
         type: string
         description: 卸货点
-      CLEARANCE_PROXY:
+      PROXY:
         type: string
         description: 清关代理
       DRIVER_INFO:
-        type: string  
+        type: string
         description: 司机名及电话
-      STOCK_TYPE:  
+      STOCK_TYPE:
         type: string
         description: '仓储类型:1-代理；2-分公司'
-      SUPPLIER:  
+      SUPPLIER:
         type: string
         description: 仓储公司
-      WAREHOUSE:  
+      WAREHOUSE:
         description: 仓库
         type: string
-      DELIVER_MAN:  
+      DELIVER_MAN:
         description: 派送人员
         type: string
       CURRENCY:
@@ -1685,7 +1678,7 @@ definitions:
           $ref: '#/definitions/TransferUpdateBodyObj'
       DELETE_INFO:
         type: string
-        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
   TransferUpdateBodyObj:
     type: object
     description: 新增时前端提供的数据结构(分货交接体)
@@ -1696,22 +1689,54 @@ definitions:
       AIR_ENTRUST_ID:
         type: string
         description: 空运大票ID
-      REC_COUNT:  
+      REC_COUNT:
         type: string
         description: 实收件数
       REMARK:
         type: string
         description: 备注
       ERR_TYPE:
-        type: string  
+        type: string
         description: 异常类型
-      ERR_REASON:  
+      ERR_REASON:
         type: string
         description: 异常原因
-      NOTICE:  
+      NOTICE:
         type: string
         description: 通知
-#CargoDelivery#############################
+  TransferComfirmObj:
+    type: object
+    description: 交接确认
+    properties:
+      ID:
+        type: string
+        description: 头ID
+      CURRENCY_NAME:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      DETAILS_INFO:
+        type: array
+        items:
+          $ref: '#/definitions/TransferComfirmBodyObj'
+  TransferComfirmBodyObj:
+    type: object
+    description: 交接确认
+    properties:
+      ID:
+        type: string
+        description: 分货交接体数据ID
+      COUNT:
+        type: string
+        description: 件数
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      NOTICE:
+        type: string
+        description: 通知
   CD_SearchList:
     type: object
     description: 货物派送查询
@@ -1719,10 +1744,10 @@ definitions:
       RECEIPT_ID:
         type: string
         description: 单据号
-      STATUS: 
+      STATUS:
         type: string
         description: 当前状态
-      EPLACE: 
+      EPLACE:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1756,10 +1781,10 @@ definitions:
       RECEIPT_ID:
         type: string
         description: 单据号
-      STATUS: 
+      STATUS:
         type: string
         description: 当前状态
-      EPLACE: 
+      EPLACE:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1859,7 +1884,7 @@ definitions:
         description: 货物标签
       PAY_TYPE:
         type: string
-        description: 付费方式  
+        description: 付费方式
       CURRENCY:
         type: string
         description: 币种
@@ -1879,7 +1904,7 @@ definitions:
     type: object
     description: 货物派送头信息
     properties:
-      EPLACE: 
+      EPLACE:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1903,7 +1928,7 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      DETAILS_INFO: 
+      DETAILS_INFO:
         type: array
         description: 备注
         items:
@@ -1929,15 +1954,15 @@ definitions:
         description: 拒收原因
       PIC_ID:
         type: string
-        description: 图片ID(xx,xx,xx,xx)
+        description: '图片ID(xx,xx,xx,xx)'
   CD_UpdateObj:
     type: object
     description: 货物派送头信息
     properties:
-      ID: 
+      ID:
         type: string
         description: 纪录ID
-      EPLACE: 
+      EPLACE:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1961,14 +1986,14 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      DETAILS_INFO: 
+      DETAILS_INFO:
         type: array
         description: 备注
         items:
           $ref: '#/definitions/CD_UpdateDetailsObj'
       DELETE_INFO:
         type: string
-        description: 删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)
+        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
   CD_UpdateDetailsObj:
     type: object
     description: 货物派送体数据
@@ -1996,7 +2021,7 @@ definitions:
         description: 拒收原因
       PIC_ID:
         type: string
-        description: 图片ID(xx,xx,xx,xx)
+        description: '图片ID(xx,xx,xx,xx)'
   CD_SIGN:
     type: object
     description: 货物派送体数据（签收信息录入）
@@ -2039,7 +2064,7 @@ definitions:
       CODE:
         type: string
       NAME:
-        type: string 
+        type: string
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
