@@ -512,8 +512,8 @@
         "parameters": [
           {
             "in": "query",
-            "name": "AIR_ENTRUST_ID",
-            "description": "空运委托单ID",
+            "name": "AIR_ENTRUST_IDS",
+            "description": "空运委托单IDS(xx,xx,xx,xx)",
             "type": "string",
             "required": true
           }
@@ -533,7 +533,8 @@
               "$ref": "#/definitions/ERROR"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/clearance/getDeliveryMan": {
@@ -1149,11 +1150,11 @@
         "parameters": [
           {
             "in": "body",
-            "name": "DETAILS_INFO",
+            "name": "body",
             "description": "交货确认的参数",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferComfirmObj"
+              "$ref": "#/definitions/TransferUpdateObj"
             }
           }
         ],
@@ -1193,7 +1194,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TransferUpdateBodyObj"
+                "$ref": "#/definitions/TransferUpdateObj"
               }
             }
           }
@@ -1204,6 +1205,82 @@
             "schema": {
               "type": "object",
               "$ref": "#/definitions/SUCCESS"
+            }
+          },
+          "400": {
+            "description": "请求失败",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ERROR"
+            }
+          }
+        }
+      }
+    },
+    "/transfer/winUnoladPoint": {
+      "get": {
+        "tags": [
+          "Transfer"
+        ],
+        "summary": "获取卸货点(弹窗)",
+        "description": "获取卸货点(弹窗)",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "DESTINATION",
+            "description": "目的地",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WINDOW_INFO"
+              }
+            }
+          },
+          "400": {
+            "description": "请求失败",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ERROR"
+            }
+          }
+        }
+      }
+    },
+    "/transfer/getExcharge": {
+      "get": {
+        "tags": [
+          "Transfer"
+        ],
+        "summary": "获取汇率",
+        "description": "获取汇率",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "CURRENCY",
+            "description": "货币ID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SUCCESS2"
+              }
             }
           },
           "400": {
@@ -1350,8 +1427,8 @@
         "tags": [
           "CargoDelivery"
         ],
-        "summary": "获取多个空运委托单信息",
-        "description": "获取清关关联的空运委托信息",
+        "summary": "获取一个空运委托单信息",
+        "description": "获取一个空运委托单信息",
         "produces": [
           "application/json"
         ],
@@ -1392,8 +1469,8 @@
         "tags": [
           "CargoDelivery"
         ],
-        "summary": "获取一个空运委托单信息",
-        "description": "获取一个空运委托信息",
+        "summary": "获取多个空运委托单信息",
+        "description": "获取多个空运委托信息",
         "produces": [
           "application/json"
         ],
@@ -1696,7 +1773,7 @@
         }
       }
     },
-    "/cargoDelivery/getFile": {
+    "/cargoDelivery/getUploadFile": {
       "get": {
         "tags": [
           "CargoDelivery"
@@ -2967,6 +3044,19 @@
           "type": "string"
         },
         "NAME": {
+          "type": "string"
+        }
+      }
+    },
+    "SUCCESS2": {
+      "type": "object",
+      "description": "成功返回2",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean",
+          "example": true
+        },
+        "rate": {
           "type": "string"
         }
       }
