@@ -1,0 +1,1418 @@
+swagger: '2.0'
+info:
+  description: '<span style="font-size:15px;font-weight:bold">收货管理：</span>收货管理安卓版接口(查，新增（含提交）)<br> 
+  <span style="font-size:15px;font-weight:bold">档口移仓：</span>档口移仓安卓版接口（查，增，删，改，发货（含提交），收货）<br>
+  <span style="font-size:15px;font-weight:bold">转仓管理：</span>转仓管理安卓版接口（查，增，删，改，发货（含提交），收货）<br>
+  <span style="font-size:15px;font-weight:bold">货物移库：</span>货物移库安卓版接口（查，改）<br>
+  <span style="font-size:15px;font-weight:bold">分货交接：</span>分货交接安卓版接口（查，改）<br>
+  <span style="font-size:15px;font-weight:bold">货物派送：</span>货物派送安卓版接口（查，改）<br>'
+  version: 1.0.0
+  title: 赛拾空运手机APP接口协议
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: it_yichao@choicexp.com.cn
+host: '10.11.1.29:8090'
+basePath: /choice-ERP
+tags:
+  - name: AirEntrust
+    description: 收货管理
+  - name: PortToWareHouse
+    description: 档口移仓
+  - name: TransformWareHouse
+    description: 转仓管理
+  - name: MoveWarehouse
+    description: 货物移库
+  - name: Transfer
+    description: 分货交接
+  - name: CargoDelivery
+    description: 货物签收(派送)
+schemes:
+  - http
+paths:
+#Air_Entrust##########################################
+  /airentrust/getListForApp:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取主列表数据
+      description: 获取主列表数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/AirEntrust_ListObjMain'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrust/getOrder:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取空运委托单详情
+      description: 获取空运委托单详情
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 空运委托单详单ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AirEntrust_Obj_SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /airentrust/getSize:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取主列表数据
+      description: 获取主列表数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: P_ID
+          description: 详情数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AirEntrust_SIZE_SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /airentrust/getWenjian:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取上传文件
+      description: 获取上传文件
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: P_ID
+          description: 详情数据ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AirEntrust_PIC_SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  #/airentrust/winBMan:
+  #/airentrust/winPService:
+  #/airentrust/winWarehouse:
+  #/airentrust/winStore:
+  #/airentrust/winCustInfo:
+  #/airentrust/uploadPic:
+  #/airentrust/addForApp:
+#Transfer##########################################  
+  /transfer/getList:
+    get:
+      tags:
+        - Transfer
+      summary: 获取主列表数据
+      description: 获取主列表数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/getTransfer:
+    get:
+      tags:
+        - Transfer
+      summary: 获取详细的分货交接数据
+      description: 获取详细的分货交接数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/getDetails:
+    get:
+      tags:
+        - Transfer
+      summary: 获取分货交接对应的子列表信息
+      description: 获取分货交接对应的子列表信息
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/getDetail:
+    get:
+      tags:
+        - Transfer
+      summary: 根据HBL号获取子列表信息（扫码）
+      description: 根据HBL号获取子列表信息（扫码）
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/updateDetailInfo:
+    get:
+      tags:
+        - Transfer
+      summary: 更新子列表信息
+      description: 更新子列表信息
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /transfer/getErrorReason:
+    get:
+      tags:
+        - Transfer
+      summary: 获取异常原因
+      description: 获取异常原因
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+definitions:
+  BigTickets:
+    type: object
+    description: 空运大票数据结构
+    properties:
+      BIG_TICKET_ID:
+        type: integer
+        description: 空运大票ID
+      AIR_ENTRUST_IDS:
+        type: string
+        description: '空运委托单ID(XX,XX,XX)'
+      FLIGHT_DATE:
+        type: string
+        description: 预订航班日期(指令)
+      C_INFO:
+        type: string
+        description: 发货人信息
+      TICKET_ID:
+        type: string
+        description: 空运大票好
+      LANDING_NO:
+        type: string
+        description: 提单号(指令)
+      E_PLACE:
+        type: string
+        description: 目的地(指令)
+      FLIGHT:
+        type: string
+        description: 航班号(指令)
+      ROUTE:
+        type: string
+        description: 航线(指令)
+      TAKE_OFF_DATE:
+        type: string
+        description: 起飞日期
+      ARRIVAL_TIME:
+        type: string
+        description: 着陆日期
+      COUNT:
+        type: string
+        description: 件数
+      WEIGHT:
+        type: string
+        description: 重量
+      BOARD_NUMBER:
+        type: string
+        description: 板号
+      TAG:
+        type: string
+        description: 标签（空运委托单）
+  BigTickets2:
+    type: object
+    description: 空运大票数据结构
+    properties:
+      ID:
+        type: integer
+        description: 空运大票ID
+      AIR_ENTRUST_IDS:
+        type: string
+        description: '空运委托单ID(XX,XX,XX)'
+      FLIGHT_DATE:
+        type: string
+        description: 预订航班日期(指令)
+      C_INFO:
+        type: string
+        description: 发货人信息
+      TICKET_ID:
+        type: string
+        description: 空运大票好
+      LANDING_NO:
+        type: string
+        description: 提单号(指令)
+      E_PLACE:
+        type: string
+        description: 目的地(指令)
+      FLIGHT:
+        type: string
+        description: 航班号(指令)
+      ROUTE:
+        type: string
+        description: 航线(指令)
+      TAKE_OFF_DATE:
+        type: string
+        description: 起飞日期
+      ARRIVAL_TIME:
+        type: string
+        description: 着陆日期
+      COUNT:
+        type: string
+        description: 件数
+      WEIGHT:
+        type: string
+        description: 重量
+      BOARD_NUMBER:
+        type: string
+        description: 板号
+      TAG:
+        type: string
+        description: 标签（空运委托单）
+      IS_CLEARANCE:
+        type: string
+        description: 清关
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DISTRIBUTOR:
+        type: string
+        description: 派送人员
+  ERROR:
+    type: object
+    description: 异常返回结构
+    properties:
+      isSuccess:
+        type: boolean
+        example: false
+      msg:
+        type: string
+  SUCCESS:
+    type: object
+    description: 成功返回
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+#AirEntrust#############################################
+  AirEntrust_ListObjMain:
+    type: object
+    description: 主列表字段带分页参数
+    properties:
+      totalRow:
+        type: integer
+        description: 总记录数
+      pageNumber:
+        type: integer
+        description: 当前页
+      firstPage:
+        type: boolean
+        description: 是否为第一页
+      lastPage:
+        type: integer
+        description: 是否为最后一页
+      totalPage:
+        type: integer
+        description: 总页数
+      pageSize:
+        type: integer
+        description: 每页大小
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/AirEntrust_ListObj'
+  AirEntrust_ListObj:
+    type: object
+    description: 主列表字段
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
+        type: string
+        description: 状态
+      AIR_HBL:
+        type: string
+        description: 空运HBL号
+      B_MAN:
+        type: string
+        description: 业务员ID
+      S_PRODUCT:
+        type: string
+        description: 服务产品ID
+      C_ID:
+        type: string
+        description: 客户资料ID
+      B_MAN_NAME:
+        type: string
+        description: 业务员名字
+      S_PRODUCT_NAME:
+        type: string
+        description: 服务产品名字
+      C_ID_NAME:
+        type: string
+        description: 客户资料名字
+  AirEntrust_Obj:
+    type: object
+    description: 表单详情
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
+        type: string
+        description: 状态
+      AIR_HBL:
+        type: string
+        description: 空运HBL号
+      B_MAN:
+        type: string
+        description: 业务员ID
+      B_MAN_NAME:
+        type: string
+        description: 业务员名
+      S_PRODUCT:
+        type: string
+        description: 服务产品ID
+      S_PRODUCT_NAME:
+        type: string
+        description: 服务产品名
+      DESTINATION:
+        type: string
+        description: 目的地ID
+      DESTINATION_NAME:
+        type: string
+        description: 目的地名
+      EXPRESS_NUM:
+        type: string
+        description: 快递单号
+      I_CODE:
+        type: string
+        description: 标识码
+      WAREHOUSE:
+        type: string
+        description: 收货仓库ID
+      WAREHOUSE_NAME:
+        type: string
+        description: 收货仓库名
+      STORE:
+        type: string
+        description: 收货档口ID
+      STORE_NAME:
+        type: string
+        description: 收货档口名字
+      REMARK:
+        type: string
+        description: 备注
+      C_ID:
+        type: string
+        description: 空运委托单ID
+      C_ID_NAME:
+        type: string
+        description: 空运委托单名
+      PAYMENT_TYPE:
+        type: string
+        description: 付费类型
+      AVAILABLE_CREDIT:
+        type: string
+        description: 可用额度
+      OVER_DUE_PAYMENT:
+        type: string
+        description: 逾期未付款金额
+      MARK:
+        type: string
+        description: 唛头
+      SENDER:
+        type: string
+        description: 发货人
+      SENDER_PHONE:
+        type: string
+        description: 发货人电话
+      SENDER_ADDRESS:
+        type: string
+        description: 发货人地址
+      SENDER_WX:
+        type: string
+        description: 发货人wX
+      RECEIVER:
+        type: string
+        description: 收货人
+      RECEIVER_PHONE:
+        type: string
+        description: 收货人电话
+      RECEIVER_ADDRESS:
+        type: string
+        description: 收货人地址
+      RECEIVER_WX:
+        type: string
+        description: 收货人WX
+      NOTICE1:
+        type: string
+        description: 通知人
+      NOTICE2:
+        type: string
+        description: 通知人信息
+      IS_MANIFEST:
+        type: string
+        description: 客户提供报关单
+      IS_RAMDOM_FILE:
+        type: string
+        description: 随机文件
+  AirEntrust_Obj_SUCCESS:
+    type: object
+    description: 成功返回
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      data: 
+        type: object
+        $ref: '#/definitions/AirEntrust_Obj'
+  AirEntrust_SIZE:
+    type: object
+    description: 尺寸清单
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      ITEM_NO:
+        type: string
+        description: 序号
+      LENGHT:
+        type: string
+        description: 长
+      WIDTH:
+        type: string
+        description: 宽
+      HIGH:
+        type: string
+        description: 高
+      G_WEIGHT:
+        type: string
+        description: 毛重
+      PIECE:
+        type: string
+        description: 件数
+  AirEntrust_SIZE_SUCCESS:
+    type: object
+    description: 成功返回
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      data: 
+        type: array
+        items:
+          $ref: '#/definitions/AirEntrust_SIZE'
+  AirEntrust_PIC:
+    type: object
+    description: 返回图片
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      P_ID:
+        type: string
+        description: 空运委托单ID
+      FILE_NAME:
+        type: string
+        description: 文件名字
+      FILE_ID:
+        type: string
+        description: 文件UUID名字
+      FILE_PATH:
+        type: string
+        description: 文件路径
+      REMARK:
+        type: string
+        description: 备注
+      UPLOAD_MAN:
+        type: string
+        description: 上传人
+      UPLOAD_DATE:
+        type: string
+        description: 上传时间（日/月/年）
+  AirEntrust_PIC_SUCCESS:
+    type: object
+    description: 成功返回
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      data: 
+        type: array
+        items:
+          $ref: '#/definitions/AirEntrust_PIC'
+  WIN_BMan: 
+    type: object
+    description: 业务员选择
+    properties:
+      ID:
+        type: string
+        description: 业务员ID
+      NAME: 
+        type: string
+        description: 业务员名字
+      DPM: 
+        type: string
+        description: 业务员所属部门ID
+  WIN_PService:
+    type: object
+    description: 服务产品选择
+    properties:
+      ID:
+        type: string
+        description: 服务产品ID
+      NAME: 
+        type: string
+        description: 服务产品名字
+      DELIVERY: 
+        type: string
+        description: 交货地ID
+      DESTINATION:
+        type: string
+        description: 目的地ID
+      DESTINATION_NAME:
+        type: string
+        description: 目的地名字
+      TRANSFERSTATION:
+        type: string
+        description: 中转地ID
+      TWO_PORT:
+        type: string
+        description: 二级港口ID
+#Transfer###############################################   
+  TransferSearchList:
+    type: object
+    description: 分货交接查询对象
+    properties:
+      ID:
+        type: string
+        description: ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
+        type: string
+        description: 状态
+      EPLACE:
+        type: string
+        description: 目的地
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      PROXY:
+        type: string
+        description: 清关代理
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      DRIVER_INFO:
+        type: string
+        description: 司机信息
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      TOTAL_REC_COUNT:
+        type: string
+        description: 实收件数
+      TOTAL_WEIGHT:
+        type: string
+        description: 总重量
+      CURRENCY:
+        type: string
+        description: 币种
+      EXCHARGE_RATE:
+        type: string
+        description: 汇率
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+  TransferList:
+    type: object
+    description: 获取分货交接头信息
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string
+        description: 司机名及电话
+      STOCK_TYPE:
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:
+        type: string
+        description: 仓储公司
+      WAREHOUSE:
+        description: 仓库
+        type: string
+      DELIVER_MAN:
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      STATUS:
+        type: string
+        description: 状态
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+  TransferDetailList:
+    type: object
+    description: 获取分货交接体信息
+    properties:
+      ID:
+        type: string
+        description: 分货交接体数据ID
+      LANDING_NO:
+        type: string
+        description: 提单号(指令)
+      TICKET_ID:
+        type: string
+        description: 空运大票号
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      R_INFO:
+        type: string
+        description: 收货人信息（未知）
+      CARGO_INFO:
+        type: string
+        description: 货物信息（未知）
+      TAG:
+        type: string
+        description: 标签（空运委托单）
+      COUNT:
+        type: string
+        description: 件数
+      WEIGHT:
+        type: string
+        description: 重量
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string
+        description: 异常类别
+      ERR_REASON:
+        type: string
+        description: 异常原因
+      NOTICE:
+        type: string
+        description: 通知
+  TransferAddObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接)
+    properties:
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string
+        description: 司机名及电话
+      STOCK_TYPE:
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:
+        type: string
+        description: 仓储公司
+      WAREHOUSE:
+        description: 仓库
+        type: string
+      DELIVER_MAN:
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO:
+        type: array
+        items:
+          $ref: '#/definitions/TransferAddBodyObj'
+  TransferAddBodyObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接体)
+    properties:
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string
+        description: 异常类型
+      ERR_REASON:
+        type: string
+        description: 异常原因
+      NOTICE:
+        type: string
+        description: 通知
+  TransferUpdateObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接)
+    properties:
+      ID:
+        type: string
+        description: ID
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      PROXY:
+        type: string
+        description: 清关代理
+      DRIVER_INFO:
+        type: string
+        description: 司机名及电话
+      STOCK_TYPE:
+        type: string
+        description: '仓储类型:1-代理；2-分公司'
+      SUPPLIER:
+        type: string
+        description: 仓储公司
+      WAREHOUSE:
+        description: 仓库
+        type: string
+      DELIVER_MAN:
+        description: 派送人员
+        type: string
+      CURRENCY:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO:
+        type: array
+        items:
+          $ref: '#/definitions/TransferUpdateBodyObj'
+      DELETE_INFO:
+        type: string
+        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
+  TransferUpdateBodyObj:
+    type: object
+    description: 新增时前端提供的数据结构(分货交接体)
+    properties:
+      ID:
+        type: string
+        description: 记录ID
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运大票ID
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      REMARK:
+        type: string
+        description: 备注
+      ERR_TYPE:
+        type: string
+        description: 异常类型
+      ERR_REASON:
+        type: string
+        description: 异常原因
+      NOTICE:
+        type: string
+        description: 通知
+  TransferComfirmObj:
+    type: object
+    description: 交接确认
+    properties:
+      ID:
+        type: string
+        description: 头ID
+      CURRENCY_NAME:
+        type: string
+        description: 币种
+      T_COST:
+        type: string
+        description: 运费
+      DETAILS_INFO:
+        type: array
+        items:
+          $ref: '#/definitions/TransferComfirmBodyObj'
+  TransferComfirmBodyObj:
+    type: object
+    description: 交接确认
+    properties:
+      ID:
+        type: string
+        description: 分货交接体数据ID
+      COUNT:
+        type: string
+        description: 件数
+      REC_COUNT:
+        type: string
+        description: 实收件数
+      NOTICE:
+        type: string
+        description: 通知
+#CargoDelivery##########################################    
+  CD_SearchList:
+    type: object
+    description: 货物派送查询
+    properties:
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
+        type: string
+        description: 当前状态
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+  CD:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID:
+        type: string
+        description: 数据ID
+      RECEIPT_ID:
+        type: string
+        description: 单据号
+      STATUS:
+        type: string
+        description: 当前状态
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+  CD_DetailsList:
+    type: object
+    description: 货物派送体数据
+    properties:
+      ID:
+        type: string
+        description: 数据ID
+      P_ID:
+        type: string
+        description: 头ID
+      BIG_TICKET:
+        type: string
+        description: 空运大票号
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      RECEIVER_INFO:
+        type: string
+        description: 收货人信息
+      TAG:
+        type: string
+        description: 标签
+      PAY_TYPE:
+        type: string
+        description: 付费类型
+      CURRENCY:
+        type: string
+        description: 币种
+      EXCHARGE_RATE:
+        type: string
+        description: 汇率
+      COUNT:
+        type: string
+        description: 到货件数
+      WEIGHT:
+        type: string
+        description: 到货重量
+      RECEIVABLE_COUNT:
+        type: string
+        description: 应收金额
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+      PIC_ID:
+        type: string
+        description: 图片ID
+  CD_Airentrust:
+    type: object
+    description: 货物派送获取空运委托单以及大票信息
+    properties:
+      AIR_ENTRUST_ID:
+        type: string
+        description: 委托单ID
+      AIR_HBL:
+        type: string
+        description: 委托单号
+      BIG_TICKET:
+        type: string
+        description: 空运大票号
+      RECEIVER_INFO:
+        type: string
+        description: 收货人信息
+      TAGS:
+        type: string
+        description: 货物标签
+      PAY_TYPE:
+        type: string
+        description: 付费方式
+      CURRENCY:
+        type: string
+        description: 币种
+      EXCHARGE_RATE:
+        type: string
+        description: 汇率
+      COUNT:
+        type: string
+        description: 到货件数
+      WEIGHT:
+        type: string
+        description: 到货重量
+      RECEIVABLE_COUNT:
+        type: string
+        description: 应收金额
+  CD_AddObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO:
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_AddDetailsObj'
+  CD_AddDetailsObj:
+    type: object
+    description: 货物派送体数据
+    properties:
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+      PIC_ID:
+        type: string
+        description: '图片ID(xx,xx,xx,xx)'
+  CD_UpdateObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID:
+        type: string
+        description: 纪录ID
+      EPLACE:
+        type: string
+        description: 目的地
+      UNLOAD_POINT:
+        type: string
+        description: 卸货点
+      DELIVER_MAN:
+        type: string
+        description: 派送人员
+      WAREHOUSE:
+        type: string
+        description: 仓库
+      TOTAL_COUNT:
+        type: string
+        description: 总件数
+      CUST_COUNT:
+        type: string
+        description: 客户签收件数
+      REC_FREIGHT:
+        type: string
+        description: 实收本位币金额
+      REMARK:
+        type: string
+        description: 备注
+      DETAILS_INFO:
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_UpdateDetailsObj'
+      DELETE_INFO:
+        type: string
+        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
+  CD_UpdateDetailsObj:
+    type: object
+    description: 货物派送体数据
+    properties:
+      ID:
+        type: string
+        description: 体纪录ID
+      P_ID:
+        type: string
+        description: 头ID
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+      PIC_ID:
+        type: string
+        description: '图片ID(xx,xx,xx,xx)'
+  CD_SIGN:
+    type: object
+    description: 货物派送体数据（签收信息录入）
+    properties:
+      ID:
+        type: string
+        description: 体纪录ID
+      P_ID:
+        type: string
+        description: 头ID
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
+      REC_COUNT:
+        type: string
+        description: 实收金额
+      SIGN_COUNT:
+        type: string
+        description: 签收件数
+      REJECT_COUNT:
+        type: string
+        description: 拒收件数
+      REJECT_REASON:
+        type: string
+        description: 拒收原因
+  CD_ConfirmObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID:
+        type: string
+        description: 纪录ID
+      
+      DETAILS_INFO:
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_UpdateDetailsObj'
+#Gobal##########################################################
+  FILE_INFO:
+    type: object
+    description: 文件查看，获取url
+    properties:
+      ID:
+        type: string
+      URL:
+        type: string
+  WINDOW_INFO:
+    type: object
+    description: 弹窗返回
+    properties:
+      ID:
+        type: string
+      CODE:
+        type: string
+      NAME:
+        type: string
+  SUCCESS2:
+    type: object
+    description: 成功返回2
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      rate:
+        type: string
+  win_ForeignCargo:
+    type: object
+    description: 海外仓储相关
+    properties:
+      SUPPLIER_CNAME:
+        type: string
+        description: 公司名字
+      FOREIGN_CARGO_ID:
+        type: string
+        description: 海外仓储ID
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

@@ -9,6 +9,8 @@ info:
 host: '10.11.1.29:8090'
 basePath: /choice-ERP
 tags:
+  - name: ForeignCargo
+    description: 海外仓储
   - name: BigTickets
     description: 空运大票
   - name: Clearance
@@ -20,6 +22,47 @@ tags:
 schemes:
   - http
 paths:
+  /foreignCargo/findForeignCargo:
+    get:
+      tags:
+        - ForeignCargo
+      summary: 获取海外仓储相关弹窗数据
+      description: 获取海外仓储相关弹窗数据
+      produces:
+        - application/json
+      parameters:
+        - name: DESTINATION
+          in: query
+          description: 目的地
+          type: string
+        - name: SERVICE_TYPE
+          in: query
+          description: 业务类型
+          type: string
+        - name: OCCUR_LINK
+          in: query
+          description: 发生环节（1-清关、2-报关、3-仓储、4-代理）
+          type: string
+        - name: COMPANY_TYPE
+          in: query
+          description: 公司类别（0-代理，1-分公司）
+          type: string
+        - name: CNAME
+          in: query
+          description: 业务类型（中文）
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items: 
+             $ref: '#/definitions/win_ForeignCargo'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /clearance/findBigTickets:
     get:
       tags:
@@ -866,6 +909,26 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  /transfer/getErrorReason:
+    get:
+      tags:
+        - Transfer
+      summary: 获取异常原因
+      description: 获取异常原因
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /cargoDelivery/getList:
     get:
       tags:
@@ -1095,6 +1158,16 @@ paths:
           description: 需要提交的数据ID
           type: string
           required: true
+        - in: query
+          name: DELIVER_MAN
+          description: 派送人表示
+          type: string
+          required: true
+        - in: query
+          name: UNLOAD_POINT_NAME
+          description: 卸货点名称
+          type: string
+          required: true
       responses:
         '200':
           description: 请求成功
@@ -1149,7 +1222,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/CD_UpdateDetailsObj'
+              $ref: '#/definitions/CD_ConfirmObj'
       responses:
         '200':
           description: 请求成功
@@ -2100,6 +2173,20 @@ definitions:
       REJECT_REASON:
         type: string
         description: 拒收原因
+  CD_ConfirmObj:
+    type: object
+    description: 货物派送头信息
+    properties:
+      ID:
+        type: string
+        description: 纪录ID
+      
+      DETAILS_INFO:
+        type: array
+        description: 备注
+        items:
+          $ref: '#/definitions/CD_UpdateDetailsObj'
+         
   FILE_INFO:
     type: object
     description: 文件查看，获取url
@@ -2127,6 +2214,16 @@ definitions:
         example: true
       rate:
         type: string
+  win_ForeignCargo:
+    type: object
+    description: 海外仓储相关
+    properties:
+      SUPPLIER_CNAME:
+        type: string
+        description: 公司名字
+      FOREIGN_CARGO_ID:
+        type: string
+        description: 海外仓储ID
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

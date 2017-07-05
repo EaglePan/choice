@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "<span style=\"font-size:15px;font-weight:bold\">清关</span>：货物在到达目的地之前或之后，需要安排清关公司（目前全部是代理公司）按进港货物的提单号分批次进行清关操作；<br> <span style=\"font-size:15px;font-weight:bold\">分货交接：</span>货物清关出来公司人员需要与代理进行交接，按空运大票号对应的空运委托单逐单核对，将差异记录在货物异常表中；<br><span style=\"font-size:15px;font-weight:bold\">货物派送：</span>空运提供的服务，有一些是需要派送的，本功能会将需要派送的且已入库的货物分派相关的人员送货人门；",
-    "version": "1.0.5",
-    "title": "清关/分货交接/货物派送",
+    "description": "<span style=\"font-size:15px;font-weight:bold\">收货管理：</span>收货管理安卓版接口(查，新增（含提交）)<br>  <span style=\"font-size:15px;font-weight:bold\">档口移仓：</span>档口移仓安卓版接口（查，增，删，改，发货（含提交），收货）<br> <span style=\"font-size:15px;font-weight:bold\">转仓管理：</span>转仓管理安卓版接口（查，增，删，改，发货（含提交），收货）<br> <span style=\"font-size:15px;font-weight:bold\">货物移库：</span>货物移库安卓版接口（查，改）<br> <span style=\"font-size:15px;font-weight:bold\">分货交接：</span>分货交接安卓版接口（查，改）<br> <span style=\"font-size:15px;font-weight:bold\">货物派送：</span>货物派送安卓版接口（查，改）<br>",
+    "version": "1.0.0",
+    "title": "赛拾空运手机APP接口协议",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "it_yichao@choicexp.com.cn"
@@ -13,545 +13,137 @@
   "basePath": "/choice-ERP",
   "tags": [
     {
-      "name": "BigTickets",
-      "description": "空运大票"
+      "name": "AirEntrust",
+      "description": "收货管理"
     },
     {
-      "name": "Clearance",
-      "description": "清关相关接口"
+      "name": "PortToWareHouse",
+      "description": "档口移仓"
+    },
+    {
+      "name": "TransformWareHouse",
+      "description": "转仓管理"
+    },
+    {
+      "name": "MoveWarehouse",
+      "description": "货物移库"
     },
     {
       "name": "Transfer",
-      "description": "分货交接接口"
+      "description": "分货交接"
     },
     {
       "name": "CargoDelivery",
-      "description": "货物派送接口"
+      "description": "货物签收(派送)"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/clearance/findBigTickets": {
+    "/airentrust/getListForApp": {
       "get": {
         "tags": [
-          "BigTickets"
+          "AirEntrust"
         ],
-        "summary": "调入信息",
-        "description": "调入信息",
-        "operationId": "findBigTickets",
+        "summary": "获取主列表数据",
+        "description": "获取主列表数据",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "FLIGHT_DATE_START",
             "in": "query",
-            "description": "预定日期（开始）",
-            "type": "string"
+            "name": "callback",
+            "description": "callback,默认为接口名字",
+            "type": "string",
+            "required": true
           },
           {
-            "name": "FLIGHT_DATE_END",
             "in": "query",
-            "description": "预定日期（结束）",
-            "type": "string"
+            "name": "start",
+            "description": "需要后去的下一个数据的编号",
+            "type": "integer",
+            "required": true
           },
           {
-            "name": "AIRLINE_COMPANY",
-            "description": "航空代理公司",
             "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BigTickets"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid status value",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/getList": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "获取清关信息列表",
-        "description": "获取清关信息列表",
-        "operationId": "getList",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "DESTINATION",
-            "in": "query",
-            "description": "目的地",
-            "type": "string"
-          },
-          {
-            "name": "PROXY",
-            "in": "query",
-            "description": "清关代理",
-            "type": "string"
-          },
-          {
-            "name": "REQDATE_START",
-            "description": "清关日期(开始)",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "REQDATE_END",
-            "description": "清关日期(结束)",
-            "in": "query",
-            "type": "string"
+            "name": "length",
+            "description": "每次获取的记录的个数",
+            "type": "integer",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "请求成功",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SearchList"
-              }
+              "type": "object",
+              "$ref": "#/definitions/AirEntrust_ListObjMain"
             }
           },
           "400": {
             "description": "请求失败",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
+              "type": "object"
             }
           }
         }
       }
     },
-    "/clearance/getClearance": {
+    "/airentrust/getOrder": {
       "get": {
         "tags": [
-          "Clearance"
+          "AirEntrust"
         ],
-        "summary": "获取清关信息",
-        "description": "获取清关信息",
-        "operationId": "getClearance",
+        "summary": "获取空运委托单详情",
+        "description": "获取空运委托单详情",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "in": "query",
             "name": "ID",
-            "in": "query",
-            "description": "ID",
-            "type": "string"
+            "description": "空运委托单ID",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "请求成功",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SearchList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AirEntrust_Obj"
+              }
             }
           },
           "400": {
             "description": "请求失败",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
+              "type": "object"
             }
           }
         }
       }
     },
-    "/clearance/getClearanceDetails": {
+    "/airentrust/getSize": {
       "get": {
         "tags": [
-          "Clearance"
+          "AirEntrust"
         ],
-        "summary": "获取清关关联的空运大票信息",
-        "description": "获取清关关联的空运大票信息",
-        "operationId": "getClearanceDetails",
+        "summary": "获取主列表数据",
+        "description": "获取主列表数据",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "in": "query",
             "name": "P_ID",
-            "in": "query",
-            "description": "清关记录ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BigTickets2"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/getAirEntrust": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "获取清关关联的空运委托单信息",
-        "description": "获取清关关联的空运委托信息",
-        "operationId": "getAirEntrust",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "AirEntrust_ID",
-            "in": "query",
-            "description": "空运委托单ID（xx,xx,xx）",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Airentrusts"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/getSingleBigTicket": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "获取单个空运大票号信息",
-        "description": "空运大票号从空运大票表中查找状态为“已起飞“或”到达目的地“，且目的地与单头的目的地相同的记录中提取;同时从空运大票表中将除卸货点、清关、备注之外的列内容提取并赋值",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "BIG_TICKET_CODE",
-            "description": "空运大票号",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/BigTickets"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/add": {
-      "post": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "添加新的请关单",
-        "description": "添加新的请关单",
-        "operationId": "add",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "新增时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/addObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/update": {
-      "post": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "编辑请关单",
-        "description": "编辑请关单",
-        "operationId": "update",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "编辑时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/updateObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/delete": {
-      "delete": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "删除请关单",
-        "description": "删除请关单",
-        "operationId": "delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要删除的字段ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/submit": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "提交请关单",
-        "description": "提交请关单",
-        "operationId": "submit",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要提交的数据ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/doClearance": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "清关操作",
-        "description": "清关操作",
-        "operationId": "doClearance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要提交的数据ID",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "query",
-            "name": "BIG_TICKET_ID",
-            "description": "空运大票号ID",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "query",
-            "name": "AIR_ENTRUST_IDS",
-            "description": "空运委托单ID(XX,XX,XX)",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/printDeliveryOrder": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "打印请关单",
-        "description": "打印请关单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "AIR_ENTRUST_IDS",
-            "description": "空运委托单IDS(xx,xx,xx,xx)",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/clearance/getDeliveryMan": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "派单员弹窗",
-        "description": "派单员弹窗",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "DESTINATION",
-            "description": "目的地ID",
+            "description": "详情数据ID",
             "type": "string",
             "required": true
           }
@@ -562,54 +154,14 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/WINDOW_INFO"
+                "$ref": "#/definitions/AirEntrust_SIZE"
               }
             }
           },
           "400": {
             "description": "请求失败",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/clearance/getUnloadPlace": {
-      "get": {
-        "tags": [
-          "Clearance"
-        ],
-        "summary": "卸货点弹窗",
-        "description": "卸货点弹窗",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "DESTINATION",
-            "description": "目的地ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WINDOW_INFO"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
+              "type": "object"
             }
           }
         }
@@ -620,42 +172,18 @@
         "tags": [
           "Transfer"
         ],
-        "summary": "获取分货交接信息列表",
-        "description": "获取分货交接信息列表",
-        "operationId": "getTList",
+        "summary": "获取主列表数据",
+        "description": "获取主列表数据",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "in": "query",
             "name": "DESTINATION",
-            "in": "query",
-            "description": "目的地",
-            "type": "string"
-          },
-          {
-            "name": "PROXY",
-            "in": "query",
-            "description": "清关代理",
-            "type": "string"
-          },
-          {
-            "name": "UNLOAD_POINT",
-            "description": "卸货点",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "WAREHOUSE",
-            "description": "仓库",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "DELIVER_MAN",
-            "description": "派送人员(员工账号)",
-            "in": "query",
-            "type": "string"
+            "description": "目的地ID",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -664,58 +192,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TransferSearchList"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/findAirEntrusts": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "获取清关信息列表",
-        "description": "从清关单中，按状态＝“已提交”或“已清关”，再按目的地+清关代理+单体的卸货点与本单单头的对应值进行比较，同时清关单体中清关标识＝0进行过滤，从清关单明细中提取空运大票号，从空运大票资料表中将相关的空运委托单记录写入本明细表中（实收件数＝件数）；",
-        "operationId": "findClearance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "DESTINATION",
-            "in": "query",
-            "description": "目的地",
-            "type": "string"
-          },
-          {
-            "name": "PROXY",
-            "in": "query",
-            "description": "清关代理",
-            "type": "string"
-          },
-          {
-            "name": "UNLOAD_POINT",
-            "description": "卸货点",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BigTickets"
+                "$ref": "#/definitions/WINDOW_INFO"
               }
             }
           },
@@ -734,496 +211,8 @@
         "tags": [
           "Transfer"
         ],
-        "summary": "获取分货交接头信息",
-        "description": "获取分货交接头信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "ID",
-            "in": "query",
-            "description": "分货交接头ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "$ref": "#/definitions/TransferList"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/findAirEntrust": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "通过hbl号，获取空运委托单ID",
-        "description": "通过hbl号，获取空运委托单ID",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "AIR_HBL",
-            "in": "query",
-            "description": "空运委托单HBL号",
-            "type": "string"
-          },
-          {
-            "name": "DESTINATION",
-            "in": "query",
-            "description": "目的地",
-            "type": "string"
-          },
-          {
-            "name": "PROXY",
-            "in": "query",
-            "description": "清关代理",
-            "type": "string"
-          },
-          {
-            "name": "UNLOAD_POINT",
-            "description": "卸货点",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TransferDetailList"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/getDetails": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "获取分货交接体信息",
-        "description": "获取分货交接体信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "P_ID",
-            "in": "query",
-            "description": "分货交接头ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TransferDetailList"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/add": {
-      "post": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "添加新的分货交接单",
-        "description": "添加新的分货交接单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "新增时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferAddObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/update": {
-      "post": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "编辑分货交接单",
-        "description": "编辑分货交接单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "编辑时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferUpdateObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/delete": {
-      "delete": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "删除请关单",
-        "description": "删除请关单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要删除的数据ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/submit": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "提交分货交接单",
-        "description": "提交分货交接单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要提交的数据ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/terminate": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "终止分货交接单",
-        "description": "终止分货交接单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要提交的数据ID",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/inputTransferInfo": {
-      "post": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "交接信息录入",
-        "description": "交接信息录入",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "DETAILS_INFO",
-            "description": "编辑时使用的参数",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TransferUpdateBodyObj"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/inputCost": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "费用录入",
-        "description": "费用录入",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "ID",
-            "description": "记录ID",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "CURRENCY",
-            "description": "币种",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "T_COST",
-            "description": "运费",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/confirm": {
-      "post": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "交货确认",
-        "description": "交货确认",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "交货确认的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferUpdateObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/sendInfo": {
-      "post": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "发送信息",
-        "description": "发送信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "DETAILS_INFO",
-            "description": "体数据",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TransferUpdateObj"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/transfer/winUnoladPoint": {
-      "get": {
-        "tags": [
-          "Transfer"
-        ],
-        "summary": "获取卸货点(弹窗)",
-        "description": "获取卸货点(弹窗)",
+        "summary": "获取详细的分货交接数据",
+        "description": "获取详细的分货交接数据",
         "produces": [
           "application/json"
         ],
@@ -1231,8 +220,9 @@
           {
             "in": "query",
             "name": "DESTINATION",
-            "description": "目的地",
-            "type": "string"
+            "description": "目的地ID",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -1255,346 +245,21 @@
         }
       }
     },
-    "/transfer/getExcharge": {
+    "/transfer/getDetails": {
       "get": {
         "tags": [
           "Transfer"
         ],
-        "summary": "获取汇率",
-        "description": "获取汇率",
+        "summary": "获取分货交接对应的子列表信息",
+        "description": "获取分货交接对应的子列表信息",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "CURRENCY",
-            "description": "货币ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SUCCESS2"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/getList": {
-      "get": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "获取货物派送信息列表",
-        "description": "获取货物派送信息列表",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
             "name": "DESTINATION",
-            "in": "query",
-            "description": "目的地",
-            "type": "string"
-          },
-          {
-            "name": "UNLOAD_POINT",
-            "description": "卸货点",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "WAREHOUSE",
-            "description": "仓库",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "DELIVER_MAN",
-            "description": "派送人员(员工账号)",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CD_SearchList"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/getCargoDlv": {
-      "get": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "获取分货交接头信息",
-        "description": "获取分货交接头信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "ID",
-            "in": "query",
-            "description": "货物派送头ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "$ref": "#/definitions/CD"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/getCargoDetails": {
-      "get": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "获取分货交接体信息",
-        "description": "获取分货交接体信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "P_ID",
-            "in": "query",
-            "description": "货物派送头ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CD_DetailsList"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/findAirEntrust": {
-      "get": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "获取一个空运委托单信息",
-        "description": "获取一个空运委托单信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "AIR_HBL",
-            "in": "query",
-            "description": "空运HBL号",
-            "type": "string"
-          },
-          {
-            "name": "WAREHOUSE",
-            "in": "query",
-            "description": "当前仓库",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CD_Airentrust"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/findAirEntrusts": {
-      "get": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "获取多个空运委托单信息",
-        "description": "获取多个空运委托信息",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "WAREHOUSE",
-            "in": "query",
-            "description": "当前仓库",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CD_Airentrust"
-              }
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/add": {
-      "post": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "添加新的货物派送单",
-        "description": "添加新的货物派送单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "新增时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CD_AddObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/update": {
-      "post": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "添加新的货物派送单",
-        "description": "添加新的货物派送单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "新增时使用的参数",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CD_UpdateObj"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/delete": {
-      "delete": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "删除货物派送单",
-        "description": "删除货物派送单",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "需要删除的数据ID",
+            "description": "目的地ID",
             "type": "string",
             "required": true
           }
@@ -1603,8 +268,10 @@
           "200": {
             "description": "请求成功",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WINDOW_INFO"
+              }
             }
           },
           "400": {
@@ -1617,21 +284,21 @@
         }
       }
     },
-    "/cargoDelivery/submit": {
+    "/transfer/getDetail": {
       "get": {
         "tags": [
-          "CargoDelivery"
+          "Transfer"
         ],
-        "summary": "提交货物派送单",
-        "description": "提交货物派送单",
+        "summary": "根据HBL号获取子列表信息（扫码）",
+        "description": "根据HBL号获取子列表信息（扫码）",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "ID",
-            "description": "需要提交的数据ID",
+            "name": "DESTINATION",
+            "description": "目的地ID",
             "type": "string",
             "required": true
           }
@@ -1640,51 +307,11 @@
           "200": {
             "description": "请求成功",
             "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/inputSignInfo": {
-      "post": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "签收信息录入",
-        "description": "签收信息录入",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "DETAILS_INFO",
-            "description": "编辑时使用的参数",
-            "required": true,
-            "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CD_SIGN"
+                "$ref": "#/definitions/WINDOW_INFO"
               }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
           },
           "400": {
             "description": "请求失败",
@@ -1696,99 +323,23 @@
         }
       }
     },
-    "/cargoDelivery/confirm": {
-      "post": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "签收确认",
-        "description": "签收确认",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "DETAILS_INFO",
-            "description": "体数据",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CD_UpdateDetailsObj"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/SUCCESS"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/fileUpload": {
-      "post": {
-        "tags": [
-          "CargoDelivery"
-        ],
-        "summary": "文件上传(参照之前的功能)",
-        "description": "文件上传(参照之前的功能)",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ID",
-            "description": "体记录ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "请求成功",
-            "schema": {
-              "type": "string",
-              "description": "文件表中的记录ID"
-            }
-          },
-          "400": {
-            "description": "请求失败",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/ERROR"
-            }
-          }
-        }
-      }
-    },
-    "/cargoDelivery/getUploadFile": {
+    "/transfer/updateDetailInfo": {
       "get": {
         "tags": [
-          "CargoDelivery"
+          "Transfer"
         ],
-        "summary": "获取文件",
-        "description": "获取文件",
+        "summary": "更新子列表信息",
+        "description": "更新子列表信息",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "PIC_IDS",
-            "description": "图片ID集（xx,xx,xx,xx）",
-            "type": "string"
+            "name": "DESTINATION",
+            "description": "目的地ID",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -1797,7 +348,46 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FILE_INFO"
+                "$ref": "#/definitions/WINDOW_INFO"
+              }
+            }
+          },
+          "400": {
+            "description": "请求失败",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ERROR"
+            }
+          }
+        }
+      }
+    },
+    "/transfer/getErrorReason": {
+      "get": {
+        "tags": [
+          "Transfer"
+        ],
+        "summary": "获取异常原因",
+        "description": "获取异常原因",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "DESTINATION",
+            "description": "目的地ID",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WINDOW_INFO"
               }
             }
           },
@@ -1980,13 +570,49 @@
         }
       }
     },
-    "SearchList": {
+    "AirEntrust_ListObjMain": {
       "type": "object",
-      "description": "查询返回",
+      "description": "主列表字段带分页参数",
+      "properties": {
+        "totalRow": {
+          "type": "integer",
+          "description": "总记录数"
+        },
+        "pageNumber": {
+          "type": "integer",
+          "description": "当前页"
+        },
+        "firstPage": {
+          "type": "boolean",
+          "description": "是否为第一页"
+        },
+        "lastPage": {
+          "type": "integer",
+          "description": "是否为最后一页"
+        },
+        "totalPage": {
+          "type": "integer",
+          "description": "总页数"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "每页大小"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AirEntrust_ListObj"
+          }
+        }
+      }
+    },
+    "AirEntrust_ListObj": {
+      "type": "object",
+      "description": "主列表字段",
       "properties": {
         "ID": {
           "type": "string",
-          "description": "ID"
+          "description": "记录ID"
         },
         "RECEIPT_ID": {
           "type": "string",
@@ -1996,184 +622,213 @@
           "type": "string",
           "description": "状态"
         },
-        "DESTINATION": {
-          "type": "string",
-          "description": "目的地"
-        },
-        "PROXY": {
-          "type": "string",
-          "description": "清关代理"
-        },
-        "REQDATE": {
-          "type": "string",
-          "description": "清关日期"
-        },
-        "REMARK": {
-          "type": "string",
-          "description": "备注"
-        }
-      }
-    },
-    "addObj": {
-      "type": "object",
-      "description": "清关新增时前端提供的数据结构",
-      "properties": {
-        "DESTINATION": {
-          "type": "string",
-          "description": "目的地ID"
-        },
-        "PROXY": {
-          "type": "string",
-          "description": "清关代理公司ID"
-        },
-        "REQDATE": {
-          "type": "string",
-          "description": "清关日期"
-        },
-        "REMARK": {
-          "type": "string",
-          "description": "备注"
-        },
-        "DETAILS_INFO": {
-          "type": "array",
-          "description": "体数据",
-          "items": {
-            "$ref": "#/definitions/bodyAddObj"
-          }
-        }
-      }
-    },
-    "bodyAddObj": {
-      "type": "object",
-      "description": "清关新增时前端提供的数据结构(体)",
-      "properties": {
-        "BIG_TICKET_ID": {
-          "type": "string",
-          "description": "空运大票ID"
-        },
-        "IS_CLEARANCE": {
-          "type": "string",
-          "description": "清关"
-        },
-        "UNLOAD_POINT": {
-          "type": "string",
-          "description": "卸货点"
-        },
-        "DISTRIBUTOR": {
-          "type": "string",
-          "description": "派送人员"
-        }
-      }
-    },
-    "updateObj": {
-      "type": "object",
-      "description": "清关编辑时前端提供的数据结构",
-      "properties": {
-        "ID": {
-          "type": "string",
-          "description": "记录ID"
-        },
-        "DESTINATION": {
-          "type": "string",
-          "description": "目的地ID"
-        },
-        "PROXY": {
-          "type": "string",
-          "description": "清关代理公司ID"
-        },
-        "REQDATE": {
-          "type": "string",
-          "description": "清关日期"
-        },
-        "REMARK": {
-          "type": "string",
-          "description": "备注"
-        },
-        "DETAILS_INFO": {
-          "type": "array",
-          "description": "体数据（只传有修改的）",
-          "items": {
-            "$ref": "#/definitions/bodyUpdateObj"
-          }
-        },
-        "DELETE_INFO": {
-          "type": "string",
-          "description": "删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)"
-        }
-      }
-    },
-    "bodyUpdateObj": {
-      "type": "object",
-      "description": "清关编辑时前端提供的数据结构(体)",
-      "properties": {
-        "ID": {
-          "type": "string",
-          "description": "记录ID"
-        },
-        "BIG_TICKET_ID": {
-          "type": "string",
-          "description": "空运大票ID"
-        },
-        "IS_CLEARANCE": {
-          "type": "string",
-          "description": "清关"
-        },
-        "UNLOAD_POINT": {
-          "type": "string",
-          "description": "卸货点"
-        },
-        "DISTRIBUTOR": {
-          "type": "string",
-          "description": "派送人员"
-        }
-      }
-    },
-    "Airentrusts": {
-      "type": "object",
-      "properties": {
         "AIR_HBL": {
           "type": "string",
-          "description": "委托单号"
+          "description": "空运HBL号"
         },
-        "RECEIVER_INFO": {
+        "B_MAN": {
           "type": "string",
-          "description": "收货人信息"
+          "description": "业务员ID"
         },
-        "CARGO_INFO": {
+        "S_PRODUCT": {
           "type": "string",
-          "description": "货物信息"
+          "description": "服务产品ID"
         },
-        "TAGS": {
+        "C_ID": {
           "type": "string",
-          "description": "货物标签"
+          "description": "客户资料ID"
         },
-        "COUNT": {
+        "B_MAN_NAME": {
           "type": "string",
-          "description": "件数"
+          "description": "业务员名字"
         },
-        "WEIGHT": {
+        "S_PRODUCT_NAME": {
           "type": "string",
-          "description": "重量"
+          "description": "服务产品名字"
         },
-        "BARCODE": {
+        "C_ID_NAME": {
           "type": "string",
-          "description": "打印"
+          "description": "客户资料名字"
+        }
+      }
+    },
+    "AirEntrust_Obj": {
+      "type": "object",
+      "description": "表单详情",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "记录ID"
+        },
+        "RECEIPT_ID": {
+          "type": "string",
+          "description": "单据号"
+        },
+        "STATUS": {
+          "type": "string",
+          "description": "状态"
+        },
+        "AIR_HBL": {
+          "type": "string",
+          "description": "空运HBL号"
+        },
+        "B_MAN": {
+          "type": "string",
+          "description": "业务员ID"
+        },
+        "B_MAN_NAME": {
+          "type": "string",
+          "description": "业务员名"
+        },
+        "S_PRODUCT": {
+          "type": "string",
+          "description": "服务产品ID"
+        },
+        "S_PRODUCT_NAME": {
+          "type": "string",
+          "description": "服务产品名"
+        },
+        "DESTINATION": {
+          "type": "string",
+          "description": "目的地ID"
+        },
+        "DESTINATION_NAME": {
+          "type": "string",
+          "description": "目的地名"
+        },
+        "EXPRESS_NUM": {
+          "type": "string",
+          "description": "快递单号"
+        },
+        "I_CODE": {
+          "type": "string",
+          "description": "标识码"
+        },
+        "WAREHOUSE": {
+          "type": "string",
+          "description": "收货仓库ID"
+        },
+        "WAREHOUSE_NAME": {
+          "type": "string",
+          "description": "收货仓库名"
+        },
+        "STORE": {
+          "type": "string",
+          "description": "收货档口ID"
+        },
+        "STORE_NAME": {
+          "type": "string",
+          "description": "收货档口名字"
+        },
+        "REMARK": {
+          "type": "string",
+          "description": "备注"
+        },
+        "C_ID": {
+          "type": "string",
+          "description": "空运委托单ID"
+        },
+        "C_ID_NAME": {
+          "type": "string",
+          "description": "空运委托单名"
         },
         "PAYMENT_TYPE": {
           "type": "string",
-          "description": "付费方式"
+          "description": "付费类型"
         },
-        "CURRENCY": {
+        "AVAILABLE_CREDIT": {
           "type": "string",
-          "description": "币种"
+          "description": "可用额度"
         },
-        "DEAL_SUM": {
+        "OVER_DUE_PAYMENT": {
           "type": "string",
-          "description": "金额"
+          "description": "逾期未付款金额"
         },
-        "REMARK": {
+        "MARK": {
           "type": "string",
-          "description": "备注"
+          "description": "唛头"
+        },
+        "SENDER": {
+          "type": "string",
+          "description": "发货人"
+        },
+        "SENDER_PHONE": {
+          "type": "string",
+          "description": "发货人电话"
+        },
+        "SENDER_ADDRESS": {
+          "type": "string",
+          "description": "发货人地址"
+        },
+        "SENDER_WX": {
+          "type": "string",
+          "description": "发货人wX"
+        },
+        "RECEIVER": {
+          "type": "string",
+          "description": "收货人"
+        },
+        "RECEIVER_PHONE": {
+          "type": "string",
+          "description": "收货人电话"
+        },
+        "RECEIVER_ADDRESS": {
+          "type": "string",
+          "description": "收货人地址"
+        },
+        "RECEIVER_WX": {
+          "type": "string",
+          "description": "收货人WX"
+        },
+        "NOTICE1": {
+          "type": "string",
+          "description": "通知人"
+        },
+        "NOTICE2": {
+          "type": "string",
+          "description": "通知人信息"
+        },
+        "IS_MANIFEST": {
+          "type": "string",
+          "description": "客户提供报关单"
+        },
+        "IS_RAMDOM_FILE": {
+          "type": "string",
+          "description": "随机文件"
+        }
+      }
+    },
+    "AirEntrust_SIZE": {
+      "type": "object",
+      "description": "尺寸清单",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "记录ID"
+        },
+        "ITEM_NO": {
+          "type": "string",
+          "description": "序号"
+        },
+        "LENGHT": {
+          "type": "string",
+          "description": "长"
+        },
+        "WIDTH": {
+          "type": "string",
+          "description": "宽"
+        },
+        "HIGH": {
+          "type": "string",
+          "description": "高"
+        },
+        "G_WEIGHT": {
+          "type": "string",
+          "description": "毛重"
+        },
+        "PIECE": {
+          "type": "string",
+          "description": "件数"
         }
       }
     },
@@ -3021,6 +1676,23 @@
         }
       }
     },
+    "CD_ConfirmObj": {
+      "type": "object",
+      "description": "货物派送头信息",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "纪录ID"
+        },
+        "DETAILS_INFO": {
+          "type": "array",
+          "description": "备注",
+          "items": {
+            "$ref": "#/definitions/CD_UpdateDetailsObj"
+          }
+        }
+      }
+    },
     "FILE_INFO": {
       "type": "object",
       "description": "文件查看，获取url",
@@ -3058,6 +1730,20 @@
         },
         "rate": {
           "type": "string"
+        }
+      }
+    },
+    "win_ForeignCargo": {
+      "type": "object",
+      "description": "海外仓储相关",
+      "properties": {
+        "SUPPLIER_CNAME": {
+          "type": "string",
+          "description": "公司名字"
+        },
+        "FOREIGN_CARGO_ID": {
+          "type": "string",
+          "description": "海外仓储ID"
         }
       }
     }
