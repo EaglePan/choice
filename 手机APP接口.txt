@@ -21,7 +21,7 @@ tags:
   - name: TransformWareHouse
     description: 转仓管理
   - name: MoveWarehouse
-    description: 货物移库
+    description: 货物移库(不可用)
   - name: Transfer
     description: 分货交接
   - name: CargoDelivery
@@ -407,7 +407,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-#Transfer(TODO)##########################################  
+#Transfer(OK)##########################################  
   /transfer/getListForApp:
     get:
       tags:
@@ -418,22 +418,47 @@ paths:
         - application/json
       parameters:
         - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
           name: DESTINATION
           description: 目的地ID
           type: string
-          required: true
+        - in: query
+          name: PROXY
+          description: 清关代理ID
+          type: string
+        - in: query
+          name: UNLOAD_POINT
+          description: 卸货点ID
+          type: string
+        - in: query
+          name: STATUS
+          description: 状态
+          type: string
       responses:
         '200':
           description: 请求成功
           schema:
             type: array
             items:
-              $ref: '#/definitions/WINDOW_INFO'
+              $ref: '#/definitions/Transfer_ListObjMain'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'
   /transfer/getTransfer:
     get:
       tags:
@@ -444,22 +469,25 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: DESTINATION
-          description: 目的地ID
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 记录ID
           type: string
           required: true
       responses:
         '200':
           description: 请求成功
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/WINDOW_INFO'
+            type: object
+            $ref: '#/definitions/Transfer_Obj'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'
   /transfer/getDetails:
     get:
       tags:
@@ -470,8 +498,13 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: DESTINATION
-          description: 目的地ID
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: P_ID
+          description: 表单ID
           type: string
           required: true
       responses:
@@ -480,12 +513,11 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WINDOW_INFO'
+              $ref: '#/definitions/Transfer_DetailList'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'
   /transfer/getDetail:
     get:
       tags:
@@ -496,22 +528,25 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: DESTINATION
-          description: 目的地ID
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: AIR_HBL
+          description: 空运HBL号
           type: string
           required: true
       responses:
         '200':
           description: 请求成功
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/WINDOW_INFO'
+            type: object
+            $ref: '#/definitions/Transfer_DetailList'
         '400':
           description: 请求失败
           schema:
             type: object
-            $ref: '#/definitions/ERROR'
   /transfer/updateDetailInfo:
     get:
       tags:
@@ -522,8 +557,33 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: DESTINATION
-          description: 目的地ID
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 表单列表ID
+          type: string
+          required: true
+        - in: query
+          name: REC_COUNT
+          description: 实收件数
+          type: string
+          required: true
+        - in: query
+          name: REMARK
+          description: 备注
+          type: string
+          required: true
+        - in: query
+          name: ERR_TYPE
+          description: 异常类型
+          type: string
+          required: true
+        - in: query
+          name: ERR_REASON
+          description: 异常原因
           type: string
           required: true
       responses:
@@ -532,13 +592,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WINDOW_INFO'
+              $ref: '#/definitions/SUCCESS'
         '400':
           description: 请求失败
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /transfer/getErrorReason:
+  /transfer/winErrorReason:
     get:
       tags:
         - Transfer
@@ -548,8 +608,8 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: DESTINATION
-          description: 目的地ID
+          name: callback
+          description: callback,默认为接口名字
           type: string
           required: true
       responses:
@@ -563,122 +623,446 @@ paths:
           description: 请求失败
           schema:
             type: object
+  /transfer/winCity:
+    get:
+      tags:
+        - Transfer
+      summary: 获取目的地
+      description: 获取目的地
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: filter
+          description: 搜索条件
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /transfer/winProxy:
+    get:
+      tags:
+        - Transfer
+      summary: 获取清关代理
+      description: 获取清关代理
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: filter
+          description: 搜索条件
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /transfer/winUnloadPoint:
+    get:
+      tags:
+        - Transfer
+      summary: 获取卸货点
+      description: 获取卸货点
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: filter
+          description: 搜索条件
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+#CargoDelivery(OK)##########################################
+  /cargoDelivery/getListForApp:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取主列表数据
+      description: 获取主列表数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+        - in: query
+          name: WAREHOUSE
+          description: 仓库ID
+          type: string
+        - in: query
+          name: DELIVER_MAN
+          description: 派送人员ID
+          type: string
+        - in: query
+          name: UNLOAD_POINT
+          description: 卸货点ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CD_ListObjMain'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /cargoDelivery/getCargoDelivery:
+     get:
+      tags:
+        - CargoDelivery
+      summary: 获取详细的货物派送数据
+      description: 获取详细的货物派送数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 记录ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/CD_OBJ'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /cargoDelivery/getDetails:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取分货交接对应的子列表信息
+      description: 获取分货交接对应的子列表信息
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: P_ID
+          description: 表单ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CD_DetailsList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /cargoDelivery/getDetail:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 根据HBL号获取子列表信息（扫码）
+      description: 根据HBL号获取子列表信息（扫码）
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: AIR_HBL
+          description: 空运HBL号
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/CD_DetailsList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /cargoDelivery/updateDetailInfo:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 更新子列表信息
+      description: 更新子列表信息
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 表单列表ID
+          type: string
+          required: true
+        - in: query
+          name: REC_COUNT
+          description: 实收金额
+          type: string
+          required: true
+        - in: query
+          name: SIGN_COUNT
+          description: 签收件数
+          type: string
+          required: true
+        - in: query
+          name: REJECT_COUNT
+          description: 拒收件数
+          type: string
+          required: true
+        - in: query
+          name: REJECT_REASON
+          description: 拒收原因ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
             $ref: '#/definitions/ERROR'
-#CargoDelivery(TODO)##########################################
-  #/cargoDelivery/getListForApp:
-  #/cargoDelivery/getCargoDelivery:
-  #/cargoDelivery/getDetails:
-  #/cargoDelivery/getDetail:
-  #/cargoDelivery/updateDetailInfo:
-  #/cargoDelivery/getRejectReason:
+  /cargoDelivery/winRejectReason:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取拒收原因
+      description: 获取拒收原因
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+#MoveWarehouse#############################################
+  /movewarehouse/addMoveWarehouse:
+    get:
+      tags: 
+        - MoveWarehouse
+      summary: 添加新库位
+      description: 添加新库位
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: ORDERS_ID
+          description: 原库位码
+          type: integer
+          required: true
+        - in: query
+          name: HBL_Item
+          description: 货物条码
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /movewarehouse/findMoveWarehouse:  
+    get:
+      tags: 
+        - MoveWarehouse
+      summary: 获取主列表数据
+      description: 获取主列表数据
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: HBL_Item
+          description: 货物条码
+          type: integer
+          required: true
+        - in: query
+          name: moveWarehouse.OLD_STOCK_NO
+          description: 原库位码
+          type: integer
+          required: true  
+        - in: query
+          name: moveWarehouse.NEW_STOCK_NO
+          description: 新库位码
+          type: integer
+          required: true 
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/MoveWarehouseList'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /movewarehouse/findOldStockNo:   
+    get:
+      tags: 
+        - MoveWarehouse
+      summary: 查找原库位码
+      description: 查找原库位码
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: HBL_Item
+          description: 货物条码
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/OldStockNo'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR' 
 definitions:
-  BigTickets:
-    type: object
-    description: 空运大票数据结构
-    properties:
-      BIG_TICKET_ID:
-        type: integer
-        description: 空运大票ID
-      AIR_ENTRUST_IDS:
-        type: string
-        description: '空运委托单ID(XX,XX,XX)'
-      FLIGHT_DATE:
-        type: string
-        description: 预订航班日期(指令)
-      C_INFO:
-        type: string
-        description: 发货人信息
-      TICKET_ID:
-        type: string
-        description: 空运大票好
-      LANDING_NO:
-        type: string
-        description: 提单号(指令)
-      E_PLACE:
-        type: string
-        description: 目的地(指令)
-      FLIGHT:
-        type: string
-        description: 航班号(指令)
-      ROUTE:
-        type: string
-        description: 航线(指令)
-      TAKE_OFF_DATE:
-        type: string
-        description: 起飞日期
-      ARRIVAL_TIME:
-        type: string
-        description: 着陆日期
-      COUNT:
-        type: string
-        description: 件数
-      WEIGHT:
-        type: string
-        description: 重量
-      BOARD_NUMBER:
-        type: string
-        description: 板号
-      TAG:
-        type: string
-        description: 标签（空运委托单）
-  BigTickets2:
-    type: object
-    description: 空运大票数据结构
-    properties:
-      ID:
-        type: integer
-        description: 空运大票ID
-      AIR_ENTRUST_IDS:
-        type: string
-        description: '空运委托单ID(XX,XX,XX)'
-      FLIGHT_DATE:
-        type: string
-        description: 预订航班日期(指令)
-      C_INFO:
-        type: string
-        description: 发货人信息
-      TICKET_ID:
-        type: string
-        description: 空运大票好
-      LANDING_NO:
-        type: string
-        description: 提单号(指令)
-      E_PLACE:
-        type: string
-        description: 目的地(指令)
-      FLIGHT:
-        type: string
-        description: 航班号(指令)
-      ROUTE:
-        type: string
-        description: 航线(指令)
-      TAKE_OFF_DATE:
-        type: string
-        description: 起飞日期
-      ARRIVAL_TIME:
-        type: string
-        description: 着陆日期
-      COUNT:
-        type: string
-        description: 件数
-      WEIGHT:
-        type: string
-        description: 重量
-      BOARD_NUMBER:
-        type: string
-        description: 板号
-      TAG:
-        type: string
-        description: 标签（空运委托单）
-      IS_CLEARANCE:
-        type: string
-        description: 清关
-      UNLOAD_POINT:
-        type: string
-        description: 卸货点
-      DISTRIBUTOR:
-        type: string
-        description: 派送人员
   ERROR:
     type: object
     description: 异常返回结构
@@ -1363,7 +1747,33 @@ definitions:
         type: string
         description: 图片ID(xx,xx,xx)
 #Transfer###############################################
-  TransferSearchList:
+  Transfer_ListObjMain:
+    type: object
+    description: 主列表字段带分页参数
+    properties:
+      totalRow:
+        type: integer
+        description: 总记录数
+      pageNumber:
+        type: integer
+        description: 当前页
+      firstPage:
+        type: boolean
+        description: 是否为第一页
+      lastPage:
+        type: integer
+        description: 是否为最后一页
+      totalPage:
+        type: integer
+        description: 总页数
+      pageSize:
+        type: integer
+        description: 每页大小
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Transfer_SearchList'
+  Transfer_SearchList:
     type: object
     description: 分货交接查询对象
     properties:
@@ -1379,43 +1789,16 @@ definitions:
       EPLACE:
         type: string
         description: 目的地
-      WAREHOUSE:
-        type: string
-        description: 仓库
       PROXY:
         type: string
         description: 清关代理
       UNLOAD_POINT:
         type: string
         description: 卸货点
-      DELIVER_MAN:
-        type: string
-        description: 派送人员
       DRIVER_INFO:
         type: string
         description: 司机信息
-      TOTAL_COUNT:
-        type: string
-        description: 总件数
-      TOTAL_REC_COUNT:
-        type: string
-        description: 实收件数
-      TOTAL_WEIGHT:
-        type: string
-        description: 总重量
-      CURRENCY:
-        type: string
-        description: 币种
-      EXCHARGE_RATE:
-        type: string
-        description: 汇率
-      T_COST:
-        type: string
-        description: 运费
-      REMARK:
-        type: string
-        description: 备注
-  TransferList:
+  Transfer_Obj:
     type: object
     description: 获取分货交接头信息
     properties:
@@ -1461,7 +1844,7 @@ definitions:
       RECEIPT_ID:
         type: string
         description: 单据号
-  TransferDetailList:
+  Transfer_DetailList:
     type: object
     description: 获取分货交接体信息
     properties:
@@ -1507,216 +1890,40 @@ definitions:
       NOTICE:
         type: string
         description: 通知
-  TransferAddObj:
+#CargoDelivery##########################################
+  CD_ListObjMain:
     type: object
-    description: 新增时前端提供的数据结构(分货交接)
+    description: 主列表字段带分页参数
     properties:
-      EPLACE:
-        type: string
-        description: 目的地
-      UNLOAD_POINT:
-        type: string
-        description: 卸货点
-      PROXY:
-        type: string
-        description: 清关代理
-      DRIVER_INFO:
-        type: string
-        description: 司机名及电话
-      STOCK_TYPE:
-        type: string
-        description: '仓储类型:1-代理；2-分公司'
-      SUPPLIER:
-        type: string
-        description: 仓储公司
-      WAREHOUSE:
-        description: 仓库
-        type: string
-      DELIVER_MAN:
-        description: 派送人员
-        type: string
-      CURRENCY:
-        type: string
-        description: 币种
-      T_COST:
-        type: string
-        description: 运费
-      REMARK:
-        type: string
-        description: 备注
-      DETAILS_INFO:
+      totalRow:
+        type: integer
+        description: 总记录数
+      pageNumber:
+        type: integer
+        description: 当前页
+      firstPage:
+        type: boolean
+        description: 是否为第一页
+      lastPage:
+        type: integer
+        description: 是否为最后一页
+      totalPage:
+        type: integer
+        description: 总页数
+      pageSize:
+        type: integer
+        description: 每页大小
+      list:
         type: array
         items:
-          $ref: '#/definitions/TransferAddBodyObj'
-  TransferAddBodyObj:
+          $ref: '#/definitions/CD_OBJ'
+  CD_OBJ:
     type: object
-    description: 新增时前端提供的数据结构(分货交接体)
-    properties:
-      AIR_ENTRUST_ID:
-        type: string
-        description: 空运委托单ID
-      REC_COUNT:
-        type: string
-        description: 实收件数
-      REMARK:
-        type: string
-        description: 备注
-      ERR_TYPE:
-        type: string
-        description: 异常类型
-      ERR_REASON:
-        type: string
-        description: 异常原因
-      NOTICE:
-        type: string
-        description: 通知
-  TransferUpdateObj:
-    type: object
-    description: 新增时前端提供的数据结构(分货交接)
+    description: 货物派送查询
     properties:
       ID:
         type: string
         description: ID
-      EPLACE:
-        type: string
-        description: 目的地
-      UNLOAD_POINT:
-        type: string
-        description: 卸货点
-      PROXY:
-        type: string
-        description: 清关代理
-      DRIVER_INFO:
-        type: string
-        description: 司机名及电话
-      STOCK_TYPE:
-        type: string
-        description: '仓储类型:1-代理；2-分公司'
-      SUPPLIER:
-        type: string
-        description: 仓储公司
-      WAREHOUSE:
-        description: 仓库
-        type: string
-      DELIVER_MAN:
-        description: 派送人员
-        type: string
-      CURRENCY:
-        type: string
-        description: 币种
-      T_COST:
-        type: string
-        description: 运费
-      REMARK:
-        type: string
-        description: 备注
-      DETAILS_INFO:
-        type: array
-        items:
-          $ref: '#/definitions/TransferUpdateBodyObj'
-      DELETE_INFO:
-        type: string
-        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
-  TransferUpdateBodyObj:
-    type: object
-    description: 新增时前端提供的数据结构(分货交接体)
-    properties:
-      ID:
-        type: string
-        description: 记录ID
-      AIR_ENTRUST_ID:
-        type: string
-        description: 空运大票ID
-      REC_COUNT:
-        type: string
-        description: 实收件数
-      REMARK:
-        type: string
-        description: 备注
-      ERR_TYPE:
-        type: string
-        description: 异常类型
-      ERR_REASON:
-        type: string
-        description: 异常原因
-      NOTICE:
-        type: string
-        description: 通知
-  TransferComfirmObj:
-    type: object
-    description: 交接确认
-    properties:
-      ID:
-        type: string
-        description: 头ID
-      CURRENCY_NAME:
-        type: string
-        description: 币种
-      T_COST:
-        type: string
-        description: 运费
-      DETAILS_INFO:
-        type: array
-        items:
-          $ref: '#/definitions/TransferComfirmBodyObj'
-  TransferComfirmBodyObj:
-    type: object
-    description: 交接确认
-    properties:
-      ID:
-        type: string
-        description: 分货交接体数据ID
-      COUNT:
-        type: string
-        description: 件数
-      REC_COUNT:
-        type: string
-        description: 实收件数
-      NOTICE:
-        type: string
-        description: 通知
-#CargoDelivery##########################################
-  CD_SearchList:
-    type: object
-    description: 货物派送查询
-    properties:
-      RECEIPT_ID:
-        type: string
-        description: 单据号
-      STATUS:
-        type: string
-        description: 当前状态
-      EPLACE:
-        type: string
-        description: 目的地
-      UNLOAD_POINT:
-        type: string
-        description: 卸货点
-      DELIVER_MAN:
-        type: string
-        description: 派送人员
-      WAREHOUSE:
-        type: string
-        description: 仓库
-      TOTAL_COUNT:
-        type: string
-        description: 总件数
-      CUST_COUNT:
-        type: string
-        description: 客户签收件数
-      REC_FREIGHT:
-        type: string
-        description: 实收本位币金额
-      REMARK:
-        type: string
-        description: 备注
-  CD:
-    type: object
-    description: 货物派送头信息
-    properties:
-      ID:
-        type: string
-        description: 数据ID
       RECEIPT_ID:
         type: string
         description: 单据号
@@ -1802,98 +2009,6 @@ definitions:
       PIC_ID:
         type: string
         description: 图片ID
-  CD_Airentrust:
-    type: object
-    description: 货物派送获取空运委托单以及大票信息
-    properties:
-      AIR_ENTRUST_ID:
-        type: string
-        description: 委托单ID
-      AIR_HBL:
-        type: string
-        description: 委托单号
-      BIG_TICKET:
-        type: string
-        description: 空运大票号
-      RECEIVER_INFO:
-        type: string
-        description: 收货人信息
-      TAGS:
-        type: string
-        description: 货物标签
-      PAY_TYPE:
-        type: string
-        description: 付费方式
-      CURRENCY:
-        type: string
-        description: 币种
-      EXCHARGE_RATE:
-        type: string
-        description: 汇率
-      COUNT:
-        type: string
-        description: 到货件数
-      WEIGHT:
-        type: string
-        description: 到货重量
-      RECEIVABLE_COUNT:
-        type: string
-        description: 应收金额
-  CD_AddObj:
-    type: object
-    description: 货物派送头信息
-    properties:
-      EPLACE:
-        type: string
-        description: 目的地
-      UNLOAD_POINT:
-        type: string
-        description: 卸货点
-      DELIVER_MAN:
-        type: string
-        description: 派送人员
-      WAREHOUSE:
-        type: string
-        description: 仓库
-      TOTAL_COUNT:
-        type: string
-        description: 总件数
-      CUST_COUNT:
-        type: string
-        description: 客户签收件数
-      REC_FREIGHT:
-        type: string
-        description: 实收本位币金额
-      REMARK:
-        type: string
-        description: 备注
-      DETAILS_INFO:
-        type: array
-        description: 备注
-        items:
-          $ref: '#/definitions/CD_AddDetailsObj'
-  CD_AddDetailsObj:
-    type: object
-    description: 货物派送体数据
-    properties:
-      AIR_ENTRUST_ID:
-        type: string
-        description: 空运委托单ID
-      REC_COUNT:
-        type: string
-        description: 实收金额
-      SIGN_COUNT:
-        type: string
-        description: 签收件数
-      REJECT_COUNT:
-        type: string
-        description: 拒收件数
-      REJECT_REASON:
-        type: string
-        description: 拒收原因
-      PIC_ID:
-        type: string
-        description: '图片ID(xx,xx,xx,xx)'
   CD_UpdateObj:
     type: object
     description: 货物派送头信息
@@ -1925,80 +2040,69 @@ definitions:
       REMARK:
         type: string
         description: 备注
-      DETAILS_INFO:
-        type: array
-        description: 备注
-        items:
-          $ref: '#/definitions/CD_UpdateDetailsObj'
-      DELETE_INFO:
-        type: string
-        description: '删除的体数据，数据由ID组成的数组(xx,xx,xx,xx)'
-  CD_UpdateDetailsObj:
+#MoveWarehouse##########################################
+  MoveWarehouseList: 
     type: object
-    description: 货物派送体数据
+    description: 主列表数据内容
     properties:
       ID:
-        type: string
+        type: integer
         description: 体纪录ID
-      P_ID:
+      RECEIPT_ID:
         type: string
-        description: 头ID
-      AIR_ENTRUST_ID:
+        description: 单据号码
+      AIR_HBL:
+        type: integer
+        description: 空运HBL
+      ITEM_NO: 
+        type: integer
+        description: 序号
+      OLD_STOCK_NO:
         type: string
-        description: 空运委托单ID
-      REC_COUNT:
+        description: 原库位
+      NEW_STOCK_NO:
         type: string
-        description: 实收金额
-      SIGN_COUNT:
+        description: 新库位
+      STATUS:
         type: string
-        description: 签收件数
-      REJECT_COUNT:
+        description: 状态
+      CREATE_TIME:
         type: string
-        description: 拒收件数
-      REJECT_REASON:
+        description: 创建日期
+      CREATE_USER:
         type: string
-        description: 拒收原因
-      PIC_ID:
+        description: 创建人
+      UPDATE_TIME:
         type: string
-        description: '图片ID(xx,xx,xx,xx)'
-  CD_SIGN:
+        description: 更新时间
+      UPDATE_USER:
+        type: string
+        description: 更新人
+      DELETE_TIME:
+        type: string
+        description: 删除时间
+      DELETER:  
+        type: string
+        description: 删除人
+  OldStockNo:
     type: object
-    description: 货物派送体数据（签收信息录入）
+    description: 原库位码数据
     properties:
-      ID:
-        type: string
-        description: 体纪录ID
-      P_ID:
-        type: string
-        description: 头ID
-      AIR_ENTRUST_ID:
-        type: string
+      ORDERS_ID:
+        type: integer
         description: 空运委托单ID
-      REC_COUNT:
+      STOCK_ID: 
+        type: integer
+        description: 原库位码下的项目
+      SIZE_ID:
+        type: integer
+        description: 尺寸清单ID
+      STOCK_NO:
         type: string
-        description: 实收金额
-      SIGN_COUNT:
-        type: string
-        description: 签收件数
-      REJECT_COUNT:
-        type: string
-        description: 拒收件数
-      REJECT_REASON:
-        type: string
-        description: 拒收原因
-  CD_ConfirmObj:
-    type: object
-    description: 货物派送头信息
-    properties:
-      ID:
-        type: string
-        description: 纪录ID
-      
-      DETAILS_INFO:
-        type: array
-        description: 备注
-        items:
-          $ref: '#/definitions/CD_UpdateDetailsObj'
+        description: 原库位码
+      WARE_HOUSE_ID:
+        type: integer
+        description: 对应仓库号
 #Gobal##################################################
   FILE_INFO:
     type: object

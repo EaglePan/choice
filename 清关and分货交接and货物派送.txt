@@ -85,6 +85,14 @@ paths:
           description: 航空代理公司
           in: query
           type: string
+        - name: DESTINATION
+          description: 目的地
+          in: query
+          type: string
+        - name: IDFLITER
+          description: 需要过滤的ID(XX,XX,XX)
+          in: query
+          type: string
       responses:
         '200':
           description: successful operation
@@ -929,6 +937,31 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  /transfer/winWarehouse:
+    get:
+      tags:
+        - Transfer
+      summary: 获取异常原因
+      description: 获取异常原因
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: DESTINATION
+          description: 目的地
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
   /cargoDelivery/getList:
     get:
       tags:
@@ -1386,6 +1419,9 @@ definitions:
         type: string
         description: 清关
       UNLOAD_POINT:
+        type: string
+        description: 卸货点ID
+      UNLOAD_POINT_NAME:
         type: string
         description: 卸货点
       DISTRIBUTOR:
