@@ -1348,7 +1348,7 @@ definitions:
       ROUTE:
         type: string
         description: 航线(指令)
-      TAKE_OFF_DATE:
+      TAKE_OFF_TIME:
         type: string
         description: 起飞日期
       ARRIVAL_TIME:
@@ -1397,7 +1397,7 @@ definitions:
       ROUTE:
         type: string
         description: 航线(指令)
-      TAKE_OFF_DATE:
+      TAKE_OFF_TIME:
         type: string
         description: 起飞日期
       ARRIVAL_TIME:
@@ -1692,12 +1692,15 @@ definitions:
       ID:
         type: string
         description: 分货交接体数据ID
-      LANDING_NO:
+      BL_NUMBER:
         type: string
         description: 提单号(指令)
-      TICKET_ID:
+      BIT_TICKET_NUN:
         type: string
         description: 空运大票号
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单ID
       AIR_HBL:
         type: string
         description: 委托单号
@@ -1707,7 +1710,7 @@ definitions:
       CARGO_INFO:
         type: string
         description: 货物信息（未知）
-      TAG:
+      TAGS:
         type: string
         description: 标签（空运委托单）
       COUNT:

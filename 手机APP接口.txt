@@ -30,7 +30,7 @@ schemes:
   - http
 paths:
 #Air_Entrust(OK)##########################################
-  /airentrust/getListForApp:
+  /airentrustpda/getList:
     get:
       tags:
         - AirEntrust
@@ -64,7 +64,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /airentrust/getOrder:
+  /airentrustpda/getOrder:
     get:
       tags:
         - AirEntrust
@@ -95,7 +95,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /airentrust/getSize:
+  /airentrustpda/getSize:
     get:
       tags:
         - AirEntrust
@@ -126,7 +126,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /airentrust/getWenjian:
+  /airentrustpda/getWenjian:
     get:
       tags:
         - AirEntrust
@@ -157,7 +157,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /airentrust/winBMan:
+  /airentrustpda/winBMan:
     get:
       tags:
         - AirEntrust
@@ -182,7 +182,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: integer
           required: true
@@ -192,12 +192,12 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WIN_BManMain'
+              $ref: '#/definitions/WIN_BMan'
         '400':
           description: 请求失败
           schema:
             type: object
-  /airentrust/winPService:
+  /airentrustpda/winPService:
     get:
       tags:
         - AirEntrust
@@ -222,7 +222,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -231,13 +231,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WIN_PServiceMain'
+              $ref: '#/definitions/WIN_PService'
         '400':
           description: 请求失败
           schema:
             type: object
   #/VWarehouse/getWarehouseForAirEntrust:
-  /airentrust/winWarehouse:
+  /airentrustpda/winWarehouse:
     get:
       tags:
         - AirEntrust
@@ -262,7 +262,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -271,12 +271,12 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WIN_WarehouseMain'
+              $ref: '#/definitions/WIN_Warehouse'
         '400':
           description: 请求失败
           schema:
             type: object
-  /airentrust/winStore:
+  /airentrustpda/winStore:
     get:
       tags:
         - AirEntrust
@@ -301,7 +301,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -310,12 +310,12 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WIN_StoreMain'
+              $ref: '#/definitions/WIN_Store'
         '400':
           description: 请求失败
           schema:
             type: object
-  /airentrust/winCustInfo:
+  /airentrustpda/winCustInfo:
     get:
       tags:
         - AirEntrust
@@ -345,7 +345,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -354,14 +354,14 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/WIN_CustInfoMain'
+              $ref: '#/definitions/WIN_CustInfo'
         '400':
           description: 请求失败
           schema:
             type: object
   #/airentrust/getOverDuePayment
   #/airentrust/getDpm
-  /airentrust/uploadPic:
+  /airentrustpda/uploadPic:
     post:
       tags:
         - AirEntrust
@@ -374,13 +374,38 @@ paths:
           description: 请求成功
           schema:
             type: object
-            $ref: '#/definitions/PIC_UPLOAD_OBJ'
+            $ref: '#/definitions/SUCCESS3'
         '400':
           description: 请求失败
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /airentrust/addForApp:
+  /airentrustpda/delPic:
+    delete:
+      tags:
+        - AirEntrust
+      summary: 删除上传文件
+      description: 删除上传文件
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 文件记录ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /airentrustpda/add:
      post:
       tags:
         - AirEntrust
@@ -407,6 +432,82 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
+  /airentrustpda/addSize:
+    post:
+      tags:
+        - AirEntrust
+      summary: 添加尺寸清单记录
+      description: 添加尺寸清单记录
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ITEM_NO
+          description: 序号
+          type: string
+          required: true
+        - in: query
+          name: LENGHT
+          description: 长
+          type: string
+          required: true
+        - in: query
+          name: WIDTH
+          description: 宽
+          type: string
+          required: true
+        - in: query
+          name: HIGH
+          description: 高
+          type: string
+          required: true
+        - in: query
+          name: G_WEIGHT
+          description: 毛重
+          type: string
+          required: true
+        - in: query
+          name: PIECE
+          description: 件数
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS3'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /airentrustpda/delSize:
+    delete:
+      tags:
+        - AirEntrust
+      summary: 删除尺寸清单记录
+      description: 删除尺寸清单记录
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 尺寸清单ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+
 #Transfer(OK)##########################################  
   /transfer/getListForApp:
     get:
@@ -648,7 +749,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -687,7 +788,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -726,7 +827,7 @@ paths:
           type: integer
           required: true
         - in: query
-          name: filter
+          name: fliter
           description: 搜索条件
           type: string
       responses:
@@ -1379,21 +1480,21 @@ definitions:
       NAME: 
         type: string
         description: 服务产品名字
-      DELIVERY: 
-        type: string
-        description: 交货地ID
-      DESTINATION:
-        type: string
-        description: 目的地ID
+    #  DELIVERY: 
+    #    type: string
+    #    description: 交货地ID
+    # DESTINATION:
+    #  type: string
+    #  description: 目的地ID
       DESTINATION_NAME:
         type: string
         description: 目的地名字
-      TRANSFERSTATION:
-        type: string
-        description: 中转地ID
-      TWO_PORT:
-        type: string
-        description: 二级港口ID
+     # TRANSFERSTATION:
+     #   type: string
+     #  description: 中转地ID
+     # TWO_PORT:
+     #   type: string
+     #   description: 二级港口ID
   WIN_Warehouse:
     type: object
     description: 仓库选择
@@ -1424,24 +1525,24 @@ definitions:
       NAME: 
         type: string
         description: 委托单位名字
-      D_B_MAN: 
+      #D_B_MAN: 
+      #  type: string
+      #  description: 目的地业务员ID
+      #D_DPM: 
+      #  type: string
+      #  description: 目的地业务员所在部门ID
+      AVAILABLE_CREDIT: 
         type: string
-        description: 目的地业务员ID
-      D_DPM: 
-        type: string
-        description: 目的地业务员所在部门ID
-      #AVAILABLE_CREDIT: 
-        #type: string
-        #description: 可用额度（授信总额+追加授信－已入仓未发货金额）
-      CREDIT_COUNT:
-        type: string
-        description: 授信总额
-      ADD_CREDIT:
-        type: string
-        description: 追加授信
-      UNFILLED_MONEY:
-        type: string
-        description: 已入仓未发货金额
+        description: 可用额度（授信总额+追加授信－已入仓未发货金额）
+      #CREDIT_COUNT:
+      #  type: string
+      #  description: 授信总额
+      #ADD_CREDIT:
+      #  type: string
+      #  description: 追加授信
+      #UNFILLED_MONEY:
+      #  type: string
+      #  description: 已入仓未发货金额
       MARK: 
         type: string
         description: MARK
@@ -1457,9 +1558,9 @@ definitions:
       WAREHOUSE_NAME: 
         type: string
         description: 仓库名字
-      P_STATE: 
-        type: string
-        description: 默认货物状态（P_TYPE）
+      #P_STATE: 
+      #  type: string
+      #  description: 默认货物状态（P_TYPE）
       PAYMENT_TYPE: 
         type: string
         description: 结算方式（PAY_TYPE）
@@ -1493,136 +1594,6 @@ definitions:
       NOTICE2: 
         type: string
         description: 通知人电话
-  WIN_BManMain: 
-    type: object
-    description: 业务员选择
-    properties:
-      totalRow:
-        type: integer
-        description: 总记录数
-      pageNumber:
-        type: integer
-        description: 当前页
-      firstPage:
-        type: boolean
-        description: 是否为第一页
-      lastPage:
-        type: integer
-        description: 是否为最后一页
-      totalPage:
-        type: integer
-        description: 总页数
-      pageSize:
-        type: integer
-        description: 每页大小
-      list:
-        type: array
-        items:
-          $ref: '#/definitions/WIN_BMan'
-  WIN_PServiceMain:
-    type: object
-    description: 服务产品选择
-    properties:
-      totalRow:
-        type: integer
-        description: 总记录数
-      pageNumber:
-        type: integer
-        description: 当前页
-      firstPage:
-        type: boolean
-        description: 是否为第一页
-      lastPage:
-        type: integer
-        description: 是否为最后一页
-      totalPage:
-        type: integer
-        description: 总页数
-      pageSize:
-        type: integer
-        description: 每页大小
-      list:
-        type: array
-        items:
-          $ref: '#/definitions/WIN_PService'
-  WIN_WarehouseMain:
-    type: object
-    description: 仓库选择
-    properties:
-      totalRow:
-        type: integer
-        description: 总记录数
-      pageNumber:
-        type: integer
-        description: 当前页
-      firstPage:
-        type: boolean
-        description: 是否为第一页
-      lastPage:
-        type: integer
-        description: 是否为最后一页
-      totalPage:
-        type: integer
-        description: 总页数
-      pageSize:
-        type: integer
-        description: 每页大小
-      list:
-        type: array
-        items:
-          $ref: '#/definitions/WIN_Warehouse'
-  WIN_StoreMain:
-    type: object
-    description: 档口选择
-    properties:
-      totalRow:
-        type: integer
-        description: 总记录数
-      pageNumber:
-        type: integer
-        description: 当前页
-      firstPage:
-        type: boolean
-        description: 是否为第一页
-      lastPage:
-        type: integer
-        description: 是否为最后一页
-      totalPage:
-        type: integer
-        description: 总页数
-      pageSize:
-        type: integer
-        description: 每页大小
-      list:
-        type: array
-        items:
-          $ref: '#/definitions/WIN_Store'
-  WIN_CustInfoMain:
-    type: object
-    description: 委托单位选择
-    properties:
-      totalRow:
-        type: integer
-        description: 总记录数
-      pageNumber:
-        type: integer
-        description: 当前页
-      firstPage:
-        type: boolean
-        description: 是否为第一页
-      lastPage:
-        type: integer
-        description: 是否为最后一页
-      totalPage:
-        type: integer
-        description: 总页数
-      pageSize:
-        type: integer
-        description: 每页大小
-      list:
-        type: array
-        items:
-          $ref: '#/definitions/WIN_CustInfo'
   PIC_UPLOAD_OBJ:
     type: object
     description: 文件上传，返回对象
@@ -1740,9 +1711,10 @@ definitions:
         type: string
         description: 随机文件*
       SizeInfo:
-        type: array
-        items:
-          $ref: '#/definitions/AirEntrust_SIZE2'
+        type: string
+        description: 尺寸ID(xx,xx,xx)
+        #items:
+        #  $ref: '#/definitions/AirEntrust_SIZE2'
       PICInfo:
         type: string
         description: 图片ID(xx,xx,xx)
@@ -2128,6 +2100,15 @@ definitions:
         type: boolean
         example: true
       rate:
+        type: string
+  SUCCESS3:
+    type: object
+    description: 成功返回2
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      ID:
         type: string
   win_ForeignCargo:
     type: object
