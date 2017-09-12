@@ -1301,7 +1301,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: PIC_IDS
+          name: PIC_ID
           description: '图片ID集（xx,xx,xx,xx）'
           type: string
       responses:
@@ -1600,7 +1600,7 @@ definitions:
       STATUS:
         type: string
         description: 状态
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       WAREHOUSE:
@@ -1646,7 +1646,7 @@ definitions:
       ID:
         type: string
         description: 记录ID
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1695,7 +1695,7 @@ definitions:
       BL_NUMBER:
         type: string
         description: 提单号(指令)
-      BIT_TICKET_NUN:
+      BIG_TICKET_NUM:
         type: string
         description: 空运大票号
       AIR_ENTRUST_ID:
@@ -1730,6 +1730,9 @@ definitions:
         description: 异常类别
       ERR_REASON:
         type: string
+        description: 异常原因ID
+      ERR_REASON_NAME:
+        type: string
         description: 异常原因
       NOTICE:
         type: string
@@ -1738,7 +1741,7 @@ definitions:
     type: object
     description: 新增时前端提供的数据结构(分货交接)
     properties:
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1804,7 +1807,7 @@ definitions:
       ID:
         type: string
         description: ID
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1912,7 +1915,7 @@ definitions:
       STATUS:
         type: string
         description: 当前状态
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1949,7 +1952,7 @@ definitions:
       STATUS:
         type: string
         description: 当前状态
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -2069,7 +2072,7 @@ definitions:
     type: object
     description: 货物派送头信息
     properties:
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -2127,7 +2130,7 @@ definitions:
       ID:
         type: string
         description: 纪录ID
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:

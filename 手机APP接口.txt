@@ -54,6 +54,35 @@ paths:
           description: 每次获取的记录的个数
           type: integer
           required: true
+         #业务日期范围、空运HBL，目的地、快递单号、唛头、委托单位 
+        - in: query
+          name: B_DATE_S
+          description: 业务日期-开始时间
+          type: string
+        - in: query
+          name: B_DATE_E
+          description: 业务日期-结束时间
+          type: string
+        - in: query
+          name: AIR_HBL
+          description: 空运HBL
+          type: string
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
+        - in: query
+          name: MARK
+          description: 唛头
+          type: string
+        - in: query
+          name: C_ID
+          description: 委托单位ID
+          type: string
+        - in: query
+          name: EXPRESS_NUM
+          description: 快递单号
+          type: string
       responses:
         '200':
           description: 请求成功
@@ -64,7 +93,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /airentrustpda/getOrder:
+  /airentrust/getOrder:
     get:
       tags:
         - AirEntrust
@@ -95,7 +124,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /airentrustpda/getSize:
+  /airentrust/getSize:
     get:
       tags:
         - AirEntrust
@@ -359,7 +388,64 @@ paths:
           description: 请求失败
           schema:
             type: object
-  #/airentrust/getOverDuePayment
+  /airentrustpda/winCustInfoForSerach:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取委托单位ID弹窗
+      description: 获取委托单位ID弹窗
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: start
+          description: 需要后去的下一个数据的编号
+          type: integer
+          required: true
+        - in: query
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: fliter
+          description: 搜索条件
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WIN_Warehouse'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustpda/getOverDuePayment:
+    get:
+      tags:
+        - AirEntrust
+      summary: 获取逾期未付款金额
+      description: 获取逾期未付款金额
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: C_ID
+          description: 委托单位ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/SUCCESS4'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
   #/airentrust/getDpm
   /airentrustpda/uploadPic:
     post:
@@ -507,9 +593,8 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-
 #Transfer(OK)##########################################  
-  /transfer/getListForApp:
+  /transferpda/getList:
     get:
       tags:
         - Transfer
@@ -518,11 +603,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
         - in: query
           name: start
           description: 需要后去的下一个数据的编号
@@ -560,7 +640,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/getTransfer:
+  /transferpda/getTransfer:
     get:
       tags:
         - Transfer
@@ -569,11 +649,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
         - in: query
           name: ID
           description: 记录ID
@@ -589,7 +664,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/getDetails:
+  /transferpda/getDetails:
     get:
       tags:
         - Transfer
@@ -598,11 +673,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
         - in: query
           name: P_ID
           description: 表单ID
@@ -619,7 +689,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/getDetail:
+  /transferpda/getDetail:
     get:
       tags:
         - Transfer
@@ -628,11 +698,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
         - in: query
           name: AIR_HBL
           description: 空运HBL号
@@ -648,7 +713,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/updateDetailInfo:
+  /transferpda/updateDetailInfo:
     get:
       tags:
         - Transfer
@@ -658,13 +723,13 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: callback
-          description: callback,默认为接口名字
+          name: ID
+          description: 表单列表ID
           type: string
           required: true
         - in: query
-          name: ID
-          description: 表单列表ID
+          name: P_ID
+          description: 主单ID
           type: string
           required: true
         - in: query
@@ -699,7 +764,7 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /transfer/winErrorReason:
+  /transfer/getErrorReason:
     get:
       tags:
         - Transfer
@@ -724,7 +789,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/winCity:
+  /transferpda/winCity:
     get:
       tags:
         - Transfer
@@ -763,7 +828,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /transfer/winProxy:
+  /foreignCargo/findForeignCargo:
     get:
       tags:
         - Transfer
@@ -830,6 +895,10 @@ paths:
           name: fliter
           description: 搜索条件
           type: string
+        - in: query
+          name: DESTINATION
+          description: 目的地ID
+          type: string
       responses:
         '200':
           description: 请求成功
@@ -842,7 +911,7 @@ paths:
           schema:
             type: object
 #CargoDelivery(OK)##########################################
-  /cargoDelivery/getListForApp:
+  /cargoDeliverypda/getList:
     get:
       tags:
         - CargoDelivery
@@ -893,7 +962,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /cargoDelivery/getCargoDelivery:
+  /cargoDeliverypda/getCargoDlv:
      get:
       tags:
         - CargoDelivery
@@ -922,7 +991,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /cargoDelivery/getDetails:
+  /cargoDeliverypda/getCargoDetails:
     get:
       tags:
         - CargoDelivery
@@ -952,7 +1021,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /cargoDelivery/getDetail:
+  /cargoDeliverypda/getCargoDetail:
     get:
       tags:
         - CargoDelivery
@@ -981,7 +1050,7 @@ paths:
           description: 请求失败
           schema:
             type: object
-  /cargoDelivery/updateDetailInfo:
+  /cargoDeliverypda/updateDetailInfo:
     get:
       tags:
         - CargoDelivery
@@ -1036,8 +1105,8 @@ paths:
     get:
       tags:
         - CargoDelivery
-      summary: 获取拒收原因
-      description: 获取拒收原因
+      summary: 获取拒收原因customer_refusal_reason
+      description: 获取拒收原因customer_refusal_reason
       produces:
         - application/json
       parameters:
@@ -1053,6 +1122,31 @@ paths:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /cargoDeliverypda/getPic:
+    get:
+      tags:
+        - CargoDelivery
+      summary: 获取上传图片
+      description: 获取上传图片
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: PIC_ID
+          description: PIC_ID字段（xx,xx,xx）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FILE_INFO'
         '400':
           description: 请求失败
           schema:
@@ -1637,7 +1731,7 @@ definitions:
         description: 交货地ID
       DESTINATION:
         type: string
-        description: 目的地ID*
+        description: 目的地ID
       TRANSFERSTATION:
         type: string
         description: 中转地ID
@@ -1649,31 +1743,31 @@ definitions:
         description: 空运委托单ID*
       SENDER:
         type: string
-        description: 发货人*
+        description: 发货人
       SENDER_PHONE:
         type: string
-        description: 发货人电话*
+        description: 发货人电话
       SENDER_ADDRESS:
         type: string
-        description: 发货人地址*
+        description: 发货人地址
       SENDER_WX:
         type: string
-        description: 发货人wX*
+        description: 发货人wX
       RECEIVER:
         type: string
-        description: 收货人*
+        description: 收货人
       RECEIVER_PHONE:
         type: string
-        description: 收货人电话*
+        description: 收货人电话
       RECEIVER_ADDRESS:
         type: string
-        description: 收货人地址*
+        description: 收货人地址
       RECEIVER_WX:
         type: string
-        description: 收货人WX*
+        description: 收货人WX
       NOTICE1:
         type: string
-        description: 通知人*
+        description: 通知人
       PAYMENT_TYPE:
         type: string
         description: 付费类型*
@@ -1758,7 +1852,7 @@ definitions:
       STATUS:
         type: string
         description: 状态
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       PROXY:
@@ -1777,7 +1871,7 @@ definitions:
       ID:
         type: string
         description: 记录ID
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1823,12 +1917,15 @@ definitions:
       ID:
         type: string
         description: 分货交接体数据ID
-      LANDING_NO:
+      BL_NUMBER:
         type: string
         description: 提单号(指令)
-      TICKET_ID:
+      BIG_TICKET_NUM:
         type: string
         description: 空运大票号
+      AIR_ENTRUST_ID:
+        type: string
+        description: 空运委托单Id
       AIR_HBL:
         type: string
         description: 委托单号
@@ -1838,7 +1935,7 @@ definitions:
       CARGO_INFO:
         type: string
         description: 货物信息（未知）
-      TAG:
+      TAGS:
         type: string
         description: 标签（空运委托单）
       COUNT:
@@ -1902,7 +1999,7 @@ definitions:
       STATUS:
         type: string
         description: 当前状态
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -1936,30 +2033,33 @@ definitions:
       P_ID:
         type: string
         description: 头ID
-      BIG_TICKET:
+      BIG_TICKET_NUM:
         type: string
         description: 空运大票号
       AIR_HBL:
         type: string
-        description: 委托单号
+        description: AIR_HBL委托单号
       RECEIVER_INFO:
         type: string
         description: 收货人信息
-      TAG:
+      TAGS:
         type: string
         description: 标签
       PAY_TYPE:
         type: string
-        description: 付费类型
+        description: 付费类型(付费方式)
       CURRENCY:
         type: string
-        description: 币种
-      EXCHARGE_RATE:
+        description: 币种ID
+      CURRENCY_NAME:
+        type: string
+        description: 币种名字
+      EXCHANGE_RATE:
         type: string
         description: 汇率
       COUNT:
         type: string
-        description: 到货件数
+        description: 到货件数（实物件数）
       WEIGHT:
         type: string
         description: 到货重量
@@ -1988,7 +2088,7 @@ definitions:
       ID:
         type: string
         description: 纪录ID
-      EPLACE:
+      DESTINATION:
         type: string
         description: 目的地
       UNLOAD_POINT:
@@ -2082,7 +2182,7 @@ definitions:
     properties:
       ID:
         type: string
-      URL:
+      FILE_URL:
         type: string
   WINDOW_INFO:
     type: object
@@ -2103,12 +2203,21 @@ definitions:
         type: string
   SUCCESS3:
     type: object
-    description: 成功返回2
+    description: 成功返回3
     properties:
       isSuccess:
         type: boolean
         example: true
       ID:
+        type: string
+  SUCCESS4:
+    type: object
+    description: 成功返回4
+    properties:
+      isSuccess:
+        type: boolean
+        example: true
+      OVER_DUE_PAYMENT:
         type: string
   win_ForeignCargo:
     type: object
