@@ -1,0 +1,424 @@
+swagger: "2.0"
+info:
+  description: "变更申请相关提交与审批"
+  version: "1.0.0"
+  title: "PC收货-变更申请"
+  contact:
+    email: "apiteam@swagger.io"
+host: "192"
+basePath: "/choice-ERP"
+tags:
+  - name: "AIR_ENTRUST_APPLY"
+    description: "提交与审批相关"
+  - name: "AIR_ENTRUST_WORKFLOW"
+    description: "工作流相关"
+schemes:
+  - "http"
+paths:
+  /airentrustapply/getList:
+   get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 获取待审批流程
+      description: 获取待审批流程
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: ID
+          description: 空运委托单ID
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ListObj'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/getNextApprovers:
+    get:
+      tags:
+         - AIR_ENTRUST_APPLY
+      summary: 获取下级审批人（提交审批时）
+      description: 获取下级审批人（提交审批时）
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: businessID
+          description: 空运委托单ID
+          type: string
+          required: true
+        - in: query
+          name: flowType
+          description: 流程类型
+          type: string
+          required: true
+        - in: query
+          name: inputVal
+          description: 输入值
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/getNextApproversforApply:
+    get:
+      tags:
+         - AIR_ENTRUST_APPLY
+      summary:  获取下级审批人（审批时）
+      description:  获取下级审批人（审批时）
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: businessID
+          description: 空运委托单ID
+          type: string
+          required: true
+        - in: query
+          name: flowname
+          description: 流程名
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /workflow/getApprovalHistory:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 获取审批历史
+      description: 获取审批历史
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: businessID
+          description: 空运委托单ID
+          type: string
+          required: true
+        - in: query
+          name: flowname
+          description: 流程名
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/applySpecialOffer:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 特价申请
+      description: 特价申请
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback
+          type: string
+          required: true
+        - in: query
+          name: ASSIGNEE
+          description: 下级审批人
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 业务ID
+          type: string
+          required: true
+        - in: query
+          name: INPUT_PRICE
+          description: 变更值（提交）
+          type: string
+          required: true
+        - in: query
+          name: COMMENT
+          description: 审批意见（审批）
+          type: string
+          required: true
+        - in: query
+          name: approve_status
+          description: 是否通过（审批）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/success'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/applyPayTypeChange:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 付费方式变更申请
+      description: 付费方式变更申请
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback
+          type: string
+          required: true
+        - in: query
+          name: ASSIGNEE
+          description: 下级审批人
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 业务ID
+          type: string
+          required: true
+        - in: query
+          name: PAYMENT_TYPE
+          description: 变更值（提交）
+          type: string
+          required: true
+        - in: query
+          name: COMMENT
+          description: 审批意见（审批）
+          type: string
+          required: true
+        - in: query
+          name: approve_status
+          description: 是否通过（审批）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/success'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/applyPWChange:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 计费重变更申请
+      description: 计费重变更申请
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback
+          type: string
+          required: true
+        - in: query
+          name: ASSIGNEE
+          description: 下级审批人
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 业务ID
+          type: string
+          required: true
+        - in: query
+          name: PAY_WEIGHT
+          description: 变更值（提交）
+          type: string
+          required: true
+        - in: query
+          name: COMMENT
+          description: 审批意见（审批）
+          type: string
+          required: true
+        - in: query
+          name: approve_status
+          description: 是否通过（审批）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/success'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/applyServiceProductChange:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 服务产品变更申请
+      description: 服务产品变更申请
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback
+          type: string
+          required: true
+        - in: query
+          name: ASSIGNEE
+          description: 下级审批人
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 业务ID
+          type: string
+          required: true
+        - in: query
+          name: S_PRODUCT
+          description: 服务产品（提交）
+          type: string
+          required: true
+        - in: query
+          name: DELIVERY
+          description: 交货地（提交）
+          type: string
+          required: true
+        - in: query
+          name: DESTINATION
+          description: 目的地（提交）
+          type: string
+          required: true
+        - in: query
+          name: TRANSFERSTATION
+          description: 中转地（提交）
+          type: string
+          required: true
+        - in: query
+          name: TWO_PORT
+          description: 二级港口（提交）
+          type: string
+          required: true
+        - in: query
+          name: COMMENT
+          description: 审批意见（审批）
+          type: string
+          required: true
+        - in: query
+          name: approve_status
+          description: 是否通过（审批）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/success'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /airentrustapply/applyDelivery:
+    get:
+      tags:
+        - AIR_ENTRUST_APPLY
+      summary: 小于最低消费发货申请
+      description: 小于最低消费发货申请
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback
+          type: string
+          required: true
+        - in: query
+          name: ASSIGNEE
+          description: 下级审批人
+          type: string
+          required: true
+        - in: query
+          name: ID
+          description: 业务ID
+          type: string
+          required: true
+        - in: query
+          name: COMMENT
+          description: 审批意见（审批）
+          type: string
+          required: true
+        - in: query
+          name: approve_status
+          description: 是否通过（审批）
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/success'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+definitions:
+  ListObj:
+    type: object
+    description: 成功返回4
+    properties:
+      FLOW_NAME:
+        type: string
+        description: 流程名
+      STATUS:
+        type: string
+        description: 流程状态
+      CHANGE_REASON:
+        type: string
+        description: 变更原因
+      SUBMIT_USER:
+        type: string
+        description: 提交人
+      SUBMIT_TIME:
+        type: string
+        description: 提交时间
+  success:
+    type: object
+    description: 成功返回
+    properties:
+      isSuccess:
+        type: string
+        description: 是否成功
+      message:
+        type: string
+        description: 信息
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
