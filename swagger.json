@@ -130,6 +130,10 @@
           "type": "string",
           "description": "通知人电话"
         },
+        "order.PAYMENT_TYPE": {
+          "type": "string",
+          "description": "付费方式"
+        },
         "order.MARK": {
           "type": "string",
           "description": "唛头"
@@ -140,7 +144,7 @@
         },
         "PRICE_TYPE": {
           "type": "string",
-          "description": "价格类型(通用-1；深圳-2；MCO-3)"
+          "description": "价格类型(通用-BC_CUSTOMER_OFFER1；深圳-BC_CUSTOMER_OFFER2；MCO-BC_CUSTOMER_OFFER3)"
         },
         "order.ROUTE": {
           "type": "string",
@@ -150,17 +154,45 @@
           "type": "string",
           "description": "起飞地ID"
         },
-        "COMMISSION": {
+        "PRICE_CURRENCY": {
           "type": "string",
-          "description": "申请佣金"
+          "description": "价格币种"
+        },
+        "AIR_PRICE": {
+          "type": "string",
+          "description": "空运单价"
+        },
+        "CLEARANCE_PRICE": {
+          "type": "string",
+          "description": "清关单价"
+        },
+        "KG_PRICE": {
+          "type": "string",
+          "description": "公斤单价"
+        },
+        "BAG_PRICE": {
+          "type": "string",
+          "description": "每包单价"
+        },
+        "COMMISSION_CURRENCY": {
+          "type": "string",
+          "description": "佣金币种"
+        },
+        "COMMISSION_PRICE": {
+          "type": "string",
+          "description": "申请佣金单价/kg"
+        },
+        "IS_SINGLE_EFFECT": {
+          "type": "string",
+          "description": "是否单票生效(1-生效；0-不生效)"
         },
         "EFFECTIVE_DATE": {
           "type": "string",
           "description": "有效日期"
         },
-        "IS_SINGLE_EFFECT": {
+        "order.REMARK": {
           "type": "string",
-          "description": "是否单票生效(0-生效；1-不生效)"
+          "description": "备注"
         },
         "INSURE_CURRENCY": {
           "type": "string",

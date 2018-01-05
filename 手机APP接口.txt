@@ -3,7 +3,7 @@ info:
   description: '<span style="font-size:15px;font-weight:bold">收货管理：</span>收货管理安卓版接口(查，新增（含提交）)<br> 
   <span style="font-size:15px;font-weight:bold">×档口移仓：</span>档口移仓安卓版接口（查，增，删，改，发货（含提交），收货）<br>
   <span style="font-size:15px;font-weight:bold">×转仓管理：</span>转仓管理安卓版接口（查，增，删，改，发货（含提交），收货）<br>
-  <span style="font-size:15px;font-weight:bold">×货物移库：</span>货物移库安卓版接口（查，改）<br>
+  <span style="font-size:15px;font-weight:bold">目的地提货：</span>提货单安卓版接口（查,增,终止）<br>
   <span style="font-size:15px;font-weight:bold">分货交接：</span>分货交接安卓版接口（查，改）<br>
   <span style="font-size:15px;font-weight:bold">货物派送：</span>货物派送安卓版接口（查，改）<br>'
   version: 1.0.0
@@ -20,8 +20,8 @@ tags:
     description: 档口移仓
   - name: TransformWareHouse
     description: 转仓管理
-  - name: MoveWarehouse
-    description: 货物移库(不可用)
+  - name: PickGoodsManage
+    description: 目的地提货
   - name: Transfer
     description: 分货交接
   - name: CargoDelivery
@@ -1151,13 +1151,13 @@ paths:
           description: 请求失败
           schema:
             type: object
-#MoveWarehouse#############################################
-  /movewarehouse/addMoveWarehouse:
+#PickGoodsManage#############################################
+  /pickGoodsManage/listPagePDA:
     get:
       tags: 
-        - MoveWarehouse
-      summary: 添加新库位
-      description: 添加新库位
+        - PickGoodsManage
+      summary: 获取主列表信息
+      description: 获取主列表信息
       produces:
         - application/json
       parameters:
@@ -1167,13 +1167,191 @@ paths:
           type: string
           required: true
         - in: query
-          name: ORDERS_ID
-          description: 原库位码
+          name: start
+          description: 需要后去的下一个数据的编号
           type: integer
           required: true
         - in: query
-          name: HBL_Item
-          description: 货物条码
+          name: length
+          description: 每次获取的记录的个数
+          type: integer
+          required: true
+        - in: query
+          name: HBL
+          description: 空运HBL
+          type: string
+        - in: query
+          name: WAREHOUSEID
+          description: 仓库
+          type: string
+        - in: query
+          name: RECEIVER
+          description: 收货人信息
+          type: string
+        - in: query
+          name: C_ID
+          description: 委托单位ID
+          type: string
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PGM_LISTOBJ'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /pickGoodsManage/getWareHouse:  
+    get:
+      tags: 
+        - PickGoodsManage
+      summary: 新增时，仓库的选择
+      description: 新增时，仓库的选择(显示NAME,取值ID)
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/PGM_WIN_WAREHOUSE'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+  /pickGoodsManage/getMsgByHBL:   
+    get:
+      tags: 
+        - PickGoodsManage
+      summary: 获取委托单信息
+      description: 获取委托单信息
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: hbl
+          description: 用户输入的HBL号
+          type: integer
+          required: true
+        - in: query
+          name: pickGoodWarehouseID
+          description: 用户选择的仓库ID
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/PGM_AIRENTRUST'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR' 
+  /pickGoodsManage/countWareMoneyByInputCargoNums:
+     get:
+      tags: 
+        - PickGoodsManage
+      summary: 根据输入的取件数来获取仓租费
+      description: 根据输入的取件数来获取仓租费。在getMsgByHBL接口返回完成，且其中的storeDays值不为0时，发起
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: hbl
+          description: 用户输入的HBL号
+          type: integer
+          required: true
+        - in: query
+          name: nums
+          description: 提货件数（来自getMsgByHBL接口的countNums值）
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/PGM_GETWAREMONEY'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  #/pickGoodsManage/save:
+  /pickGoodsManage/getOtherInfo:
+    get:
+      tags: 
+        - PickGoodsManage
+      summary: 获取仓存天数与是否允许发货信息
+      description: 获取仓存天数与是否允许发货信息（浏览时获取）
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: callback
+          description: callback,默认为接口名字
+          type: string
+          required: true
+        - in: query
+          name: HBL
+          description: 用户输入的HBL号
+          type: integer
+          required: true
+        - in: query
+          name: ORDER_ID
+          description: 空运委托单ID
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 请求成功
+          schema:
+            type: object
+            $ref: '#/definitions/PGM_GETOTHERINFO'
+        '400':
+          description: 请求失败
+          schema:
+            type: object
+            $ref: '#/definitions/ERROR'
+  /pickGoodsManage/stop:
+    get:
+      tags: 
+        - PickGoodsManage
+      summary: 终止操作
+      description: 终止操作
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: hbl
+          description: HBL号
+          type: integer
+          required: true
+        - in: query
+          name: id
+          description: 记录ID(CHARGE_ID)
           type: integer
           required: true
       responses:
@@ -1187,76 +1365,9 @@ paths:
           schema:
             type: object
             $ref: '#/definitions/ERROR'
-  /movewarehouse/findMoveWarehouse:  
-    get:
-      tags: 
-        - MoveWarehouse
-      summary: 获取主列表数据
-      description: 获取主列表数据
-      produces:
-        - application/json
-      parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
-        - in: query
-          name: HBL_Item
-          description: 货物条码
-          type: integer
-          required: true
-        - in: query
-          name: moveWarehouse.OLD_STOCK_NO
-          description: 原库位码
-          type: integer
-          required: true  
-        - in: query
-          name: moveWarehouse.NEW_STOCK_NO
-          description: 新库位码
-          type: integer
-          required: true 
-      responses:
-        '200':
-          description: 请求成功
-          schema:
-            type: object
-            $ref: '#/definitions/MoveWarehouseList'
-        '400':
-          description: 请求失败
-          schema:
-            type: object
-            $ref: '#/definitions/ERROR'
-  /movewarehouse/findOldStockNo:   
-    get:
-      tags: 
-        - MoveWarehouse
-      summary: 查找原库位码
-      description: 查找原库位码
-      produces:
-        - application/json
-      parameters:
-        - in: query
-          name: callback
-          description: callback,默认为接口名字
-          type: string
-          required: true
-        - in: query
-          name: HBL_Item
-          description: 货物条码
-          type: integer
-          required: true
-      responses:
-        '200':
-          description: 请求成功
-          schema:
-            type: object
-            $ref: '#/definitions/OldStockNo'
-        '400':
-          description: 请求失败
-          schema:
-            type: object
-            $ref: '#/definitions/ERROR' 
+  #/pickGoodsManage/uploadFile:
+  #/pickGoodsManage/delFile:
+  #/pickGoodsManage/findFiles:
 definitions:
   ERROR:
     type: object
@@ -2112,69 +2223,185 @@ definitions:
       REMARK:
         type: string
         description: 备注
-#MoveWarehouse##########################################
-  MoveWarehouseList: 
+#PickGoodsManage##########################################
+  PGM_LISTOBJ: 
     type: object
     description: 主列表数据内容
     properties:
-      ID:
-        type: integer
-        description: 体纪录ID
-      RECEIPT_ID:
-        type: string
-        description: 单据号码
       AIR_HBL:
-        type: integer
-        description: 空运HBL
-      ITEM_NO: 
-        type: integer
-        description: 序号
-      OLD_STOCK_NO:
         type: string
-        description: 原库位
-      NEW_STOCK_NO:
+        description: 空运Hbl
+      CANCELER:
         type: string
-        description: 新库位
+        description: 终止人
+      CANCEL_DATE:
+        type: string
+        description: 终止日期
+      CARGO_CURRENCY:
+        type: string
+        description: 币种
+      CARGO_INFO:
+        type: string
+        description: 货物信息
+      CARGO_TRANSPORTION_MONEY:
+        type: string
+        description: 货物运费
+      CHARGE_ID :
+        type: string
+        description: 记录ID
+      COLUMN_RECEIVER:
+        type: string
+        description: 收货人
+      CUST_NAME:
+        type: string
+        description: 委托单位名字
+      C_ID:
+        type: string
+        description: 委托单位ID
+      FEIGHT_AMT:
+        type: string
+        description: 实收运费金额
+      NOW_WAREHOUSE_NAME:
+        type: string
+        description: 当前仓库名字
+      ORDER_ID:
+        type: string
+        description: 空运委托单ID
+      PAYMENT_TYPE:
+        type: string
+        description: 结算方式
+      RECEIVABLE_STOCK_FARE:
+        type: string
+        description: 应收仓租费
+      RECEIVEDQTY:
+        type: string
+        description: 实发件数
+      RECEPTI_ID:
+        type: string
+        description: 单据号
       STATUS:
         type: string
-        description: 状态
-      CREATE_TIME:
+        description: 记录状态
+      STOCK_AMT:
         type: string
-        description: 创建日期
-      CREATE_USER:
+        description: 实收仓租费
+      STOCK_CURRENCY_FULL_NAME:
         type: string
-        description: 创建人
-      UPDATE_TIME:
+        description: 仓租币种
+      STOCK_CURRENCY_ID:
         type: string
-        description: 更新时间
-      UPDATE_USER:
+        description: 仓租币种ID
+      STOCK_EXCHANGE_RATE:
         type: string
-        description: 更新人
-      DELETE_TIME:
+        description: 仓租币种汇率
+      TOTAL_COUNT:
         type: string
-        description: 删除时间
-      DELETER:  
+        description: 货物件数
+      VEHICLE_CURRENCY_ID:
         type: string
-        description: 删除人
-  OldStockNo:
+        description: 运费币种ID
+      VEHICLE_EXCHANGE_RATE:
+        type: string
+        description: 运费汇率
+      WAREHOUSE_ID:
+        type: string
+        description: 当前仓库ID
+      overDue:
+        type: string
+        description: 超期未付本位币总额
+  PGM_WIN_WAREHOUSE:
     type: object
-    description: 原库位码数据
+    description: 仓库对象
     properties:
-      ORDERS_ID:
-        type: integer
-        description: 空运委托单ID
-      STOCK_ID: 
-        type: integer
-        description: 原库位码下的项目
-      SIZE_ID:
-        type: integer
-        description: 尺寸清单ID
-      STOCK_NO:
+      CODE:
         type: string
-        description: 原库位码
-      WARE_HOUSE_ID:
+        description: 仓库编码
+      ID: 
         type: integer
-        description: 对应仓库号
+        description: 仓库ID
+      NAME:
+        type: string
+        description: 仓库名字
+  PGM_AIRENTRUST:
+    type: object
+    description: getMsgByHBL返回对象
+    properties:
+      isSuccess:
+        type: boolean
+        description: 是否成功
+      msg:
+        type: string
+        description: 返回信息
+      additional:
+        type: array
+        items:
+          $ref: '#/definitions/PGM_AIRENTRUST_CHILD1'
+  PGM_AIRENTRUST_CHILD1:
+    type: object
+    description: PGM_AIRENTRUST第一子对象
+    properties:
+      cargoMsg: 
+        type: string
+        description: 货物信息
+      custom: 
+        type: string
+        description: 委托单位信息
+      receiverInfo: 
+        type: string
+        description: 收货人信息
+      overDue: 
+        type: number
+        description: 超期未付本位币总额
+      storeDays: 
+        type: number
+        description: 超期天数 
+      isCheck: 
+        type: string
+        description: 发货人确认放货
+      PAYMENT_TYPE: 
+        type: string
+        description: 结算方式
+      countNums: 
+        type: number
+        description: 货物件数
+      dealSum: 
+        type: string
+        description: 成交金额 货物运费
+      currency: 
+        type: number
+        description: 货物运费币种
+      wareCurrency: 
+        type: number
+        description: 仓租对应币种
+      DELAY_AMT: 
+        type: string
+        description: 申请延期金额
+  PGM_GETWAREMONEY:
+    type: object
+    description: 应收仓租费返回对象
+    properties:
+      isSuccess:
+        type: boolean
+        description: 是否返回成功
+      money:
+        type: number
+        description: 应收仓租费
+  PGM_GETOTHERINFO:
+    type: object
+    description: 获取仓存天数与是否允许发货信息
+    properties:
+      isSuccess:
+        type: boolean
+        description: 是否返回成功
+      msg:
+        type: number
+        description: 信息
+      IS_PERMISSION:
+        type: boolean
+        description: 是否发货人确认放货
+      STORE_DAYS:
+        type: number
+        description: 超期天数
 #Gobal##################################################
   FILE_INFO:
     type: object
