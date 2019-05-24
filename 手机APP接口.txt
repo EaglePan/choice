@@ -1,13 +1,13 @@
 swagger: '2.0'
 info:
-  description: '<span style="font-size:15px;font-weight:bold">ÊÕ»õ¹ÜÀí£º</span>ÊÕ»õ¹ÜÀí°²×¿°æ½Ó¿Ú(²é£¬ĞÂÔö£¨º¬Ìá½»£©)<br> 
-  <span style="font-size:15px;font-weight:bold">¡Áµµ¿ÚÒÆ²Ö£º</span>µµ¿ÚÒÆ²Ö°²×¿°æ½Ó¿Ú£¨²é£¬Ôö£¬É¾£¬¸Ä£¬·¢»õ£¨º¬Ìá½»£©£¬ÊÕ»õ£©<br>
-  <span style="font-size:15px;font-weight:bold">¡Á×ª²Ö¹ÜÀí£º</span>×ª²Ö¹ÜÀí°²×¿°æ½Ó¿Ú£¨²é£¬Ôö£¬É¾£¬¸Ä£¬·¢»õ£¨º¬Ìá½»£©£¬ÊÕ»õ£©<br>
-  <span style="font-size:15px;font-weight:bold">Ä¿µÄµØÌá»õ£º</span>Ìá»õµ¥°²×¿°æ½Ó¿Ú£¨²é,Ôö,ÖÕÖ¹£©<br>
-  <span style="font-size:15px;font-weight:bold">·Ö»õ½»½Ó£º</span>·Ö»õ½»½Ó°²×¿°æ½Ó¿Ú£¨²é£¬¸Ä£©<br>
-  <span style="font-size:15px;font-weight:bold">»õÎïÅÉËÍ£º</span>»õÎïÅÉËÍ°²×¿°æ½Ó¿Ú£¨²é£¬¸Ä£©<br>'
+  description: '<span style="font-size:15px;font-weight:bold">æ”¶è´§ç®¡ç†ï¼š</span>æ”¶è´§ç®¡ç†å®‰å“ç‰ˆæ¥å£(æŸ¥ï¼Œæ–°å¢ï¼ˆå«æäº¤ï¼‰)<br> 
+  <span style="font-size:15px;font-weight:bold">Ã—æ¡£å£ç§»ä»“ï¼š</span>æ¡£å£ç§»ä»“å®‰å“ç‰ˆæ¥å£ï¼ˆæŸ¥ï¼Œå¢ï¼Œåˆ ï¼Œæ”¹ï¼Œå‘è´§ï¼ˆå«æäº¤ï¼‰ï¼Œæ”¶è´§ï¼‰<br>
+  <span style="font-size:15px;font-weight:bold">Ã—è½¬ä»“ç®¡ç†ï¼š</span>è½¬ä»“ç®¡ç†å®‰å“ç‰ˆæ¥å£ï¼ˆæŸ¥ï¼Œå¢ï¼Œåˆ ï¼Œæ”¹ï¼Œå‘è´§ï¼ˆå«æäº¤ï¼‰ï¼Œæ”¶è´§ï¼‰<br>
+  <span style="font-size:15px;font-weight:bold">ç›®çš„åœ°æè´§ï¼š</span>æè´§å•å®‰å“ç‰ˆæ¥å£ï¼ˆæŸ¥,å¢,ç»ˆæ­¢ï¼‰<br>
+  <span style="font-size:15px;font-weight:bold">åˆ†è´§äº¤æ¥ï¼š</span>åˆ†è´§äº¤æ¥å®‰å“ç‰ˆæ¥å£ï¼ˆæŸ¥ï¼Œæ”¹ï¼‰<br>
+  <span style="font-size:15px;font-weight:bold">è´§ç‰©æ´¾é€ï¼š</span>è´§ç‰©æ´¾é€å®‰å“ç‰ˆæ¥å£ï¼ˆæŸ¥ï¼Œæ”¹ï¼‰<br>'
   version: 1.0.0
-  title: ÈüÊ°¿ÕÔËÊÖ»úAPP½Ó¿ÚĞ­Òé
+  title: èµ›æ‹¾ç©ºè¿æ‰‹æœºAPPæ¥å£åè®®
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: it_yichao@choicexp.com.cn
@@ -15,17 +15,17 @@ host: '10.11.1.29:8090'
 basePath: /choice-ERP
 tags:
   - name: AirEntrust
-    description: ÊÕ»õ¹ÜÀí
+    description: æ”¶è´§ç®¡ç†
   - name: PortToWareHouse
-    description: µµ¿ÚÒÆ²Ö
+    description: æ¡£å£ç§»ä»“
   - name: TransformWareHouse
-    description: ×ª²Ö¹ÜÀí
+    description: è½¬ä»“ç®¡ç†
   - name: PickGoodsManage
-    description: Ä¿µÄµØÌá»õ
+    description: ç›®çš„åœ°æè´§
   - name: Transfer
-    description: ·Ö»õ½»½Ó
+    description: åˆ†è´§äº¤æ¥
   - name: CargoDelivery
-    description: »õÎïÇ©ÊÕ(ÅÉËÍ)
+    description: è´§ç‰©ç­¾æ”¶(æ´¾é€)
 schemes:
   - http
 paths:
@@ -34,93 +34,93 @@ paths:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
-      description: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
+      summary: è·å–ä¸»åˆ—è¡¨æ•°æ®
+      description: è·å–ä¸»åˆ—è¡¨æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
-         #ÒµÎñÈÕÆÚ·¶Î§¡¢¿ÕÔËHBL£¬Ä¿µÄµØ¡¢¿ìµİµ¥ºÅ¡¢ßéÍ·¡¢Î¯ÍĞµ¥Î» 
+         #ä¸šåŠ¡æ—¥æœŸèŒƒå›´ã€ç©ºè¿HBLï¼Œç›®çš„åœ°ã€å¿«é€’å•å·ã€å”›å¤´ã€å§”æ‰˜å•ä½ 
         - in: query
           name: B_DATE_S
-          description: ÒµÎñÈÕÆÚ-¿ªÊ¼Ê±¼ä
+          description: ä¸šåŠ¡æ—¥æœŸ-å¼€å§‹æ—¶é—´
           type: string
         - in: query
           name: B_DATE_E
-          description: ÒµÎñÈÕÆÚ-½áÊøÊ±¼ä
+          description: ä¸šåŠ¡æ—¥æœŸ-ç»“æŸæ—¶é—´
           type: string
         - in: query
           name: AIR_HBL
-          description: ¿ÕÔËHBL
+          description: ç©ºè¿HBL
           type: string
         - in: query
           name: DESTINATION
-          description: Ä¿µÄµØID
+          description: ç›®çš„åœ°ID
           type: string
         - in: query
           name: MARK
-          description: ßéÍ·
+          description: å”›å¤´
           type: string
         - in: query
           name: C_ID
-          description: Î¯ÍĞµ¥Î»ID
+          description: å§”æ‰˜å•ä½ID
           type: string
         - in: query
           name: EXPRESS_NUM
-          description: ¿ìµİµ¥ºÅ
+          description: å¿«é€’å•å·
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/AirEntrust_ListObjMain'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrust/getOrder:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡¿ÕÔËÎ¯ÍĞµ¥ÏêÇé
-      description: »ñÈ¡¿ÕÔËÎ¯ÍĞµ¥ÏêÇé
+      summary: è·å–ç©ºè¿å§”æ‰˜å•è¯¦æƒ…
+      description: è·å–ç©ºè¿å§”æ‰˜å•è¯¦æƒ…
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: ID
-          description: ¿ÕÔËÎ¯ÍĞµ¥Ïêµ¥ID
+          description: ç©ºè¿å§”æ‰˜å•è¯¦å•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/AirEntrust_Obj_SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -128,30 +128,30 @@ paths:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
-      description: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
+      summary: è·å–ä¸»åˆ—è¡¨æ•°æ®
+      description: è·å–ä¸»åˆ—è¡¨æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: P_ID
-          description: ÏêÇéÊı¾İID
+          description: è¯¦æƒ…æ•°æ®ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/AirEntrust_SIZE_SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -159,30 +159,30 @@ paths:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡ÉÏ´«ÎÄ¼ş
-      description: »ñÈ¡ÉÏ´«ÎÄ¼ş
+      summary: è·å–ä¸Šä¼ æ–‡ä»¶
+      description: è·å–ä¸Šä¼ æ–‡ä»¶
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: P_ID
-          description: ÏêÇéÊı¾İID
+          description: è¯¦æƒ…æ•°æ®ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/AirEntrust_PIC_SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -190,79 +190,79 @@ paths:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡ÒµÎñÔ±
-      description: »ñÈ¡ÒµÎñÔ±
+      summary: è·å–ä¸šåŠ¡å‘˜
+      description: è·å–ä¸šåŠ¡å‘˜
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: integer
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_BMan'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrustpda/winPService:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡·şÎñ²úÆ·£¨STATUS=SD£©
-      description: »ñÈ¡·şÎñ²úÆ·£¨STATUS=SD£©
+      summary: è·å–æœåŠ¡äº§å“ï¼ˆSTATUS=SDï¼‰
+      description: è·å–æœåŠ¡äº§å“ï¼ˆSTATUS=SDï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_PService'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   #/VWarehouse/getWarehouseForAirEntrust:
@@ -270,180 +270,180 @@ paths:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡²Ö¿â£¨status=1£©
-      description: »ñÈ¡²Ö¿â£¨status=1£©
+      summary: è·å–ä»“åº“ï¼ˆstatus=1ï¼‰
+      description: è·å–ä»“åº“ï¼ˆstatus=1ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_Warehouse'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrustpda/winStore:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡µµ¿Ú£¨status=1£©
-      description: »ñÈ¡µµ¿Ú£¨status=1£©
+      summary: è·å–æ¡£å£ï¼ˆstatus=1ï¼‰
+      description: è·å–æ¡£å£ï¼ˆstatus=1ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_Store'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrustpda/winCustInfo:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡Î¯ÍĞµ¥Î»ÒÔ¼°Ïà¹ØĞÅÏ¢
-      description: »ñÈ¡Î¯ÍĞµ¥Î»ÒÔ¼°Ïà¹ØĞÅÏ¢:¿ÉÓÃ¶î¶È£¨ÊÚĞÅ×Ü¶î+×·¼ÓÊÚĞÅ£­ÒÑÈë²ÖÎ´·¢»õ½ğ¶î£©
+      summary: è·å–å§”æ‰˜å•ä½ä»¥åŠç›¸å…³ä¿¡æ¯
+      description: è·å–å§”æ‰˜å•ä½ä»¥åŠç›¸å…³ä¿¡æ¯:å¯ç”¨é¢åº¦ï¼ˆæˆä¿¡æ€»é¢+è¿½åŠ æˆä¿¡ï¼å·²å…¥ä»“æœªå‘è´§é‡‘é¢ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: B_MAN
-          description: ÒµÎñÔ±ID
+          description: ä¸šåŠ¡å‘˜ID
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_CustInfo'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrustpda/winCustInfoForSerach:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡Î¯ÍĞµ¥Î»IDµ¯´°
-      description: »ñÈ¡Î¯ÍĞµ¥Î»IDµ¯´°
+      summary: è·å–å§”æ‰˜å•ä½IDå¼¹çª—
+      description: è·å–å§”æ‰˜å•ä½IDå¼¹çª—
       produces:
         - application/json
       parameters:
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WIN_Warehouse'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /airentrustpda/getOverDuePayment:
     get:
       tags:
         - AirEntrust
-      summary: »ñÈ¡ÓâÆÚÎ´¸¶¿î½ğ¶î
-      description: »ñÈ¡ÓâÆÚÎ´¸¶¿î½ğ¶î
+      summary: è·å–é€¾æœŸæœªä»˜æ¬¾é‡‘é¢
+      description: è·å–é€¾æœŸæœªä»˜æ¬¾é‡‘é¢
       produces:
         - application/json
       parameters:
         - in: query
           name: C_ID
-          description: Î¯ÍĞµ¥Î»ID
+          description: å§”æ‰˜å•ä½ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS4'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   #/airentrust/getDpm
@@ -451,18 +451,18 @@ paths:
     post:
       tags:
         - AirEntrust
-      summary: ÎÄ¼şÉÏ´«
-      description: ÎÄ¼şÉÏ´«
+      summary: æ–‡ä»¶ä¸Šä¼ 
+      description: æ–‡ä»¶ä¸Šä¼ 
       produces:
         - application/json
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS3'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -470,24 +470,24 @@ paths:
     delete:
       tags:
         - AirEntrust
-      summary: É¾³ıÉÏ´«ÎÄ¼ş
-      description: É¾³ıÉÏ´«ÎÄ¼ş
+      summary: åˆ é™¤ä¸Šä¼ æ–‡ä»¶
+      description: åˆ é™¤ä¸Šä¼ æ–‡ä»¶
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ÎÄ¼ş¼ÇÂ¼ID
+          description: æ–‡ä»¶è®°å½•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -495,26 +495,26 @@ paths:
      post:
       tags:
         - AirEntrust
-      summary: Ìí¼ÓÊÕ»õĞÅÏ¢
-      description: Ìí¼ÓÊÕ»õĞÅÏ¢
+      summary: æ·»åŠ æ”¶è´§ä¿¡æ¯
+      description: æ·»åŠ æ”¶è´§ä¿¡æ¯
       operationId: add
       produces:
         - application/json
       parameters:
         - in: body
           name: body
-          description: ĞÂÔöÊ±Ê¹ÓÃµÄ²ÎÊı
+          description: æ–°å¢æ—¶ä½¿ç”¨çš„å‚æ•°
           required: true
           schema:
             $ref: '#/definitions/AirEntrust_AddObj'
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -522,49 +522,49 @@ paths:
     post:
       tags:
         - AirEntrust
-      summary: Ìí¼Ó³ß´çÇåµ¥¼ÇÂ¼
-      description: Ìí¼Ó³ß´çÇåµ¥¼ÇÂ¼
+      summary: æ·»åŠ å°ºå¯¸æ¸…å•è®°å½•
+      description: æ·»åŠ å°ºå¯¸æ¸…å•è®°å½•
       produces:
         - application/json
       parameters:
         - in: query
           name: ITEM_NO
-          description: ĞòºÅ
+          description: åºå·
           type: string
           required: true
         - in: query
           name: LENGHT
-          description: ³¤
+          description: é•¿
           type: string
           required: true
         - in: query
           name: WIDTH
-          description: ¿í
+          description: å®½
           type: string
           required: true
         - in: query
           name: HIGH
-          description: ¸ß
+          description: é«˜
           type: string
           required: true
         - in: query
           name: G_WEIGHT
-          description: Ã«ÖØ
+          description: æ¯›é‡
           type: string
           required: true
         - in: query
           name: PIECE
-          description: ¼şÊı
+          description: ä»¶æ•°
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS3'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -572,24 +572,24 @@ paths:
     delete:
       tags:
         - AirEntrust
-      summary: É¾³ı³ß´çÇåµ¥¼ÇÂ¼
-      description: É¾³ı³ß´çÇåµ¥¼ÇÂ¼
+      summary: åˆ é™¤å°ºå¯¸æ¸…å•è®°å½•
+      description: åˆ é™¤å°ºå¯¸æ¸…å•è®°å½•
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ³ß´çÇåµ¥ID
+          description: å°ºå¯¸æ¸…å•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -598,169 +598,169 @@ paths:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
-      description: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
+      summary: è·å–ä¸»åˆ—è¡¨æ•°æ®
+      description: è·å–ä¸»åˆ—è¡¨æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: DESTINATION
-          description: Ä¿µÄµØID
+          description: ç›®çš„åœ°ID
           type: string
         - in: query
           name: PROXY
-          description: Çå¹Ø´úÀíID
+          description: æ¸…å…³ä»£ç†ID
           type: string
         - in: query
           name: UNLOAD_POINT
-          description: Ğ¶»õµãID
+          description: å¸è´§ç‚¹ID
           type: string
         - in: query
           name: STATUS
-          description: ×´Ì¬
+          description: çŠ¶æ€
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/Transfer_ListObjMain'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transferpda/getTransfer:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡ÏêÏ¸µÄ·Ö»õ½»½ÓÊı¾İ
-      description: »ñÈ¡ÏêÏ¸µÄ·Ö»õ½»½ÓÊı¾İ
+      summary: è·å–è¯¦ç»†çš„åˆ†è´§äº¤æ¥æ•°æ®
+      description: è·å–è¯¦ç»†çš„åˆ†è´§äº¤æ¥æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ¼ÇÂ¼ID
+          description: è®°å½•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/Transfer_Obj'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transferpda/getDetails:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡·Ö»õ½»½Ó¶ÔÓ¦µÄ×ÓÁĞ±íĞÅÏ¢
-      description: »ñÈ¡·Ö»õ½»½Ó¶ÔÓ¦µÄ×ÓÁĞ±íĞÅÏ¢
+      summary: è·å–åˆ†è´§äº¤æ¥å¯¹åº”çš„å­åˆ—è¡¨ä¿¡æ¯
+      description: è·å–åˆ†è´§äº¤æ¥å¯¹åº”çš„å­åˆ—è¡¨ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: P_ID
-          description: ±íµ¥ID
+          description: è¡¨å•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/Transfer_DetailList'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transferpda/getDetail:
     get:
       tags:
         - Transfer
-      summary: ¸ù¾İHBLºÅ»ñÈ¡×ÓÁĞ±íĞÅÏ¢£¨É¨Âë£©
-      description: ¸ù¾İHBLºÅ»ñÈ¡×ÓÁĞ±íĞÅÏ¢£¨É¨Âë£©
+      summary: æ ¹æ®HBLå·è·å–å­åˆ—è¡¨ä¿¡æ¯ï¼ˆæ‰«ç ï¼‰
+      description: æ ¹æ®HBLå·è·å–å­åˆ—è¡¨ä¿¡æ¯ï¼ˆæ‰«ç ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: AIR_HBL
-          description: ¿ÕÔËHBLºÅ
+          description: ç©ºè¿HBLå·
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/Transfer_DetailList'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transferpda/updateDetailInfo:
     get:
       tags:
         - Transfer
-      summary: ¸üĞÂ×ÓÁĞ±íĞÅÏ¢
-      description: ¸üĞÂ×ÓÁĞ±íĞÅÏ¢
+      summary: æ›´æ–°å­åˆ—è¡¨ä¿¡æ¯
+      description: æ›´æ–°å­åˆ—è¡¨ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: ID
-          description: ±íµ¥ÁĞ±íID
+          description: è¡¨å•åˆ—è¡¨ID
           type: string
           required: true
         - in: query
           name: P_ID
-          description: Ö÷µ¥ID
+          description: ä¸»å•ID
           type: string
           required: true
         - in: query
           name: REC_COUNT
-          description: ÊµÊÕ¼şÊı
+          description: å®æ”¶ä»¶æ•°
           type: string
           required: true
         - in: query
           name: REMARK
-          description: ±¸×¢
+          description: å¤‡æ³¨
           type: string
           required: true
         - in: query
           name: ERR_TYPE
-          description: Òì³£ÀàĞÍ
+          description: å¼‚å¸¸ç±»å‹
           type: string
           required: true
         - in: query
           name: ERR_REASON
-          description: Òì³£Ô­Òò
+          description: å¼‚å¸¸åŸå› 
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -768,146 +768,146 @@ paths:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡Òì³£Ô­Òò
-      description: »ñÈ¡Òì³£Ô­Òò
+      summary: è·å–å¼‚å¸¸åŸå› 
+      description: è·å–å¼‚å¸¸åŸå› 
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transferpda/winCity:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡Ä¿µÄµØ
-      description: »ñÈ¡Ä¿µÄµØ
+      summary: è·å–ç›®çš„åœ°
+      description: è·å–ç›®çš„åœ°
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /foreignCargo/findForeignCargo:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡Çå¹Ø´úÀí
-      description: »ñÈ¡Çå¹Ø´úÀí
+      summary: è·å–æ¸…å…³ä»£ç†
+      description: è·å–æ¸…å…³ä»£ç†
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /transfer/winUnloadPoint:
     get:
       tags:
         - Transfer
-      summary: »ñÈ¡Ğ¶»õµã
-      description: »ñÈ¡Ğ¶»õµã
+      summary: è·å–å¸è´§ç‚¹
+      description: è·å–å¸è´§ç‚¹
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: fliter
-          description: ËÑË÷Ìõ¼ş
+          description: æœç´¢æ¡ä»¶
           type: string
         - in: query
           name: DESTINATION
-          description: Ä¿µÄµØID
+          description: ç›®çš„åœ°ID
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
 #CargoDelivery(OK)##########################################
@@ -915,189 +915,189 @@ paths:
     get:
       tags:
         - CargoDelivery
-      summary: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
-      description: »ñÈ¡Ö÷ÁĞ±íÊı¾İ
+      summary: è·å–ä¸»åˆ—è¡¨æ•°æ®
+      description: è·å–ä¸»åˆ—è¡¨æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: DESTINATION
-          description: Ä¿µÄµØID
+          description: ç›®çš„åœ°ID
           type: string
         - in: query
           name: WAREHOUSE
-          description: ²Ö¿âID
+          description: ä»“åº“ID
           type: string
         - in: query
           name: DELIVER_MAN
-          description: ÅÉËÍÈËÔ±ID
+          description: æ´¾é€äººå‘˜ID
           type: string
         - in: query
           name: UNLOAD_POINT
-          description: Ğ¶»õµãID
+          description: å¸è´§ç‚¹ID
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/CD_ListObjMain'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /cargoDeliverypda/getCargoDlv:
      get:
       tags:
         - CargoDelivery
-      summary: »ñÈ¡ÏêÏ¸µÄ»õÎïÅÉËÍÊı¾İ
-      description: »ñÈ¡ÏêÏ¸µÄ»õÎïÅÉËÍÊı¾İ
+      summary: è·å–è¯¦ç»†çš„è´§ç‰©æ´¾é€æ•°æ®
+      description: è·å–è¯¦ç»†çš„è´§ç‰©æ´¾é€æ•°æ®
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: ID
-          description: ¼ÇÂ¼ID
+          description: è®°å½•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/CD_OBJ'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /cargoDeliverypda/getCargoDetails:
     get:
       tags:
         - CargoDelivery
-      summary: »ñÈ¡·Ö»õ½»½Ó¶ÔÓ¦µÄ×ÓÁĞ±íĞÅÏ¢
-      description: »ñÈ¡·Ö»õ½»½Ó¶ÔÓ¦µÄ×ÓÁĞ±íĞÅÏ¢
+      summary: è·å–åˆ†è´§äº¤æ¥å¯¹åº”çš„å­åˆ—è¡¨ä¿¡æ¯
+      description: è·å–åˆ†è´§äº¤æ¥å¯¹åº”çš„å­åˆ—è¡¨ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: P_ID
-          description: ±íµ¥ID
+          description: è¡¨å•ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/CD_DetailsList'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /cargoDeliverypda/getCargoDetail:
     get:
       tags:
         - CargoDelivery
-      summary: ¸ù¾İHBLºÅ»ñÈ¡×ÓÁĞ±íĞÅÏ¢£¨É¨Âë£©
-      description: ¸ù¾İHBLºÅ»ñÈ¡×ÓÁĞ±íĞÅÏ¢£¨É¨Âë£©
+      summary: æ ¹æ®HBLå·è·å–å­åˆ—è¡¨ä¿¡æ¯ï¼ˆæ‰«ç ï¼‰
+      description: æ ¹æ®HBLå·è·å–å­åˆ—è¡¨ä¿¡æ¯ï¼ˆæ‰«ç ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: AIR_HBL
-          description: ¿ÕÔËHBLºÅ
+          description: ç©ºè¿HBLå·
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/CD_DetailsList'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /cargoDeliverypda/updateDetailInfo:
     get:
       tags:
         - CargoDelivery
-      summary: ¸üĞÂ×ÓÁĞ±íĞÅÏ¢
-      description: ¸üĞÂ×ÓÁĞ±íĞÅÏ¢
+      summary: æ›´æ–°å­åˆ—è¡¨ä¿¡æ¯
+      description: æ›´æ–°å­åˆ—è¡¨ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: ID
-          description: ±íµ¥ÁĞ±íID
+          description: è¡¨å•åˆ—è¡¨ID
           type: string
           required: true
         - in: query
           name: REC_COUNT
-          description: ÊµÊÕ½ğ¶î
+          description: å®æ”¶é‡‘é¢
           type: string
           required: true
         - in: query
           name: SIGN_COUNT
-          description: Ç©ÊÕ¼şÊı
+          description: ç­¾æ”¶ä»¶æ•°
           type: string
           required: true
         - in: query
           name: REJECT_COUNT
-          description: ¾ÜÊÕ¼şÊı
+          description: æ‹’æ”¶ä»¶æ•°
           type: string
           required: true
         - in: query
           name: REJECT_REASON
-          description: ¾ÜÊÕÔ­ÒòID
+          description: æ‹’æ”¶åŸå› ID
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -1105,50 +1105,50 @@ paths:
     get:
       tags:
         - CargoDelivery
-      summary: »ñÈ¡¾ÜÊÕÔ­Òòcustomer_refusal_reason
-      description: »ñÈ¡¾ÜÊÕÔ­Òòcustomer_refusal_reason
+      summary: è·å–æ‹’æ”¶åŸå› customer_refusal_reason
+      description: è·å–æ‹’æ”¶åŸå› customer_refusal_reason
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/WINDOW_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /cargoDeliverypda/getPic:
     get:
       tags:
         - CargoDelivery
-      summary: »ñÈ¡ÉÏ´«Í¼Æ¬
-      description: »ñÈ¡ÉÏ´«Í¼Æ¬
+      summary: è·å–ä¸Šä¼ å›¾ç‰‡
+      description: è·å–ä¸Šä¼ å›¾ç‰‡
       produces:
         - application/json
       parameters:
         - in: query
           name: PIC_ID
-          description: PIC_ID×Ö¶Î£¨xx,xx,xx£©
+          description: PIC_IDå­—æ®µï¼ˆxx,xx,xxï¼‰
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/FILE_INFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
 #PickGoodsManage#############################################
@@ -1156,51 +1156,51 @@ paths:
     get:
       tags: 
         - PickGoodsManage
-      summary: »ñÈ¡Ö÷ÁĞ±íĞÅÏ¢
-      description: »ñÈ¡Ö÷ÁĞ±íĞÅÏ¢
+      summary: è·å–ä¸»åˆ—è¡¨ä¿¡æ¯
+      description: è·å–ä¸»åˆ—è¡¨ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: start
-          description: ĞèÒªºóÈ¥µÄÏÂÒ»¸öÊı¾İµÄ±àºÅ
+          description: éœ€è¦åå»çš„ä¸‹ä¸€ä¸ªæ•°æ®çš„ç¼–å·
           type: integer
           required: true
         - in: query
           name: length
-          description: Ã¿´Î»ñÈ¡µÄ¼ÇÂ¼µÄ¸öÊı
+          description: æ¯æ¬¡è·å–çš„è®°å½•çš„ä¸ªæ•°
           type: integer
           required: true
         - in: query
           name: HBL
-          description: ¿ÕÔËHBL
+          description: ç©ºè¿HBL
           type: string
         - in: query
           name: WAREHOUSEID
-          description: ²Ö¿â
+          description: ä»“åº“
           type: string
         - in: query
           name: RECEIVER
-          description: ÊÕ»õÈËĞÅÏ¢
+          description: æ”¶è´§äººä¿¡æ¯
           type: string
         - in: query
           name: C_ID
-          description: Î¯ÍĞµ¥Î»ID
+          description: å§”æ‰˜å•ä½ID
           type: string
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
               $ref: '#/definitions/PGM_LISTOBJ'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -1208,59 +1208,59 @@ paths:
     get:
       tags: 
         - PickGoodsManage
-      summary: ĞÂÔöÊ±£¬²Ö¿âµÄÑ¡Ôñ
-      description: ĞÂÔöÊ±£¬²Ö¿âµÄÑ¡Ôñ(ÏÔÊ¾NAME,È¡ÖµID)
+      summary: æ–°å¢æ—¶ï¼Œä»“åº“çš„é€‰æ‹©
+      description: æ–°å¢æ—¶ï¼Œä»“åº“çš„é€‰æ‹©(æ˜¾ç¤ºNAME,å–å€¼ID)
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: array
             items:
              $ref: '#/definitions/PGM_WIN_WAREHOUSE'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
   /pickGoodsManage/getMsgByHBL:   
     get:
       tags: 
         - PickGoodsManage
-      summary: »ñÈ¡Î¯ÍĞµ¥ĞÅÏ¢
-      description: »ñÈ¡Î¯ÍĞµ¥ĞÅÏ¢
+      summary: è·å–å§”æ‰˜å•ä¿¡æ¯
+      description: è·å–å§”æ‰˜å•ä¿¡æ¯
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: hbl
-          description: ÓÃ»§ÊäÈëµÄHBLºÅ
+          description: ç”¨æˆ·è¾“å…¥çš„HBLå·
           type: integer
           required: true
         - in: query
           name: pickGoodWarehouseID
-          description: ÓÃ»§Ñ¡ÔñµÄ²Ö¿âID
+          description: ç”¨æˆ·é€‰æ‹©çš„ä»“åº“ID
           type: integer
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/PGM_AIRENTRUST'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR' 
@@ -1268,34 +1268,34 @@ paths:
      get:
       tags: 
         - PickGoodsManage
-      summary: ¸ù¾İÊäÈëµÄÈ¡¼şÊıÀ´»ñÈ¡²Ö×â·Ñ
-      description: ¸ù¾İÊäÈëµÄÈ¡¼şÊıÀ´»ñÈ¡²Ö×â·Ñ¡£ÔÚgetMsgByHBL½Ó¿Ú·µ»ØÍê³É£¬ÇÒÆäÖĞµÄstoreDaysÖµ²»Îª0Ê±£¬·¢Æğ
+      summary: æ ¹æ®è¾“å…¥çš„å–ä»¶æ•°æ¥è·å–ä»“ç§Ÿè´¹
+      description: æ ¹æ®è¾“å…¥çš„å–ä»¶æ•°æ¥è·å–ä»“ç§Ÿè´¹ã€‚åœ¨getMsgByHBLæ¥å£è¿”å›å®Œæˆï¼Œä¸”å…¶ä¸­çš„storeDayså€¼ä¸ä¸º0æ—¶ï¼Œå‘èµ·
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: hbl
-          description: ÓÃ»§ÊäÈëµÄHBLºÅ
+          description: ç”¨æˆ·è¾“å…¥çš„HBLå·
           type: integer
           required: true
         - in: query
           name: nums
-          description: Ìá»õ¼şÊı£¨À´×ÔgetMsgByHBL½Ó¿ÚµÄcountNumsÖµ£©
+          description: æè´§ä»¶æ•°ï¼ˆæ¥è‡ªgetMsgByHBLæ¥å£çš„countNumså€¼ï¼‰
           type: integer
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/PGM_GETWAREMONEY'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -1304,34 +1304,34 @@ paths:
     get:
       tags: 
         - PickGoodsManage
-      summary: »ñÈ¡²Ö´æÌìÊıÓëÊÇ·ñÔÊĞí·¢»õĞÅÏ¢
-      description: »ñÈ¡²Ö´æÌìÊıÓëÊÇ·ñÔÊĞí·¢»õĞÅÏ¢£¨ä¯ÀÀÊ±»ñÈ¡£©
+      summary: è·å–ä»“å­˜å¤©æ•°ä¸æ˜¯å¦å…è®¸å‘è´§ä¿¡æ¯
+      description: è·å–ä»“å­˜å¤©æ•°ä¸æ˜¯å¦å…è®¸å‘è´§ä¿¡æ¯ï¼ˆæµè§ˆæ—¶è·å–ï¼‰
       produces:
         - application/json
       parameters:
         - in: query
           name: callback
-          description: callback,Ä¬ÈÏÎª½Ó¿ÚÃû×Ö
+          description: callback,é»˜è®¤ä¸ºæ¥å£åå­—
           type: string
           required: true
         - in: query
           name: HBL
-          description: ÓÃ»§ÊäÈëµÄHBLºÅ
+          description: ç”¨æˆ·è¾“å…¥çš„HBLå·
           type: integer
           required: true
         - in: query
           name: ORDER_ID
-          description: ¿ÕÔËÎ¯ÍĞµ¥ID
+          description: ç©ºè¿å§”æ‰˜å•ID
           type: integer
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/PGM_GETOTHERINFO'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -1339,29 +1339,29 @@ paths:
     get:
       tags: 
         - PickGoodsManage
-      summary: ÖÕÖ¹²Ù×÷
-      description: ÖÕÖ¹²Ù×÷
+      summary: ç»ˆæ­¢æ“ä½œ
+      description: ç»ˆæ­¢æ“ä½œ
       produces:
         - application/json
       parameters:
         - in: query
           name: hbl
-          description: HBLºÅ
+          description: HBLå·
           type: integer
           required: true
         - in: query
           name: id
-          description: ¼ÇÂ¼ID(CHARGE_ID)
+          description: è®°å½•ID(CHARGE_ID)
           type: integer
           required: true
       responses:
         '200':
-          description: ÇëÇó³É¹¦
+          description: è¯·æ±‚æˆåŠŸ
           schema:
             type: object
             $ref: '#/definitions/SUCCESS'
         '400':
-          description: ÇëÇóÊ§°Ü
+          description: è¯·æ±‚å¤±è´¥
           schema:
             type: object
             $ref: '#/definitions/ERROR'
@@ -1371,7 +1371,7 @@ paths:
 definitions:
   ERROR:
     type: object
-    description: Òì³£·µ»Ø½á¹¹
+    description: å¼‚å¸¸è¿”å›ç»“æ„
     properties:
       isSuccess:
         type: boolean
@@ -1380,7 +1380,7 @@ definitions:
         type: string
   SUCCESS:
     type: object
-    description: ³É¹¦·µ»Ø
+    description: æˆåŠŸè¿”å›
     properties:
       isSuccess:
         type: boolean
@@ -1388,176 +1388,176 @@ definitions:
 #AirEntrust#############################################
   AirEntrust_ListObjMain:
     type: object
-    description: Ö÷ÁĞ±í×Ö¶Î´ø·ÖÒ³²ÎÊı
+    description: ä¸»åˆ—è¡¨å­—æ®µå¸¦åˆ†é¡µå‚æ•°
     properties:
       totalRow:
         type: integer
-        description: ×Ü¼ÇÂ¼Êı
+        description: æ€»è®°å½•æ•°
       pageNumber:
         type: integer
-        description: µ±Ç°Ò³
+        description: å½“å‰é¡µ
       firstPage:
         type: boolean
-        description: ÊÇ·ñÎªµÚÒ»Ò³
+        description: æ˜¯å¦ä¸ºç¬¬ä¸€é¡µ
       lastPage:
         type: integer
-        description: ÊÇ·ñÎª×îºóÒ»Ò³
+        description: æ˜¯å¦ä¸ºæœ€åä¸€é¡µ
       totalPage:
         type: integer
-        description: ×ÜÒ³Êı
+        description: æ€»é¡µæ•°
       pageSize:
         type: integer
-        description: Ã¿Ò³´óĞ¡
+        description: æ¯é¡µå¤§å°
       list:
         type: array
         items:
           $ref: '#/definitions/AirEntrust_ListObj'
   AirEntrust_ListObj:
     type: object
-    description: Ö÷ÁĞ±í×Ö¶Î
+    description: ä¸»åˆ—è¡¨å­—æ®µ
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       RECEIPT_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
       STATUS:
         type: string
-        description: ×´Ì¬
+        description: çŠ¶æ€
       AIR_HBL:
         type: string
-        description: ¿ÕÔËHBLºÅ
+        description: ç©ºè¿HBLå·
       B_MAN:
         type: string
-        description: ÒµÎñÔ±ID
+        description: ä¸šåŠ¡å‘˜ID
       S_PRODUCT:
         type: string
-        description: ·şÎñ²úÆ·ID
+        description: æœåŠ¡äº§å“ID
       C_ID:
         type: string
-        description: ¿Í»§×ÊÁÏID
+        description: å®¢æˆ·èµ„æ–™ID
       B_MAN_NAME:
         type: string
-        description: ÒµÎñÔ±Ãû×Ö
+        description: ä¸šåŠ¡å‘˜åå­—
       S_PRODUCT_NAME:
         type: string
-        description: ·şÎñ²úÆ·Ãû×Ö
+        description: æœåŠ¡äº§å“åå­—
       C_ID_NAME:
         type: string
-        description: ¿Í»§×ÊÁÏÃû×Ö
+        description: å®¢æˆ·èµ„æ–™åå­—
   AirEntrust_Obj:
     type: object
-    description: ±íµ¥ÏêÇé
+    description: è¡¨å•è¯¦æƒ…
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       RECEIPT_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
       STATUS:
         type: string
-        description: ×´Ì¬
+        description: çŠ¶æ€
       AIR_HBL:
         type: string
-        description: ¿ÕÔËHBLºÅ
+        description: ç©ºè¿HBLå·
       B_MAN:
         type: string
-        description: ÒµÎñÔ±ID
+        description: ä¸šåŠ¡å‘˜ID
       B_MAN_NAME:
         type: string
-        description: ÒµÎñÔ±Ãû
+        description: ä¸šåŠ¡å‘˜å
       S_PRODUCT:
         type: string
-        description: ·şÎñ²úÆ·ID
+        description: æœåŠ¡äº§å“ID
       S_PRODUCT_NAME:
         type: string
-        description: ·şÎñ²úÆ·Ãû
+        description: æœåŠ¡äº§å“å
       DESTINATION:
         type: string
-        description: Ä¿µÄµØID
+        description: ç›®çš„åœ°ID
       DESTINATION_NAME:
         type: string
-        description: Ä¿µÄµØÃû
+        description: ç›®çš„åœ°å
       EXPRESS_NUM:
         type: string
-        description: ¿ìµİµ¥ºÅ
+        description: å¿«é€’å•å·
       I_CODE:
         type: string
-        description: ±êÊ¶Âë
+        description: æ ‡è¯†ç 
       WAREHOUSE:
         type: string
-        description: ÊÕ»õ²Ö¿âID
+        description: æ”¶è´§ä»“åº“ID
       WAREHOUSE_NAME:
         type: string
-        description: ÊÕ»õ²Ö¿âÃû
+        description: æ”¶è´§ä»“åº“å
       STORE:
         type: string
-        description: ÊÕ»õµµ¿ÚID
+        description: æ”¶è´§æ¡£å£ID
       STORE_NAME:
         type: string
-        description: ÊÕ»õµµ¿ÚÃû×Ö
+        description: æ”¶è´§æ¡£å£åå­—
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       C_ID:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥ID
+        description: ç©ºè¿å§”æ‰˜å•ID
       C_ID_NAME:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥Ãû
+        description: ç©ºè¿å§”æ‰˜å•å
       PAYMENT_TYPE:
         type: string
-        description: ¸¶·ÑÀàĞÍ
+        description: ä»˜è´¹ç±»å‹
       AVAILABLE_CREDIT:
         type: string
-        description: ¿ÉÓÃ¶î¶È
+        description: å¯ç”¨é¢åº¦
       OVER_DUE_PAYMENT:
         type: string
-        description: ÓâÆÚÎ´¸¶¿î½ğ¶î
+        description: é€¾æœŸæœªä»˜æ¬¾é‡‘é¢
       MARK:
         type: string
-        description: ßéÍ·
+        description: å”›å¤´
       SENDER:
         type: string
-        description: ·¢»õÈË
+        description: å‘è´§äºº
       SENDER_PHONE:
         type: string
-        description: ·¢»õÈËµç»°
+        description: å‘è´§äººç”µè¯
       SENDER_ADDRESS:
         type: string
-        description: ·¢»õÈËµØÖ·
+        description: å‘è´§äººåœ°å€
       SENDER_WX:
         type: string
-        description: ·¢»õÈËwX
+        description: å‘è´§äººwX
       RECEIVER:
         type: string
-        description: ÊÕ»õÈË
+        description: æ”¶è´§äºº
       RECEIVER_PHONE:
         type: string
-        description: ÊÕ»õÈËµç»°
+        description: æ”¶è´§äººç”µè¯
       RECEIVER_ADDRESS:
         type: string
-        description: ÊÕ»õÈËµØÖ·
+        description: æ”¶è´§äººåœ°å€
       RECEIVER_WX:
         type: string
-        description: ÊÕ»õÈËWX
+        description: æ”¶è´§äººWX
       NOTICE1:
         type: string
-        description: Í¨ÖªÈË
+        description: é€šçŸ¥äºº
       NOTICE2:
         type: string
-        description: Í¨ÖªÈËĞÅÏ¢
+        description: é€šçŸ¥äººä¿¡æ¯
       IS_MANIFEST:
         type: string
-        description: ¿Í»§Ìá¹©±¨¹Øµ¥
+        description: å®¢æˆ·æä¾›æŠ¥å…³å•
       IS_RAMDOM_FILE:
         type: string
-        description: Ëæ»úÎÄ¼ş
+        description: éšæœºæ–‡ä»¶
   AirEntrust_Obj_SUCCESS:
     type: object
-    description: ³É¹¦·µ»Ø
+    description: æˆåŠŸè¿”å›
     properties:
       isSuccess:
         type: boolean
@@ -1567,54 +1567,54 @@ definitions:
         $ref: '#/definitions/AirEntrust_Obj'
   AirEntrust_SIZE:
     type: object
-    description: ³ß´çÇåµ¥
+    description: å°ºå¯¸æ¸…å•
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       ITEM_NO:
         type: string
-        description: ĞòºÅ
+        description: åºå·
       LENGHT:
         type: string
-        description: ³¤
+        description: é•¿
       WIDTH:
         type: string
-        description: ¿í
+        description: å®½
       HIGH:
         type: string
-        description: ¸ß
+        description: é«˜
       G_WEIGHT:
         type: string
-        description: Ã«ÖØ
+        description: æ¯›é‡
       PIECE:
         type: string
-        description: ¼şÊı
+        description: ä»¶æ•°
   AirEntrust_SIZE2:
     type: object
-    description: ³ß´çÇåµ¥
+    description: å°ºå¯¸æ¸…å•
     properties:
       ITEM_NO:
         type: string
-        description: ĞòºÅ
+        description: åºå·
       LENGHT:
         type: string
-        description: ³¤
+        description: é•¿
       WIDTH:
         type: string
-        description: ¿í
+        description: å®½
       HIGH:
         type: string
-        description: ¸ß
+        description: é«˜
       G_WEIGHT:
         type: string
-        description: Ã«ÖØ
+        description: æ¯›é‡
       PIECE:
         type: string
-        description: ¼şÊı
+        description: ä»¶æ•°
   AirEntrust_SIZE_SUCCESS:
     type: object
-    description: ³É¹¦·µ»Ø
+    description: æˆåŠŸè¿”å›
     properties:
       isSuccess:
         type: boolean
@@ -1625,35 +1625,35 @@ definitions:
           $ref: '#/definitions/AirEntrust_SIZE'
   AirEntrust_PIC:
     type: object
-    description: ·µ»ØÍ¼Æ¬
+    description: è¿”å›å›¾ç‰‡
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       P_ID:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥ID
+        description: ç©ºè¿å§”æ‰˜å•ID
       FILE_NAME:
         type: string
-        description: ÎÄ¼şÃû×Ö
+        description: æ–‡ä»¶åå­—
       FILE_ID:
         type: string
-        description: ÎÄ¼şUUIDÃû×Ö
+        description: æ–‡ä»¶UUIDåå­—
       FILE_PATH:
         type: string
-        description: ÎÄ¼şÂ·¾¶
+        description: æ–‡ä»¶è·¯å¾„
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       UPLOAD_MAN:
         type: string
-        description: ÉÏ´«ÈË
+        description: ä¸Šä¼ äºº
       UPLOAD_DATE:
         type: string
-        description: ÉÏ´«Ê±¼ä£¨ÈÕ/ÔÂ/Äê£©
+        description: ä¸Šä¼ æ—¶é—´ï¼ˆæ—¥/æœˆ/å¹´ï¼‰
   AirEntrust_PIC_SUCCESS:
     type: object
-    description: ³É¹¦·µ»Ø
+    description: æˆåŠŸè¿”å›
     properties:
       isSuccess:
         type: boolean
@@ -1664,748 +1664,748 @@ definitions:
           $ref: '#/definitions/AirEntrust_PIC'
   WIN_BMan: 
     type: object
-    description: ÒµÎñÔ±Ñ¡Ôñ
+    description: ä¸šåŠ¡å‘˜é€‰æ‹©
     properties:
       ID:
         type: string
-        description: ÒµÎñÔ±ID
+        description: ä¸šåŠ¡å‘˜ID
       NAME: 
         type: string
-        description: ÒµÎñÔ±Ãû×Ö
+        description: ä¸šåŠ¡å‘˜åå­—
       DPM: 
         type: string
-        description: ÒµÎñÔ±ËùÊô²¿ÃÅID
+        description: ä¸šåŠ¡å‘˜æ‰€å±éƒ¨é—¨ID
   WIN_PService:
     type: object
-    description: ·şÎñ²úÆ·Ñ¡Ôñ
+    description: æœåŠ¡äº§å“é€‰æ‹©
     properties:
       ID:
         type: string
-        description: ·şÎñ²úÆ·ID
+        description: æœåŠ¡äº§å“ID
       NAME: 
         type: string
-        description: ·şÎñ²úÆ·Ãû×Ö
+        description: æœåŠ¡äº§å“åå­—
     #  DELIVERY: 
     #    type: string
-    #    description: ½»»õµØID
+    #    description: äº¤è´§åœ°ID
     # DESTINATION:
     #  type: string
-    #  description: Ä¿µÄµØID
+    #  description: ç›®çš„åœ°ID
       DESTINATION_NAME:
         type: string
-        description: Ä¿µÄµØÃû×Ö
+        description: ç›®çš„åœ°åå­—
      # TRANSFERSTATION:
      #   type: string
-     #  description: ÖĞ×ªµØID
+     #  description: ä¸­è½¬åœ°ID
      # TWO_PORT:
      #   type: string
-     #   description: ¶ş¼¶¸Û¿ÚID
+     #   description: äºŒçº§æ¸¯å£ID
   WIN_Warehouse:
     type: object
-    description: ²Ö¿âÑ¡Ôñ
+    description: ä»“åº“é€‰æ‹©
     properties:
       ID:
         type: string
-        description: ²Ö¿âID
+        description: ä»“åº“ID
       NAME: 
         type: string
-        description: ²Ö¿âÃû×Ö
+        description: ä»“åº“åå­—
   WIN_Store:
     type: object
-    description: µµ¿ÚÑ¡Ôñ
+    description: æ¡£å£é€‰æ‹©
     properties:
       ID:
         type: string
-        description: µµ¿ÚID
+        description: æ¡£å£ID
       NAME: 
         type: string
-        description: µµ¿ÚÃû×Ö
+        description: æ¡£å£åå­—
   WIN_CustInfo:
     type: object
-    description: Î¯ÍĞµ¥Î»Ñ¡Ôñ
+    description: å§”æ‰˜å•ä½é€‰æ‹©
     properties:
       ID:
         type: string
-        description: Î¯ÍĞµ¥Î»ID
+        description: å§”æ‰˜å•ä½ID
       NAME: 
         type: string
-        description: Î¯ÍĞµ¥Î»Ãû×Ö
+        description: å§”æ‰˜å•ä½åå­—
       #D_B_MAN: 
       #  type: string
-      #  description: Ä¿µÄµØÒµÎñÔ±ID
+      #  description: ç›®çš„åœ°ä¸šåŠ¡å‘˜ID
       #D_DPM: 
       #  type: string
-      #  description: Ä¿µÄµØÒµÎñÔ±ËùÔÚ²¿ÃÅID
+      #  description: ç›®çš„åœ°ä¸šåŠ¡å‘˜æ‰€åœ¨éƒ¨é—¨ID
       AVAILABLE_CREDIT: 
         type: string
-        description: ¿ÉÓÃ¶î¶È£¨ÊÚĞÅ×Ü¶î+×·¼ÓÊÚĞÅ£­ÒÑÈë²ÖÎ´·¢»õ½ğ¶î£©
+        description: å¯ç”¨é¢åº¦ï¼ˆæˆä¿¡æ€»é¢+è¿½åŠ æˆä¿¡ï¼å·²å…¥ä»“æœªå‘è´§é‡‘é¢ï¼‰
       #CREDIT_COUNT:
       #  type: string
-      #  description: ÊÚĞÅ×Ü¶î
+      #  description: æˆä¿¡æ€»é¢
       #ADD_CREDIT:
       #  type: string
-      #  description: ×·¼ÓÊÚĞÅ
+      #  description: è¿½åŠ æˆä¿¡
       #UNFILLED_MONEY:
       #  type: string
-      #  description: ÒÑÈë²ÖÎ´·¢»õ½ğ¶î
+      #  description: å·²å…¥ä»“æœªå‘è´§é‡‘é¢
       MARK: 
         type: string
         description: MARK
       STORE: 
         type: string
-        description: µµ¿Ú
+        description: æ¡£å£
       STORES_NAME: 
         type: string
-        description: µµ¿ÚÃû×Ö
+        description: æ¡£å£åå­—
       WAREHOUSE: 
         type: string
-        description: ²Ö¿â
+        description: ä»“åº“
       WAREHOUSE_NAME: 
         type: string
-        description: ²Ö¿âÃû×Ö
+        description: ä»“åº“åå­—
       #P_STATE: 
       #  type: string
-      #  description: Ä¬ÈÏ»õÎï×´Ì¬£¨P_TYPE£©
+      #  description: é»˜è®¤è´§ç‰©çŠ¶æ€ï¼ˆP_TYPEï¼‰
       PAYMENT_TYPE: 
         type: string
-        description: ½áËã·½Ê½£¨PAY_TYPE£©
+        description: ç»“ç®—æ–¹å¼ï¼ˆPAY_TYPEï¼‰
       SENDER: 
         type: string
-        description: ·¢»õÈËÃû×Ö
+        description: å‘è´§äººåå­—
       SENDER_PHONE: 
         type: string
-        description: ·¢»õÈËµç»°
+        description: å‘è´§äººç”µè¯
       SENDER_ADDRESS: 
         type: string
-        description: ·¢»õÈËµØÖ·
+        description: å‘è´§äººåœ°å€
       SENDER_WX: 
         type: string
-        description: ·¢»õÈËÎ¢ĞÅ
+        description: å‘è´§äººå¾®ä¿¡
       RECEIVER: 
         type: string
-        description: ÊÕ»õÈËÃû×Ö
+        description: æ”¶è´§äººåå­—
       RECEIVER_PHONE: 
         type: string
-        description: ÊÕ»õÈËµç»°
+        description: æ”¶è´§äººç”µè¯
       RECEIVER_ADDRESS: 
         type: string
-        description: ÊÕ»õÈËµØÖ·
+        description: æ”¶è´§äººåœ°å€
       RECEIVER_WX: 
         type: string
-        description: ÊÕ»õÈËWX
+        description: æ”¶è´§äººWX
       NOTICE1: 
         type: string
-        description: Í¨ÖªÈËÃû×Ö
+        description: é€šçŸ¥äººåå­—
       NOTICE2: 
         type: string
-        description: Í¨ÖªÈËµç»°
+        description: é€šçŸ¥äººç”µè¯
   PIC_UPLOAD_OBJ:
     type: object
-    description: ÎÄ¼şÉÏ´«£¬·µ»Ø¶ÔÏó
+    description: æ–‡ä»¶ä¸Šä¼ ï¼Œè¿”å›å¯¹è±¡
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       FILE_NAME:
         type: string
-        description: ÎÄ¼şÃû
+        description: æ–‡ä»¶å
       FILE_ID:
         type: string
-        description: ÎÄ¼şUUIDÃû×Ö
+        description: æ–‡ä»¶UUIDåå­—
       FILE_PATH:
         type: string
-        description: ÎÄ¼şµØÖ·
+        description: æ–‡ä»¶åœ°å€
       UPLOAD_MAN:
         type: string
-        description: ÉÏ´«ÈË
+        description: ä¸Šä¼ äºº
       UPLOAD_DATE:
         type: string
-        description: ÉÏ´«ÈÕÆÚ
+        description: ä¸Šä¼ æ—¥æœŸ
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
   AirEntrust_AddObj:
     type: object
-    description: ĞÂÔö¶ÔÏó
+    description: æ–°å¢å¯¹è±¡
     properties:
       AIR_HBL:
         type: string
-        description: ¿ÕÔËHBLºÅ*
+        description: ç©ºè¿HBLå·*
       B_MAN:
         type: string
-        description: ÒµÎñÔ±ID*
+        description: ä¸šåŠ¡å‘˜ID*
       S_PRODUCT:
         type: string
-        description: ·şÎñ²úÆ·ID*
+        description: æœåŠ¡äº§å“ID*
       DELIVERY:
         type: string
-        description: ½»»õµØID
+        description: äº¤è´§åœ°ID
       DESTINATION:
         type: string
-        description: Ä¿µÄµØID
+        description: ç›®çš„åœ°ID
       TRANSFERSTATION:
         type: string
-        description: ÖĞ×ªµØID
+        description: ä¸­è½¬åœ°ID
       TWO_PORT:
         type: string
-        description: ¶ş¼¶¸Û¿ÚID
+        description: äºŒçº§æ¸¯å£ID
       C_ID:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥ID*
+        description: ç©ºè¿å§”æ‰˜å•ID*
       SENDER:
         type: string
-        description: ·¢»õÈË
+        description: å‘è´§äºº
       SENDER_PHONE:
         type: string
-        description: ·¢»õÈËµç»°
+        description: å‘è´§äººç”µè¯
       SENDER_ADDRESS:
         type: string
-        description: ·¢»õÈËµØÖ·
+        description: å‘è´§äººåœ°å€
       SENDER_WX:
         type: string
-        description: ·¢»õÈËwX
+        description: å‘è´§äººwX
       RECEIVER:
         type: string
-        description: ÊÕ»õÈË
+        description: æ”¶è´§äºº
       RECEIVER_PHONE:
         type: string
-        description: ÊÕ»õÈËµç»°
+        description: æ”¶è´§äººç”µè¯
       RECEIVER_ADDRESS:
         type: string
-        description: ÊÕ»õÈËµØÖ·
+        description: æ”¶è´§äººåœ°å€
       RECEIVER_WX:
         type: string
-        description: ÊÕ»õÈËWX
+        description: æ”¶è´§äººWX
       NOTICE1:
         type: string
-        description: Í¨ÖªÈË
+        description: é€šçŸ¥äºº
       PAYMENT_TYPE:
         type: string
-        description: ¸¶·ÑÀàĞÍ*
+        description: ä»˜è´¹ç±»å‹*
       AVAILABLE_CREDIT:
         type: string
-        description: ¿ÉÓÃ¶î¶È*
+        description: å¯ç”¨é¢åº¦*
       MARK:
         type: string
-        description: ßéÍ·*
+        description: å”›å¤´*
       D_B_MAN:
         type: string
-        description: Ä¿µÄµØÒµÎñÔ±
+        description: ç›®çš„åœ°ä¸šåŠ¡å‘˜
       D_DPM:
         type: string
-        description: Ä¿µÄµØ¹«Ë¾
+        description: ç›®çš„åœ°å…¬å¸
       WAREHOUSE:
         type: string
-        description: ÊÕ»õ²Ö¿âID*
+        description: æ”¶è´§ä»“åº“ID*
       STORE:
         type: string
-        description: ÊÕ»õµµ¿ÚID*
+        description: æ”¶è´§æ¡£å£ID*
       EXPRESS_NUM:
         type: string
-        description: ¿ìµİµ¥ºÅ*
+        description: å¿«é€’å•å·*
       I_CODE:
         type: string
-        description: ±êÊ¶Âë*
+        description: æ ‡è¯†ç *
       REMARK:
         type: string
-        description: ±¸×¢*
+        description: å¤‡æ³¨*
       IS_MANIFEST:
         type: string
-        description: ¿Í»§Ìá¹©±¨¹Øµ¥*
+        description: å®¢æˆ·æä¾›æŠ¥å…³å•*
       IS_RAMDOM_FILE:
         type: string
-        description: Ëæ»úÎÄ¼ş*
+        description: éšæœºæ–‡ä»¶*
       SizeInfo:
         type: string
-        description: ³ß´çID(xx,xx,xx)
+        description: å°ºå¯¸ID(xx,xx,xx)
         #items:
         #  $ref: '#/definitions/AirEntrust_SIZE2'
       PICInfo:
         type: string
-        description: Í¼Æ¬ID(xx,xx,xx)
+        description: å›¾ç‰‡ID(xx,xx,xx)
 #Transfer###############################################
   Transfer_ListObjMain:
     type: object
-    description: Ö÷ÁĞ±í×Ö¶Î´ø·ÖÒ³²ÎÊı
+    description: ä¸»åˆ—è¡¨å­—æ®µå¸¦åˆ†é¡µå‚æ•°
     properties:
       totalRow:
         type: integer
-        description: ×Ü¼ÇÂ¼Êı
+        description: æ€»è®°å½•æ•°
       pageNumber:
         type: integer
-        description: µ±Ç°Ò³
+        description: å½“å‰é¡µ
       firstPage:
         type: boolean
-        description: ÊÇ·ñÎªµÚÒ»Ò³
+        description: æ˜¯å¦ä¸ºç¬¬ä¸€é¡µ
       lastPage:
         type: integer
-        description: ÊÇ·ñÎª×îºóÒ»Ò³
+        description: æ˜¯å¦ä¸ºæœ€åä¸€é¡µ
       totalPage:
         type: integer
-        description: ×ÜÒ³Êı
+        description: æ€»é¡µæ•°
       pageSize:
         type: integer
-        description: Ã¿Ò³´óĞ¡
+        description: æ¯é¡µå¤§å°
       list:
         type: array
         items:
           $ref: '#/definitions/Transfer_SearchList'
   Transfer_SearchList:
     type: object
-    description: ·Ö»õ½»½Ó²éÑ¯¶ÔÏó
+    description: åˆ†è´§äº¤æ¥æŸ¥è¯¢å¯¹è±¡
     properties:
       ID:
         type: string
         description: ID
       RECEIPT_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
       STATUS:
         type: string
-        description: ×´Ì¬
+        description: çŠ¶æ€
       DESTINATION:
         type: string
-        description: Ä¿µÄµØ
+        description: ç›®çš„åœ°
       PROXY:
         type: string
-        description: Çå¹Ø´úÀí
+        description: æ¸…å…³ä»£ç†
       UNLOAD_POINT:
         type: string
-        description: Ğ¶»õµã
+        description: å¸è´§ç‚¹
       DRIVER_INFO:
         type: string
-        description: Ë¾»úĞÅÏ¢
+        description: å¸æœºä¿¡æ¯
   Transfer_Obj:
     type: object
-    description: »ñÈ¡·Ö»õ½»½ÓÍ·ĞÅÏ¢
+    description: è·å–åˆ†è´§äº¤æ¥å¤´ä¿¡æ¯
     properties:
       ID:
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       DESTINATION:
         type: string
-        description: Ä¿µÄµØ
+        description: ç›®çš„åœ°
       UNLOAD_POINT:
         type: string
-        description: Ğ¶»õµã
+        description: å¸è´§ç‚¹
       PROXY:
         type: string
-        description: Çå¹Ø´úÀí
+        description: æ¸…å…³ä»£ç†
       DRIVER_INFO:
         type: string
-        description: Ë¾»úÃû¼°µç»°
+        description: å¸æœºååŠç”µè¯
       STOCK_TYPE:
         type: string
-        description: '²Ö´¢ÀàĞÍ:1-´úÀí£»2-·Ö¹«Ë¾'
+        description: 'ä»“å‚¨ç±»å‹:1-ä»£ç†ï¼›2-åˆ†å…¬å¸'
       SUPPLIER:
         type: string
-        description: ²Ö´¢¹«Ë¾
+        description: ä»“å‚¨å…¬å¸
       WAREHOUSE:
-        description: ²Ö¿â
+        description: ä»“åº“
         type: string
       DELIVER_MAN:
-        description: ÅÉËÍÈËÔ±
+        description: æ´¾é€äººå‘˜
         type: string
       CURRENCY:
         type: string
-        description: ±ÒÖÖ
+        description: å¸ç§
       T_COST:
         type: string
-        description: ÔË·Ñ
+        description: è¿è´¹
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       STATUS:
         type: string
-        description: ×´Ì¬
+        description: çŠ¶æ€
       RECEIPT_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
   Transfer_DetailList:
     type: object
-    description: »ñÈ¡·Ö»õ½»½ÓÌåĞÅÏ¢
+    description: è·å–åˆ†è´§äº¤æ¥ä½“ä¿¡æ¯
     properties:
       ID:
         type: string
-        description: ·Ö»õ½»½ÓÌåÊı¾İID
+        description: åˆ†è´§äº¤æ¥ä½“æ•°æ®ID
       BL_NUMBER:
         type: string
-        description: Ìáµ¥ºÅ(Ö¸Áî)
+        description: æå•å·(æŒ‡ä»¤)
       BIG_TICKET_NUM:
         type: string
-        description: ¿ÕÔË´óÆ±ºÅ
+        description: ç©ºè¿å¤§ç¥¨å·
       AIR_ENTRUST_ID:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥Id
+        description: ç©ºè¿å§”æ‰˜å•Id
       AIR_HBL:
         type: string
-        description: Î¯ÍĞµ¥ºÅ
+        description: å§”æ‰˜å•å·
       R_INFO:
         type: string
-        description: ÊÕ»õÈËĞÅÏ¢£¨Î´Öª£©
+        description: æ”¶è´§äººä¿¡æ¯ï¼ˆæœªçŸ¥ï¼‰
       CARGO_INFO:
         type: string
-        description: »õÎïĞÅÏ¢£¨Î´Öª£©
+        description: è´§ç‰©ä¿¡æ¯ï¼ˆæœªçŸ¥ï¼‰
       TAGS:
         type: string
-        description: ±êÇ©£¨¿ÕÔËÎ¯ÍĞµ¥£©
+        description: æ ‡ç­¾ï¼ˆç©ºè¿å§”æ‰˜å•ï¼‰
       COUNT:
         type: string
-        description: ¼şÊı
+        description: ä»¶æ•°
       WEIGHT:
         type: string
-        description: ÖØÁ¿
+        description: é‡é‡
       REC_COUNT:
         type: string
-        description: ÊµÊÕ¼şÊı
+        description: å®æ”¶ä»¶æ•°
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
       ERR_TYPE:
         type: string
-        description: Òì³£Àà±ğ
+        description: å¼‚å¸¸ç±»åˆ«
       ERR_REASON:
         type: string
-        description: Òì³£Ô­Òò
+        description: å¼‚å¸¸åŸå› 
       NOTICE:
         type: string
-        description: Í¨Öª
+        description: é€šçŸ¥
 #CargoDelivery##########################################
   CD_ListObjMain:
     type: object
-    description: Ö÷ÁĞ±í×Ö¶Î´ø·ÖÒ³²ÎÊı
+    description: ä¸»åˆ—è¡¨å­—æ®µå¸¦åˆ†é¡µå‚æ•°
     properties:
       totalRow:
         type: integer
-        description: ×Ü¼ÇÂ¼Êı
+        description: æ€»è®°å½•æ•°
       pageNumber:
         type: integer
-        description: µ±Ç°Ò³
+        description: å½“å‰é¡µ
       firstPage:
         type: boolean
-        description: ÊÇ·ñÎªµÚÒ»Ò³
+        description: æ˜¯å¦ä¸ºç¬¬ä¸€é¡µ
       lastPage:
         type: integer
-        description: ÊÇ·ñÎª×îºóÒ»Ò³
+        description: æ˜¯å¦ä¸ºæœ€åä¸€é¡µ
       totalPage:
         type: integer
-        description: ×ÜÒ³Êı
+        description: æ€»é¡µæ•°
       pageSize:
         type: integer
-        description: Ã¿Ò³´óĞ¡
+        description: æ¯é¡µå¤§å°
       list:
         type: array
         items:
           $ref: '#/definitions/CD_OBJ'
   CD_OBJ:
     type: object
-    description: »õÎïÅÉËÍ²éÑ¯
+    description: è´§ç‰©æ´¾é€æŸ¥è¯¢
     properties:
       ID:
         type: string
         description: ID
       RECEIPT_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
       STATUS:
         type: string
-        description: µ±Ç°×´Ì¬
+        description: å½“å‰çŠ¶æ€
       DESTINATION:
         type: string
-        description: Ä¿µÄµØ
+        description: ç›®çš„åœ°
       UNLOAD_POINT:
         type: string
-        description: Ğ¶»õµã
+        description: å¸è´§ç‚¹
       DELIVER_MAN:
         type: string
-        description: ÅÉËÍÈËÔ±
+        description: æ´¾é€äººå‘˜
       WAREHOUSE:
         type: string
-        description: ²Ö¿â
+        description: ä»“åº“
       TOTAL_COUNT:
         type: string
-        description: ×Ü¼şÊı
+        description: æ€»ä»¶æ•°
       CUST_COUNT:
         type: string
-        description: ¿Í»§Ç©ÊÕ¼şÊı
+        description: å®¢æˆ·ç­¾æ”¶ä»¶æ•°
       REC_FREIGHT:
         type: string
-        description: ÊµÊÕ±¾Î»±Ò½ğ¶î
+        description: å®æ”¶æœ¬ä½å¸é‡‘é¢
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
   CD_DetailsList:
     type: object
-    description: »õÎïÅÉËÍÌåÊı¾İ
+    description: è´§ç‰©æ´¾é€ä½“æ•°æ®
     properties:
       ID:
         type: string
-        description: Êı¾İID
+        description: æ•°æ®ID
       P_ID:
         type: string
-        description: Í·ID
+        description: å¤´ID
       BIG_TICKET_NUM:
         type: string
-        description: ¿ÕÔË´óÆ±ºÅ
+        description: ç©ºè¿å¤§ç¥¨å·
       AIR_HBL:
         type: string
-        description: AIR_HBLÎ¯ÍĞµ¥ºÅ
+        description: AIR_HBLå§”æ‰˜å•å·
       RECEIVER_INFO:
         type: string
-        description: ÊÕ»õÈËĞÅÏ¢
+        description: æ”¶è´§äººä¿¡æ¯
       TAGS:
         type: string
-        description: ±êÇ©
+        description: æ ‡ç­¾
       PAY_TYPE:
         type: string
-        description: ¸¶·ÑÀàĞÍ(¸¶·Ñ·½Ê½)
+        description: ä»˜è´¹ç±»å‹(ä»˜è´¹æ–¹å¼)
       CURRENCY:
         type: string
-        description: ±ÒÖÖID
+        description: å¸ç§ID
       CURRENCY_NAME:
         type: string
-        description: ±ÒÖÖÃû×Ö
+        description: å¸ç§åå­—
       EXCHANGE_RATE:
         type: string
-        description: »ãÂÊ
+        description: æ±‡ç‡
       COUNT:
         type: string
-        description: µ½»õ¼şÊı£¨ÊµÎï¼şÊı£©
+        description: åˆ°è´§ä»¶æ•°ï¼ˆå®ç‰©ä»¶æ•°ï¼‰
       WEIGHT:
         type: string
-        description: µ½»õÖØÁ¿
+        description: åˆ°è´§é‡é‡
       RECEIVABLE_COUNT:
         type: string
-        description: Ó¦ÊÕ½ğ¶î
+        description: åº”æ”¶é‡‘é¢
       REC_COUNT:
         type: string
-        description: ÊµÊÕ½ğ¶î
+        description: å®æ”¶é‡‘é¢
       SIGN_COUNT:
         type: string
-        description: Ç©ÊÕ¼şÊı
+        description: ç­¾æ”¶ä»¶æ•°
       REJECT_COUNT:
         type: string
-        description: ¾ÜÊÕ¼şÊı
+        description: æ‹’æ”¶ä»¶æ•°
       REJECT_REASON:
         type: string
-        description: ¾ÜÊÕÔ­Òò
+        description: æ‹’æ”¶åŸå› 
       PIC_ID:
         type: string
-        description: Í¼Æ¬ID
+        description: å›¾ç‰‡ID
   CD_UpdateObj:
     type: object
-    description: »õÎïÅÉËÍÍ·ĞÅÏ¢
+    description: è´§ç‰©æ´¾é€å¤´ä¿¡æ¯
     properties:
       ID:
         type: string
-        description: ¼ÍÂ¼ID
+        description: çºªå½•ID
       DESTINATION:
         type: string
-        description: Ä¿µÄµØ
+        description: ç›®çš„åœ°
       UNLOAD_POINT:
         type: string
-        description: Ğ¶»õµã
+        description: å¸è´§ç‚¹
       DELIVER_MAN:
         type: string
-        description: ÅÉËÍÈËÔ±
+        description: æ´¾é€äººå‘˜
       WAREHOUSE:
         type: string
-        description: ²Ö¿â
+        description: ä»“åº“
       TOTAL_COUNT:
         type: string
-        description: ×Ü¼şÊı
+        description: æ€»ä»¶æ•°
       CUST_COUNT:
         type: string
-        description: ¿Í»§Ç©ÊÕ¼şÊı
+        description: å®¢æˆ·ç­¾æ”¶ä»¶æ•°
       REC_FREIGHT:
         type: string
-        description: ÊµÊÕ±¾Î»±Ò½ğ¶î
+        description: å®æ”¶æœ¬ä½å¸é‡‘é¢
       REMARK:
         type: string
-        description: ±¸×¢
+        description: å¤‡æ³¨
 #PickGoodsManage##########################################
   PGM_LISTOBJ: 
     type: object
-    description: Ö÷ÁĞ±íÊı¾İÄÚÈİ
+    description: ä¸»åˆ—è¡¨æ•°æ®å†…å®¹
     properties:
       AIR_HBL:
         type: string
-        description: ¿ÕÔËHbl
+        description: ç©ºè¿Hbl
       CANCELER:
         type: string
-        description: ÖÕÖ¹ÈË
+        description: ç»ˆæ­¢äºº
       CANCEL_DATE:
         type: string
-        description: ÖÕÖ¹ÈÕÆÚ
+        description: ç»ˆæ­¢æ—¥æœŸ
       CARGO_CURRENCY:
         type: string
-        description: ±ÒÖÖ
+        description: å¸ç§
       CARGO_INFO:
         type: string
-        description: »õÎïĞÅÏ¢
+        description: è´§ç‰©ä¿¡æ¯
       CARGO_TRANSPORTION_MONEY:
         type: string
-        description: »õÎïÔË·Ñ
+        description: è´§ç‰©è¿è´¹
       CHARGE_ID :
         type: string
-        description: ¼ÇÂ¼ID
+        description: è®°å½•ID
       COLUMN_RECEIVER:
         type: string
-        description: ÊÕ»õÈË
+        description: æ”¶è´§äºº
       CUST_NAME:
         type: string
-        description: Î¯ÍĞµ¥Î»Ãû×Ö
+        description: å§”æ‰˜å•ä½åå­—
       C_ID:
         type: string
-        description: Î¯ÍĞµ¥Î»ID
+        description: å§”æ‰˜å•ä½ID
       FEIGHT_AMT:
         type: string
-        description: ÊµÊÕÔË·Ñ½ğ¶î
+        description: å®æ”¶è¿è´¹é‡‘é¢
       NOW_WAREHOUSE_NAME:
         type: string
-        description: µ±Ç°²Ö¿âÃû×Ö
+        description: å½“å‰ä»“åº“åå­—
       ORDER_ID:
         type: string
-        description: ¿ÕÔËÎ¯ÍĞµ¥ID
+        description: ç©ºè¿å§”æ‰˜å•ID
       PAYMENT_TYPE:
         type: string
-        description: ½áËã·½Ê½
+        description: ç»“ç®—æ–¹å¼
       RECEIVABLE_STOCK_FARE:
         type: string
-        description: Ó¦ÊÕ²Ö×â·Ñ
+        description: åº”æ”¶ä»“ç§Ÿè´¹
       RECEIVEDQTY:
         type: string
-        description: Êµ·¢¼şÊı
+        description: å®å‘ä»¶æ•°
       RECEPTI_ID:
         type: string
-        description: µ¥¾İºÅ
+        description: å•æ®å·
       STATUS:
         type: string
-        description: ¼ÇÂ¼×´Ì¬
+        description: è®°å½•çŠ¶æ€
       STOCK_AMT:
         type: string
-        description: ÊµÊÕ²Ö×â·Ñ
+        description: å®æ”¶ä»“ç§Ÿè´¹
       STOCK_CURRENCY_FULL_NAME:
         type: string
-        description: ²Ö×â±ÒÖÖ
+        description: ä»“ç§Ÿå¸ç§
       STOCK_CURRENCY_ID:
         type: string
-        description: ²Ö×â±ÒÖÖID
+        description: ä»“ç§Ÿå¸ç§ID
       STOCK_EXCHANGE_RATE:
         type: string
-        description: ²Ö×â±ÒÖÖ»ãÂÊ
+        description: ä»“ç§Ÿå¸ç§æ±‡ç‡
       TOTAL_COUNT:
         type: string
-        description: »õÎï¼şÊı
+        description: è´§ç‰©ä»¶æ•°
       VEHICLE_CURRENCY_ID:
         type: string
-        description: ÔË·Ñ±ÒÖÖID
+        description: è¿è´¹å¸ç§ID
       VEHICLE_EXCHANGE_RATE:
         type: string
-        description: ÔË·Ñ»ãÂÊ
+        description: è¿è´¹æ±‡ç‡
       WAREHOUSE_ID:
         type: string
-        description: µ±Ç°²Ö¿âID
+        description: å½“å‰ä»“åº“ID
       overDue:
         type: string
-        description: ³¬ÆÚÎ´¸¶±¾Î»±Ò×Ü¶î
+        description: è¶…æœŸæœªä»˜æœ¬ä½å¸æ€»é¢
   PGM_WIN_WAREHOUSE:
     type: object
-    description: ²Ö¿â¶ÔÏó
+    description: ä»“åº“å¯¹è±¡
     properties:
       CODE:
         type: string
-        description: ²Ö¿â±àÂë
+        description: ä»“åº“ç¼–ç 
       ID: 
         type: integer
-        description: ²Ö¿âID
+        description: ä»“åº“ID
       NAME:
         type: string
-        description: ²Ö¿âÃû×Ö
+        description: ä»“åº“åå­—
   PGM_AIRENTRUST:
     type: object
-    description: getMsgByHBL·µ»Ø¶ÔÏó
+    description: getMsgByHBLè¿”å›å¯¹è±¡
     properties:
       isSuccess:
         type: boolean
-        description: ÊÇ·ñ³É¹¦
+        description: æ˜¯å¦æˆåŠŸ
       msg:
         type: string
-        description: ·µ»ØĞÅÏ¢
+        description: è¿”å›ä¿¡æ¯
       additional:
         type: array
         items:
           $ref: '#/definitions/PGM_AIRENTRUST_CHILD1'
   PGM_AIRENTRUST_CHILD1:
     type: object
-    description: PGM_AIRENTRUSTµÚÒ»×Ó¶ÔÏó
+    description: PGM_AIRENTRUSTç¬¬ä¸€å­å¯¹è±¡
     properties:
       cargoMsg: 
         type: string
-        description: »õÎïĞÅÏ¢
+        description: è´§ç‰©ä¿¡æ¯
       custom: 
         type: string
-        description: Î¯ÍĞµ¥Î»ĞÅÏ¢
+        description: å§”æ‰˜å•ä½ä¿¡æ¯
       receiverInfo: 
         type: string
-        description: ÊÕ»õÈËĞÅÏ¢
+        description: æ”¶è´§äººä¿¡æ¯
       overDue: 
         type: number
-        description: ³¬ÆÚÎ´¸¶±¾Î»±Ò×Ü¶î
+        description: è¶…æœŸæœªä»˜æœ¬ä½å¸æ€»é¢
       storeDays: 
         type: number
-        description: ³¬ÆÚÌìÊı 
+        description: è¶…æœŸå¤©æ•° 
       isCheck: 
         type: string
-        description: ·¢»õÈËÈ·ÈÏ·Å»õ
+        description: å‘è´§äººç¡®è®¤æ”¾è´§
       PAYMENT_TYPE: 
         type: string
-        description: ½áËã·½Ê½
+        description: ç»“ç®—æ–¹å¼
       countNums: 
         type: number
-        description: »õÎï¼şÊı
+        description: è´§ç‰©ä»¶æ•°
       dealSum: 
         type: string
-        description: ³É½»½ğ¶î »õÎïÔË·Ñ
+        description: æˆäº¤é‡‘é¢ è´§ç‰©è¿è´¹
       currency: 
         type: number
-        description: »õÎïÔË·Ñ±ÒÖÖ
+        description: è´§ç‰©è¿è´¹å¸ç§
       wareCurrency: 
         type: number
-        description: ²Ö×â¶ÔÓ¦±ÒÖÖ
+        description: ä»“ç§Ÿå¯¹åº”å¸ç§
       DELAY_AMT: 
         type: string
-        description: ÉêÇëÑÓÆÚ½ğ¶î
+        description: ç”³è¯·å»¶æœŸé‡‘é¢
   PGM_GETWAREMONEY:
     type: object
-    description: Ó¦ÊÕ²Ö×â·Ñ·µ»Ø¶ÔÏó
+    description: åº”æ”¶ä»“ç§Ÿè´¹è¿”å›å¯¹è±¡
     properties:
       isSuccess:
         type: boolean
-        description: ÊÇ·ñ·µ»Ø³É¹¦
+        description: æ˜¯å¦è¿”å›æˆåŠŸ
       money:
         type: number
-        description: Ó¦ÊÕ²Ö×â·Ñ
+        description: åº”æ”¶ä»“ç§Ÿè´¹
   PGM_GETOTHERINFO:
     type: object
-    description: »ñÈ¡²Ö´æÌìÊıÓëÊÇ·ñÔÊĞí·¢»õĞÅÏ¢
+    description: è·å–ä»“å­˜å¤©æ•°ä¸æ˜¯å¦å…è®¸å‘è´§ä¿¡æ¯
     properties:
       isSuccess:
         type: boolean
-        description: ÊÇ·ñ·µ»Ø³É¹¦
+        description: æ˜¯å¦è¿”å›æˆåŠŸ
       msg:
         type: number
-        description: ĞÅÏ¢
+        description: ä¿¡æ¯
       IS_PERMISSION:
         type: boolean
-        description: ÊÇ·ñ·¢»õÈËÈ·ÈÏ·Å»õ
+        description: æ˜¯å¦å‘è´§äººç¡®è®¤æ”¾è´§
       STORE_DAYS:
         type: number
-        description: ³¬ÆÚÌìÊı
+        description: è¶…æœŸå¤©æ•°
 #Gobal##################################################
   FILE_INFO:
     type: object
-    description: ÎÄ¼ş²é¿´£¬»ñÈ¡url
+    description: æ–‡ä»¶æŸ¥çœ‹ï¼Œè·å–url
     properties:
       ID:
         type: string
@@ -2413,7 +2413,7 @@ definitions:
         type: string
   WINDOW_INFO:
     type: object
-    description: µ¯´°·µ»Ø
+    description: å¼¹çª—è¿”å›
     properties:
       ID:
         type: string
@@ -2421,7 +2421,7 @@ definitions:
         type: string
   SUCCESS2:
     type: object
-    description: ³É¹¦·µ»Ø2
+    description: æˆåŠŸè¿”å›2
     properties:
       isSuccess:
         type: boolean
@@ -2430,7 +2430,7 @@ definitions:
         type: string
   SUCCESS3:
     type: object
-    description: ³É¹¦·µ»Ø3
+    description: æˆåŠŸè¿”å›3
     properties:
       isSuccess:
         type: boolean
@@ -2439,7 +2439,7 @@ definitions:
         type: string
   SUCCESS4:
     type: object
-    description: ³É¹¦·µ»Ø4
+    description: æˆåŠŸè¿”å›4
     properties:
       isSuccess:
         type: boolean
@@ -2448,14 +2448,14 @@ definitions:
         type: string
   win_ForeignCargo:
     type: object
-    description: º£Íâ²Ö´¢Ïà¹Ø
+    description: æµ·å¤–ä»“å‚¨ç›¸å…³
     properties:
       SUPPLIER_CNAME:
         type: string
-        description: ¹«Ë¾Ãû×Ö
+        description: å…¬å¸åå­—
       FOREIGN_CARGO_ID:
         type: string
-        description: º£Íâ²Ö´¢ID
+        description: æµ·å¤–ä»“å‚¨ID
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
